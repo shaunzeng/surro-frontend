@@ -1,0 +1,48 @@
+<h5 class="mb-4">{{ 'wizard.icons' | translate }}</h5>
+<div class="card">
+  <div class="card-body">
+    <aw-wizard [navBarLayout]="'large-empty-symbols'">
+      <aw-wizard-step stepTitle="Personal Info" style="min-height: 230px;">
+        <ng-template awWizardStepSymbol><i class="simple-icon-user"></i></ng-template>
+        <div>
+          <div class="form-group">
+            <label>{{ 'forms.firstname' | translate }}</label>
+            <input type="text" class="form-control" name="name">
+          </div>
+          <div class="form-group">
+            <label>{{ 'forms.lastname' | translate }}</label>
+            <input type="text" class="form-control" name="name">
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep disabled>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+      <aw-wizard-step stepTitle="Delivery Location" style="min-height: 230px;">
+        <ng-template awWizardStepSymbol><i class="simple-icon-location-pin"></i></ng-template>
+        <div>
+          <div class="form-group">
+            <label>{{ 'forms.city' | translate }}</label>
+            <input type="text" class="form-control" name="name">
+          </div>
+          <div class="form-group">
+            <label>{{ 'forms.address' | translate }}</label>
+            <textarea class="form-control" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+      <aw-wizard-completion-step stepTitle="{{ 'wizard.done' | translate }}" style="min-height: 230px;">
+        <ng-template awWizardStepSymbol><i class="simple-icon-check"></i></ng-template>
+        <div class="text-center complete-message-centered">
+          <h2 class="mb-2">{{ 'wizard.content-thanks' | translate }}</h2>
+          <p>{{ 'wizard.registered' | translate }}</p>
+        </div>
+      </aw-wizard-completion-step>
+    </aw-wizard>
+  </div>
+</div>

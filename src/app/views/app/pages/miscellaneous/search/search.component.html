@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div *ngFor="let item of data; let i = index;" [ngClass]="{'mb-3':data.length!==(i+1)}">
+          <a href="javascript:;" class="w-40 w-sm-100">
+            <p class="list-item-heading mb-1 color-theme-1">{{item.title}}</p>
+            <p class="mb-1 text-muted text-small">{{item.category}} | {{item.title}}</p>
+            <p class="mb-4 text-small">{{ item.description }}</p>
+          </a>
+          <div class="separator mb-5" *ngIf="data.length!==(i+1)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mt-3">
+    <pagination [totalItems]="24" [rotate]="true" [maxSize]="5" class="justify-content-center"
+    [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+    </pagination>
+  </div>
+</div>
+
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-left'></i>
+</ng-template>

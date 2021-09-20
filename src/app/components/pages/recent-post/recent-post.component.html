@@ -1,0 +1,12 @@
+<div class="d-flex flex-row mb-3">
+  <a class="d-block position-relative" href="#">
+    <img [src]="data.thumb" alt="Marble Cake" class="list-thumbnail border-0" />
+    <span class="badge badge-pill badge-theme-2 position-absolute badge-top-right"
+      *ngIf="data.badge !== ''">{{data.badge}}</span>
+  </a>
+  <div class="pl-3 pt-2 pr-2 pb-2">
+    <a href="#">
+      <p class="list-item-heading">{{data.title}}</p>
+    </a>
+  </div>
+</div>

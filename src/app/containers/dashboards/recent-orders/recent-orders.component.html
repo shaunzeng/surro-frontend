@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="position-absolute card-top-buttons">
+        <button class="btn btn-header-light icon-button">
+            <i class="simple-icon-refresh"></i>
+        </button>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ 'dashboards.recent-orders' | translate }}</h5>
+        <div class="scroll dashboard-list-with-thumbs">
+            <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}">
+                <div class="d-flex flex-row mb-3" *ngFor="let product of data">
+                    <a routerLink="#" class="d-block position-relative">
+                        <img [src]="product.img" [alt]="product.title" class="list-thumbnail border-0" />
+                        <span [class]="'position-absolute badge-top-right badge badge-pill badge-'+product.statusColor">{{product.status}}</span>
+                    </a>
+                    <div class="pl-3 pt-2 pr-2 pb-2">
+                        <a routerLink="#">
+                            <p class="list-item-heading">{{product.title}}</p>
+                            <div class="pr-4">
+                                <p class="text-muted mb-1 text-small">
+                                    {{product.description}}
+                                </p>
+                            </div>
+                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                {{product.date}}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </perfect-scrollbar>
+        </div>
+    </div>
+</div>

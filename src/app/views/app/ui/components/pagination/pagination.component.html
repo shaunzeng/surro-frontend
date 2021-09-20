@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.basic' | translate}}</h5>
+        <pagination [totalItems]="30" [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.manual-switch' | translate}}</h5>
+        <pagination [(ngModel)]="currentPage" [totalItems]="totalItems" [customNextTemplate]="nextTemplate"
+          [customPreviousTemplate]="prevTemplate">
+        </pagination>
+        <button type="button" class="btn btn-outline-primary" (click)="setPage(3)">Set current page to: 3</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.change-event' | translate}}</h5>
+        <pagination [totalItems]="66" [(ngModel)]="currentPageEvent" (pageChanged)="pageChanged($event)"
+          [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+        </pagination>
+        <pre class="border p-2 rounded">Page changed to: {{page}}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.boundary-links' | translate}}</h5>
+        <pagination [boundaryLinks]="true" [totalItems]="55" [customFirstTemplate]="firstTemplate"
+          [customLastTemplate]="lastTemplate" [customPreviousTemplate]="prevTemplate"
+          [customNextTemplate]="nextTemplate"></pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.direction-links' | translate}}</h5>
+        <pagination [directionLinks]="true" [boundaryLinks]="false" [totalItems]="55"
+          [customFirstTemplate]="firstTemplate" [customLastTemplate]="lastTemplate"
+          [customPreviousTemplate]="prevTemplate" [customNextTemplate]="nextTemplate">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.disabled' | translate}}</h5>
+        <pagination [disabled]="true" [totalItems]="66" [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate"></pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.limits' | translate}}</h5>
+        <pagination [totalItems]="limitsTotalItems" [(ngModel)]="limitsCurrentPage" [maxSize]="limitsMaxSize"
+        [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.centering' | translate}}</h5>
+        <pagination [totalItems]="155" [rotate]="true" [maxSize]="5" class="justify-content-center"
+        [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'pagination.small' | translate}}</h5>
+        <pagination class="pagination-sm" [totalItems]="155" [rotate]="true" [maxSize]="5"
+        [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-right'></i>
+</ng-template>
+
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-arrow-left'></i>
+</ng-template>
+
+<ng-template #lastTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-control-end'></i>
+</ng-template>
+
+<ng-template #firstTemplate let-disabled="disabled" let-currentPage="currentPage">
+  <i class='simple-icon-control-start'></i>
+</ng-template>

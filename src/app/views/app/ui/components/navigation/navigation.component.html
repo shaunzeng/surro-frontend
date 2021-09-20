@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+
+      <div class="card-body">
+        <h5 class="mb-4">{{'nav.basic' | translate}}</h5>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'nav.horizontal-alignment' | translate}}</h5>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+        <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'nav.vertical-alignment' | translate}}</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'nav.pills' | translate}}</h5>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'nav.fill-justify' | translate}}</h5>
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.longer-link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'nav.pills-dropdowns' | translate}}</h5>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link c-pointer active">{{'nav.active' | translate}}</a>
+          </li>
+          <li class="nav-item dropdown ml-1 mr-1">
+            <div class="btn-group" dropdown>
+              <a id="button-basic" dropdownToggle class="nav-link c-pointer dropdown-toggle"
+                aria-controls="dropdown-basic">
+                {{'nav.dropdown' | translate}} <span class="caret"></span>
+              </a>
+              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{'nav.action' | translate}}</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{'nav.another-action' | translate}}</a></li>
+                <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{'nav.another-link' | translate}}</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer">{{'nav.link' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link c-pointer disabled">{{'nav.disabled' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

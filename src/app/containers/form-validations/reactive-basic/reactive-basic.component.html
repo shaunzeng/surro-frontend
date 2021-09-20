@@ -1,0 +1,72 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h6 class="mb-4">{{ 'forms.basic' | translate }}</h6>
+
+    <form [formGroup]="basicForm" #form="ngForm" (ngSubmit)="onSubmit()" novalidate class="tooltip-label-right">
+      <div class="form-group error-l-50">
+        <label>{{ 'forms.name' | translate }}</label>
+        <input type="text" class="form-control" name="name" formControlName="name">
+        <div *ngIf="basicForm.get('name').errors?.required && form.submitted" class="invalid-tooltip">Name is required!</div>
+        <div *ngIf="basicForm.get('name').errors?.minlength && form.submitted" class="invalid-tooltip">Name must contain at least 2 characters!</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.email' | translate }}</label>
+        <input type="email" class="form-control" formControlName="email">
+        <div *ngIf="basicForm.get('email').errors?.required && form.submitted" class="invalid-tooltip">Email is required</div>
+        <div *ngIf="basicForm.get('email').errors?.email && form.submitted" class="invalid-tooltip">Email must be a valid address</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.rank' | translate }}</label>
+        <input type="number" class="form-control" formControlName="rank">
+        <div *ngIf="basicForm.get('rank').errors?.required && form.submitted" class="invalid-tooltip">Rank is required</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.options' | translate }}</label>
+        <select class="custom-select" formControlName="state">
+          <option value=""></option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <div *ngIf="basicForm.get('state').errors?.required && form.submitted" class="invalid-tooltip">Option is required</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.details' | translate }}</label>
+        <textarea class="form-control" rows="2" formControlName="details"></textarea>
+        <div *ngIf="basicForm.get('details').errors?.required && form.submitted" class="invalid-tooltip">Details are required!</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.radios' | translate }}</label>
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" value="cake" name="radio" formControlName="radio" id="reactiveRadios1">
+          <label class="custom-control-label" for="reactiveRadios1">
+            Cake
+          </label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input class="custom-control-input" type="radio" value="cupcake" name="radio" formControlName="radio" id="reactiveRadios2">
+          <label class="custom-control-label" for="reactiveRadios2">
+            Cupcake
+          </label>
+        </div>
+        <div *ngIf="basicForm.get('radio').errors?.required && form.submitted" class="invalid-tooltip">Radio is required</div>
+      </div>
+
+      <div class="form-group error-l-75" formGroupName="checks">
+        <label>{{ 'forms.checkbox' | translate }}</label>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="reactiveCheck1" formControlName="check0">
+          <label class="custom-control-label" for="reactiveCheck1">Check first</label>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="reactiveCheck2" formControlName="check1">
+          <label class="custom-control-label" for="reactiveCheck2">Check second</label>
+        </div>
+        <div *ngIf="basicForm.get('checks').errors?.requireOneCheckboxToBeChecked && form.submitted" class="invalid-tooltip">Check is required</div>
+      </div>
+
+      <button class="btn btn-primary" type="submit">{{ 'forms.submit' | translate }}</button>
+    </form>
+
+  </div>
+</div>

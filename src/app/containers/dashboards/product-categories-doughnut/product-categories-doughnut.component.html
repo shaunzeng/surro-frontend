@@ -1,0 +1,9 @@
+<div class="card h-100">
+    <div class="card-body">
+        <h5 class="card-title">{{ 'dashboards.product-categories' | translate }}</h5>
+        <div class="dashboard-donut-chart">
+            <app-doughnut-chart [shadow]="true" [options]="chartDataConfig.doughnutChartOptions"
+                [data]="doughnutChartData"></app-doughnut-chart>
+        </div>
+    </div>
+</div>

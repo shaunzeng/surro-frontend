@@ -1,0 +1,17 @@
+<div [class]="'card '+class">
+    <div class="card-body">
+        <h5 class="card-title">{{ 'dashboards.profile-status' | translate}}</h5>
+
+        <div class="mb-4" *ngFor="let s of data">
+            <p class="mb-2">
+                {{s.title}}
+                <span class="float-right text-muted">
+                    {{s.status}}/{{s.total}}
+                </span>
+            </p>
+            <div class="progress">
+                <progressbar [value]="(s.status / s.total) * 100"></progressbar>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div [class]="class">
+  <div>
+    <p class="lead color-theme-1 mb-1 value">
+      {{currentValue | currency:'USD':'symbol':'0.0-0'}}
+    </p>
+    <p class="mb-0 label text-small">{{currentLabel}}</p>
+  </div>
+  <canvas #chart></canvas>
+</div>

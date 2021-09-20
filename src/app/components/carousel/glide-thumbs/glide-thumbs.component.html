@@ -1,0 +1,24 @@
+<div class="glide details" #glideRef >
+  <div class="glide__track" data-glide-el="track">
+    <ul class="glide__slides" #glideSlides>
+      <li class="glide__slide" *ngFor="let item of images">
+        <img alt="detail" [src]="item.img" class="responsive border-0 border-radius img-fluid mb-3" />
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="glide thumbs" #glideThumbsRef >
+  <div class="glide__track" data-glide-el="track">
+    <div class="glide__slides" #glideThumbs>
+      <li [class]="activeIndex == i ? 'glide__slide active': 'glide__slide'" *ngFor="let item of thumbs; let i = index" (click)="onThumbClick(i)">
+        <img alt="thumb" [src]="item.img" class="responsive border-0 border-radius img-fluid" />
+      </li>
+
+    </div>
+  </div>
+  <div *ngIf="renderArrows" class="glide__arrows" data-glide-el="controls">
+    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="simple-icon-arrow-left"></i></button>
+    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="simple-icon-arrow-right"></i></button>
+  </div>
+</div>

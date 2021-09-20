@@ -1,0 +1,18 @@
+<div class="row" [sortablejs]="itemsRow" [sortablejsOptions]="{ handle: '.handle' }">
+    <div class="col-xl-3 col-lg-6 mb-4">
+        <app-radial-process-card [title]="'dashboards.payment-status' | translate" [percent]="64" [isSortable]="true">
+        </app-radial-process-card>
+    </div>
+    <div class="col-xl-3 col-lg-6 mb-4">
+        <app-radial-process-card [title]="'dashboards.work-progress' | translate" [percent]="75" [isSortable]="true">
+        </app-radial-process-card>
+    </div>
+    <div class="col-xl-3 col-lg-6 mb-4">
+        <app-radial-process-card [title]="'dashboards.tasks-completed' | translate" [percent]="32" [isSortable]="true">
+        </app-radial-process-card>
+    </div>
+    <div class="col-xl-3 col-lg-6 mb-4">
+        <app-radial-process-card [title]="'dashboards.payments-done' | translate" [percent]="45" [isSortable]="true">
+        </app-radial-process-card>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<div [ngClass]="{'app-menu': true, 'shown': isOpen}" (click)="menuClick($event)">
+    <ng-content></ng-content>
+    <a class="app-menu-button d-inline-block d-xl-none" href="javascript:;" (click)="toggle()">
+        <i class="simple-icon-options"></i>
+    </a>
+</div>

@@ -1,0 +1,21 @@
+<div class="card dashboard-link-list">
+    <div class="card-body">
+        <h5 class="card-title">{{ 'dashboards.cakes' | translate }}</h5>
+        <div class="d-flex flex-row">
+            <div class="w-50">
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-1" *ngFor="let c of data.slice(0, 12)">
+                        <a [routerLink]="c.link">{{c.title}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-50">
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-1" *ngFor="let c of data.slice(12, 24)">
+                        <a [routerLink]="c.link">{{c.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

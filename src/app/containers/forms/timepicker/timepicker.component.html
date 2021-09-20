@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'form-components.timepicker' | translate }}</h5>
+
+        <div class="row">
+          <div class="col-12 col-lg-6 mb-4">
+            <label>{{ 'form-components.basic' | translate }}</label>
+            <timepicker class="timepicker" [(ngModel)]="basicTime"></timepicker>
+          </div>
+          <div class="col-12 col-lg-6 mb-4">
+            <label>{{ 'form-components.seconds' | translate }}</label>
+            <timepicker class="timepicker" [(ngModel)]="secondsTime" [showMinutes]="true" [showSeconds]="true"
+              [showMeridian]="false"></timepicker>
+          </div>
+          <div class="col-12 col-lg-6 mb-4">
+            <label>{{ 'form-components.custom-steps' | translate }}</label>
+            <timepicker class="timepicker" [(ngModel)]="stepsTime" [hourStep]="1" [minuteStep]="1" [showSeconds]="true"
+              [secondsStep]="30" [minuteStep]="1"></timepicker>
+          </div>
+          <div class="col-12 col-lg-6 mb-4">
+            <label>{{ 'form-components.mouse-wheel' | translate }}</label>
+            <timepicker class="timepicker" [mousewheel]="true" [(ngModel)]="mouseTime" [showMeridian]="false"></timepicker>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

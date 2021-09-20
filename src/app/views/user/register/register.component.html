@@ -1,0 +1,45 @@
+<div class="card auth-card">
+  <div class="position-relative image-side ">
+    <p class=" text-white h2">MAGIC IS IN THE DETAILS</p>
+    <p class="white mb-0">
+      Please use the form to register.
+      <br>If you are a member, please
+      <a routerLink="/user/login" class="white white-underline-link">login</a>.
+    </p>
+  </div>
+  <div class="form-side">
+    <a class="c-pointer">
+      <span class="logo-single"></span>
+    </a>
+    <h6 class="mb-4">Register</h6>
+
+    <form #registerForm="ngForm" novalidate  (ngSubmit)="onSubmit()">
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #displayName="ngModel" name="displayName"/>
+        <span>{{ 'user.fullname' | translate }}</span>
+        <div *ngIf="!displayName.valid && registerForm.submitted" class="invalid-tooltip">Name is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" required email ngModel #email="ngModel" name="email"/>
+        <span>{{ 'user.email' | translate }}</span>
+        <div *ngIf="!email.valid && registerForm.submitted" class="invalid-tooltip">Email is required!</div>
+        <div *ngIf="email?.errors?.email && registerForm.submitted" class="invalid-tooltip">Email must be a valid address!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="password"/>
+        <span>{{ 'user.password' | translate }}</span>
+        <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password is required!</div>
+      </label>
+      <div class="d-flex justify-content-between align-items-center">
+        <a routerLink="/user/forgot-password">{{ 'user.forgot-password' | translate }}?</a>
+        <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"
+          [isDisabled]="buttonDisabled" click="onLoginClick()">
+          {{ 'user.register-button' | translate | uppercase }}
+        </app-state-button>
+
+      </div>
+    </form >
+
+  </div>
+</div>
+<simple-notifications></simple-notifications>

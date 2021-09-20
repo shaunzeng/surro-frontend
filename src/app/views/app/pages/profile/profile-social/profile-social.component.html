@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-12">
+    <div>
+      <h1>Sarah Kortney</h1>
+      <div class="text-zero top-right-button-container">
+        <div dropdown>
+          <button id="button-basic" dropdownToggle type="button" placement="bottom right"
+            class="btn btn-outline-primary dropdown-toggle btn-lg" aria-controls="dropdown-basic">{{ 'pages.actions' | translate }} <span
+              class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+            aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.action' | translate }}</a></li>
+            <li role="menuitem"><a class="dropdown-item"
+                href="javascript:;">{{ 'pages.another-action' | translate }}</a></li>
+          </ul>
+        </div>
+      </div>
+      <app-breadcrumb></app-breadcrumb>
+    </div>
+
+    <div>
+      <tabset class="separator-tabs">
+
+        <tab heading="{{'pages.profile' | translate | uppercase }}">
+          <div class="row">
+            <div class="col-12 mb-5">
+              <img class="social-header card-img" src="/assets/img/social/header.jpg" />
+            </div>
+            <div class="col-12 col-lg-5 col-xl-4 col-left">
+              <app-profile-user-social></app-profile-user-social>
+              <app-profile-photos></app-profile-photos>
+              <app-profile-who-to-follow></app-profile-who-to-follow>
+              <app-profile-recent-posts></app-profile-recent-posts>
+            </div>
+            <div class="col-12 col-lg-7 col-xl-8 col-right">
+              <app-profile-posts></app-profile-posts>
+            </div>
+          </div>
+        </tab>
+
+        <tab heading="{{'pages.images' | translate | uppercase }}">
+          <app-profile-gallery></app-profile-gallery>
+        </tab>
+        <tab heading="{{'pages.friends' | translate | uppercase }}">
+          <app-profile-friends></app-profile-friends>
+        </tab>
+      </tabset>
+    </div>
+
+  </div>
+</div>

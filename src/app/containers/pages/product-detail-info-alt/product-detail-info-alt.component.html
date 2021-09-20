@@ -1,0 +1,42 @@
+<div class="card mb-4">
+  <div class="position-absolute card-top-buttons">
+    <button class="btn btn-outline-white icon-button"><i class="simple-icon-pencil"></i></button>
+  </div>
+  <img src="/assets/img/details/1.jpg" alt="Detail" class="card-img-top" />
+  <div class="card-body">
+    <p class="text-muted text-small mb-2">{{ 'pages.description' | translate }}</p>
+    <p class="mb-3">
+      It’s all about simplicity…Less is more. Chocolate Cake
+      exclusively brings you the classic chocolate cake.
+      This cake is the one you always dream of-moist cake
+      and creamy chocolate frosting.
+      <br />
+      <br /> This cake proudly serves itself for a family
+      gathering, a dinner party, a birthday celebration, a
+      baby christening, and a gift to someone special or
+      simply to have on hand on the cake stand at home
+      served with an ice cold glass of milk!
+    </p>
+    <p class="text-muted text-small mb-2">{{ 'pages.rating' | translate }}</p>
+    <div class="mb-3">
+      <rating [readonly]="true" [max]="5" [(ngModel)]="rate" [customTemplate]="ttt"></rating>
+      <ng-template #ttt let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+    </div>
+    <p class="text-muted text-small mb-2">{{ 'pages.price' | translate }}</p>
+    <p class="mb-3">$8,14</p>
+    <p class="text-muted text-small mb-2">{{ 'pages.ingredients' | translate }}</p>
+    <div class="mb-3">
+      <p class="d-sm-inline-block mb-1">
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Flour' | uppercase}}</span>
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Chocolate' | uppercase}}</span>
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Caster Sugar' | uppercase}}</span>
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Baking Powder' | uppercase}}</span>
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Milk' | uppercase}}</span>
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Eggs' | uppercase}}</span>
+        <span class="badge mb-1 mr-1 badge-outline-secondary badge-pill">{{'Vegetable Oil' | uppercase}}</span>
+      </p>
+    </div>
+    <p class="text-muted text-small mb-2">{{ 'pages.is-vegan' | translate }}</p>
+    <p>No</p>
+  </div>
+</div>

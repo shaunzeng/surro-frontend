@@ -1,0 +1,21 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">{{ 'pages.comments' | translate }}</h5>
+    <div class="d-flex flex-row mb-3 pb-3 border-bottom" *ngFor="let comment of comments">
+      <a href="javascript:;">
+        <img [src]="comment.thumb" [alt]="comment.title"
+          class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+      </a>
+      <div class="pl-3 pr-2">
+        <a href="javascript:;">
+          <p class="font-weight-medium mb-0 ">{{ comment.title }}</p>
+          <p class="text-muted mb-1 text-small">{{ comment.detail }}</p>
+          <div>
+            <rating [readonly]="true" [max]="5" [(ngModel)]="comment.rate" [customTemplate]="t2"></rating>
+            <ng-template #t2 let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

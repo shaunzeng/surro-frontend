@@ -1,0 +1,6 @@
+<div class="card mb-4 d-none d-lg-block">
+  <div class="card-body">
+    <h5 class="card-title">{{'pages.who-to-follow' | translate}}</h5>
+    <app-user-follow *ngFor="let item of data" [data]="item"></app-user-follow>
+  </div>
+</div>

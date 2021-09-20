@@ -1,0 +1,129 @@
+<div class="card">
+  <tabset class="card-tabs">
+    <tab heading="{{'pages.details-title' | translate}}" class="card-body">
+      <p class="font-weight-bold">Augue Vitae Commodo</p>
+      <p>
+        Vivamus ultricies augue vitae commodo condimentum. Nullam
+        faucibus eros eu mauris feugiat, eget consectetur tortor tempus. Sed volutpat
+        mollis dui eget fringilla. Vestibulum blandit urna ut tellus lobortis tristique.
+        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+        Curae; Pellentesque quis cursus mauris. Nam in ornare erat. Vestibulum convallis
+        enim ac massa dapibus consectetur. Maecenas facilisis eros ac felis mattis, eget
+        auctor sapien varius.
+        <br />
+        <br />
+        Nulla non purus fermentum, pulvinar dui condimentum,
+        malesuada nibh. Sed viverra quam urna, at condimentum ante viverra non. Mauris
+        posuere erat sapien, a convallis libero lobortis sit amet. Suspendisse in orci
+        tellus.
+      </p>
+      <br />
+
+      <p class="font-weight-bold">Phasellus Efficitur</p>
+
+      <p>
+        Tellus a sem condimentum, vitae convallis sapien feugiat.
+        Aenean non nibh nec nunc aliquam iaculis. Ut quis suscipit nunc. Duis at lectus
+        a est aliquam venenatis vitae eget arcu. Sed egestas felis eget convallis
+        maximus. Curabitur maximus, ligula vel sagittis iaculis, risus nisi tincidunt
+        sem, ut ultricies libero nulla eu ligula. Nam ultricies mollis nulla, sed
+        laoreet leo convallis ac. Mauris nisl risus, tincidunt ac diam aliquet,
+        convallis pellentesque nisi. Nam sit amet libero at odio malesuada ultricies a
+        vitae dolor. Cras in viverra felis, non consequat quam. Praesent a orci enim.
+        Vivamus porttitor nisi at nisl egestas iaculis. Nullam commodo eget dui
+        sollicitudin sagittis. Duis id nibh mollis, hendrerit metus consectetur,
+        ullamcorper risus. Morbi elementum ultrices nunc, quis porta nisi ornare sit
+        amet.
+        <br />
+        <br />
+        Etiam tincidunt orci in nisi aliquam placerat. Aliquam finibus in sem ut
+        vehicula. Morbi eget consectetur leo. Quisque consectetur lectus eros, sed
+        sodales libero ornare cursus. Etiam elementum ut dolor eget hendrerit.
+        Suspendisse eu lacus eu eros lacinia feugiat sit amet non purus.
+        <br />
+        <br />
+        Pellentesque quis cursus mauris. Nam in ornare erat. Vestibulum convallis enim
+        ac massa dapibus consectetur. Maecenas facilisis eros ac felis mattis, eget
+        auctor sapien varius.
+      </p>
+      <br />
+      <p class="font-weight-bold">Elementum Ultrices</p>
+
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </tab>
+
+    <tab heading="{{'pages.comments-title' | translate}} (19)" class="card-body">
+      <div [class]="i===comments.length-1 ? 'd-flex flex-row mb-3 pb-3 justify-content-between': 'd-flex flex-row mb-3 pb-3 border-bottom justify-content-between'" *ngFor="let comment of comments; let i = index;">
+        <a href="javascript:;">
+          <img [src]="comment.thumb" [alt]="comment.title"
+            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+        </a>
+        <div class="pl-3 flex-grow-1">
+          <a href="javascript:;">
+            <p class="font-weight-medium mb-0 ">{{ comment.title }}</p>
+            <p class="text-muted mb-1 text-small">{{ comment.detail }}</p>
+            <div>
+              <rating [readonly]="true" [max]="5" [(ngModel)]="comment.rate" [customTemplate]="t2"></rating>
+              <ng-template #t2 let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+            </div>
+          </a>
+        </div>
+        <div class="comment-likes">
+          <span class="post-icon"><a href="#"><span>12 Likes</span> <i class="simple-icon-heart ml-2"></i></a></span>
+        </div>
+      </div>
+
+      <div class="comment-contaiener">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Add a comment">
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button"><span class="d-inline-block">Send</span> <i
+                class="simple-icon-arrow-right ml-2"></i></button>
+          </div>
+        </div>
+      </div>
+    </tab>
+
+    <tab heading="{{'pages.questions-title' | translate}}" class="card-body">
+      <div>
+        <accordion class="detail-tabs"  [closeOthers]="true" [isAnimated]="true">
+          <accordion-group heading="{{question.question | translate}}" [isOpen]="i === 0 ? true : false" *ngFor="let question of questions; let i = index;">
+            <p class="mb-0">
+              {{question.answer}}
+            </p>
+          </accordion-group>
+        </accordion>
+      </div>
+    </tab>
+  </tabset>
+</div>
+
+

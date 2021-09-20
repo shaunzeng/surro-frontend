@@ -1,0 +1,43 @@
+<h5 class="mb-4">{{ 'wizard.last-end' | translate }}</h5>
+<div class="card mb-5">
+  <div class="card-body">
+    <aw-wizard >
+      <aw-wizard-step stepTitle="{{ 'wizard.step-name-1' | translate }}" style="min-height: 120px;">
+        <div class="form-group">
+          <label>{{ 'forms.name' | translate }}</label>
+          <input type="text" class="form-control" name="name">
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep disabled>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+      <aw-wizard-step stepTitle="{{ 'wizard.step-name-2' | translate }}" style="min-height: 120px;">
+        <div class="form-group">
+          <label>{{ 'forms.email' | translate }}</label>
+          <input type="text" class="form-control" name="email">
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+      <aw-wizard-step stepTitle="{{ 'wizard.step-name-3' | translate }}" style="min-height: 120px;">
+        <div class="form-group">
+          <label>{{ 'forms.password' | translate }}</label>
+          <input type="password" class="form-control" name="password">
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+      <aw-wizard-completion-step stepTitle="{{ 'wizard.done' | translate }}" style="min-height: 120px;">
+        <div class="text-center complete-message-centered">
+          <h2 class="mb-2">{{ 'wizard.content-thanks' | translate }}</h2>
+          <p>{{ 'wizard.registered' | translate }}</p>
+        </div>
+      </aw-wizard-completion-step>
+    </aw-wizard >
+  </div>
+</div>

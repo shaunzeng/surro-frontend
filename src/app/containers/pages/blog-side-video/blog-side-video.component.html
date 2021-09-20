@@ -1,0 +1,20 @@
+<div class="card mb-4">
+  <div class="card-body p-0">
+    <div class="position-relative">
+      <app-player class="video-js side-bar-video card-img-top" [options]="{
+        preload: 'auto',
+        controls: true,
+        poster: '/assets/img/video/poster.jpg',
+        sources: [{src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        type: 'video/mp4'}]}">
+      </app-player>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="list-item-heading mb-4">Homemade Cheesecake with Fresh Berries and Mint
+    </p>
+    <footer>
+      <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
+    </footer>
+  </div>
+</div>

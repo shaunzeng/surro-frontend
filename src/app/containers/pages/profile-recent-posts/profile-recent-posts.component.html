@@ -1,0 +1,13 @@
+<div class="card mb-4 d-none d-lg-block">
+  <div class="position-absolute card-top-buttons">
+    <button class="btn btn-header-light icon-button">
+      <i class="simple-icon-refresh"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{'pages.recent-posts' | translate}}</h5>
+    <div>
+      <app-recent-post *ngFor="let item of data" [data]="item"></app-recent-post>
+    </div>
+  </div>
+</div>

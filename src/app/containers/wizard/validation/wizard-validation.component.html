@@ -1,0 +1,72 @@
+<h5 class="mb-4">{{ 'wizard.validation' | translate }}</h5>
+<div class="card mb-5">
+  <div class="card-body">
+    <aw-wizard #wizard>
+
+      <aw-wizard-step stepTitle="Step 1" style="min-height: 120px;">
+        <ng-template awWizardStepSymbol><i class="fa fa-search"></i></ng-template>
+        <form #formStep1="ngForm" novalidate>
+          <div class="form-group tooltip-left-bottom">
+            <label>{{ 'forms.name' | translate }}</label>
+            <input type="text" class="form-control" name="name" ngModel required #name="ngModel">
+            <div *ngIf="!name.valid && formStep1.submitted" class="invalid-tooltip">Name is required!</div>
+          </div>
+        </form>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep disabled>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" (click)="onNextStep1()">{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+
+      <aw-wizard-step stepTitle="Step 2" style="min-height: 120px;">
+        <form #formStep2="ngForm" novalidate>
+          <div class="form-group tooltip-left-bottom">
+            <label>{{ 'forms.email' | translate }}</label>
+            <input type="text" class="form-control" name="email" ngModel required #email="ngModel" email>
+            <div *ngIf="email?.errors?.required && formStep2.submitted" class="invalid-tooltip">Email is required!</div>
+            <div *ngIf="email?.errors?.email && formStep2.submitted" class="invalid-tooltip">Email must be a valid address!</div>
+              </div>
+        </form>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" (click)="onNextStep2()">{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+
+      <aw-wizard-step stepTitle="Step 3" style="min-height: 120px;">
+        <form #formStep3="ngForm" novalidate>
+          <div class="form-group tooltip-left-bottom">
+            <label>{{ 'forms.password' | translate }}</label>
+            <input type="password" class="form-control" name="password" ngModel required #password="ngModel" minlength="8"
+              pattern="([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*">
+            <div *ngIf="password?.errors?.required && formStep3.submitted" class="invalid-tooltip">Password is required!
+            </div>
+            <div *ngIf="password?.errors?.pattern && formStep3.submitted" class="invalid-tooltip">Paswsword must contain at
+              least a letter and a number!</div>
+            <div *ngIf="!password?.errors?.pattern && password?.errors?.minlength && formStep3.submitted"
+              class="invalid-tooltip">Paswsword must contain at least 8 characters!</div>
+          </div>
+        </form>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+          <button type="button" class="btn btn-primary" (click)="onNextStep3()">{{ 'wizard.next' | translate }}</button>
+        </div>
+      </aw-wizard-step>
+
+      <aw-wizard-completion-step stepTitle="{{ 'wizard.done' | translate }}" style="min-height: 120px;">
+        <div class="text-center complete-message-centered">
+          <div *ngIf="posting">
+            <div class="spinner-border text-primary" role="status">
+            </div>
+            <div class="mt-3">{{ 'wizard.saving' | translate }}</div>
+          </div>
+          <div *ngIf="!posting">
+            <h2 class="mb-2">{{ 'wizard.content-thanks' | translate }}</h2>
+            <p>{{ 'wizard.registered' | translate }}</p>
+            </div>
+        </div>
+      </aw-wizard-completion-step>
+
+    </aw-wizard>
+  </div>
+</div>

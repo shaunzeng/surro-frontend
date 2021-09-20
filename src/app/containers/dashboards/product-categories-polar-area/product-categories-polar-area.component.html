@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{'dashboards.product-categories' | translate}}</h5>
+        <div class="chart-container">
+            <app-polar-chart [shadow]="true" [class]="chartClass" [options]="chartDataConfig.polarAreaChartOptions"
+                [data]="polarAreaChartData"></app-polar-chart>
+        </div>
+    </div>
+</div>

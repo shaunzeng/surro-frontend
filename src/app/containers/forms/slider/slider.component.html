@@ -1,0 +1,21 @@
+<div class="card mb-4">
+  <div class="card-body">
+      <h5 class="mb-4">{{ 'form-components.slider' | translate }}</h5>
+      <div class="row">
+          <div class="col-12 col-xs-6 mb-3">
+              <div class="form-group">
+                  <label>{{ 'form-components.single-slider' | translate }}</label>
+                  <nouislider [min]="0" [max]="150" [tooltips]="true" [step]="1" [(ngModel)]="sliderValue"></nouislider>
+              </div>
+          </div>
+          <div class="col-12 col-xs-6 mb-3">
+              <div class="form-group">
+                  <label>{{ 'form-components.double-slider' | translate }}</label>
+                  <form [formGroup]="sliderRangeFormGroup">
+                    <nouislider  [connect]="true" [min]="500" [max]="1500" [tooltips]="true" [step]="10" [formControl]="sliderRangeFormGroup.controls.range"></nouislider>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

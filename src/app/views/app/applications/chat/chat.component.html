@@ -1,0 +1,151 @@
+<div class="row app-row">
+    <div class="col-12 chat-app">
+        <div class="d-flex flex-row justify-content-between mb-3" *ngIf="selectedConversation">
+            <div class="d-flex flex-row chat-heading">
+                <a class="d-flex" href="javascript:;">
+                    <img [alt]="getOtherUser(selectedConversation.users).title"
+                        [src]="getOtherUser(selectedConversation.users).img"
+                        class="img-thumbnail border-0 rounded-circle ml-0 mr-4 list-thumbnail align-self-center small">
+                </a>
+                <div class=" d-flex min-width-zero">
+                    <div
+                        class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                        <div class="min-width-zero">
+                            <a href="javascript:;">
+                                <p class="list-item-heading mb-1 truncate ">
+                                    {{ getOtherUser(selectedConversation.users).title}}</p>
+                            </a>
+                            <p class="mb-0 text-muted text-small">{{getOtherUser(selectedConversation.users).date}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="separator mb-5"></div>
+        <ng-container *ngIf="selectedConversation">
+            <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}" #scroll>
+                <ng-container *ngFor="let m of selectedConversation.messages">
+                    <div
+                        [ngClass]="{'float-right': m.sender===currentUserId ,'float-left': m.sender!==currentUserId ,'card d-inline-block mb-3' : true }">
+                        <div class="position-absolute pt-1 pr-2 r-0">
+                            <span class="text-extra-small text-muted">{{m.time}}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-row pb-2">
+                                <a class="d-flex" href="javascript:;">
+                                    <img [alt]="getUser(m.sender).title" [src]="getUser(m.sender).img"
+                                        class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall">
+                                </a>
+                                <div class=" d-flex flex-grow-1 min-width-zero">
+                                    <div
+                                        class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                        <div class="min-width-zero">
+                                            <p class="mb-0 truncate list-item-heading">{{getUser(m.sender).title}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-text-left">
+                                <p class="mb-0 text-semi-muted">{{m.text}} </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </ng-container>
+            </perfect-scrollbar>
+        </ng-container>
+
+    </div>
+</div>
+
+
+<div class="chat-input-container d-flex justify-content-between align-items-center">
+    <input class="form-control flex-grow-1" type="text" placeholder="Say something..." [(ngModel)]="message"
+        (keyup)="messageInputKeyUp($event)">
+    <div>
+        <button type="button" class="btn btn-outline-primary icon-button large">
+            <i class="simple-icon-paper-clip"></i>
+        </button>{{' '}}
+        <button type="button" class="btn btn-primary icon-button large" (click)="sendMessage()">
+            <i class="simple-icon-arrow-right"></i>
+        </button>
+    </div>
+</div>
+
+
+<app-application-menu>
+    <tabset class="card-tabs h-100" [justified]="true">
+        <tab [heading]="'chat.messages' | translate" class="card-body h-100">
+            <div class="chat-app-tab-pane-messages">
+
+                <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}">
+                    <div class="d-flex flex-row mb-1 border-bottom pb-3 mb-3" *ngFor="let item of conversations"
+                        (click)="selectConversation(item.id)">
+                        <a class="d-flex" href="javascript:;">
+                            <img [src]="getOtherUser(item.users).img" [alt]="getOtherUser(item.users).title"
+                                class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall">
+                        </a>
+                        <div class="d-flex flex-grow-1 min-width-zero">
+                            <div
+                                class="pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                <div class="min-width-zero">
+                                    <a href="javascript:;">
+                                        <p class=" mb-0 truncate">{{getOtherUser(item.users).title}}</p>
+                                    </a>
+                                    <p class="mb-1 text-muted text-small">{{item.lastMessageTime}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </perfect-scrollbar>
+            </div>
+        </tab>
+        <tab [heading]="'chat.contacts' | translate" class="card-body h-100">
+            <div class="form-group">
+                <input type="text" class="form-control rounded-100" placeholder="Search" #searchBoxContact id="search-box"
+                    (input)="search(searchBoxContact.value)" />
+            </div>
+            <div class="chat-app-tab-pane-contacts">
+                <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}">
+                    <ng-container *ngIf="searchKeyword===''">
+                        <div class="d-flex flex-row mb-3 border-bottom pb-3" *ngFor="let contact of contacts">
+                            <a class="d-flex" href="javascript:;">
+                                <img [alt]="contact.title" [src]="contact.img"
+                                    class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall">
+                            </a>
+                            <div class="d-flex flex-grow-1 min-width-zero">
+                                <div
+                                    class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                    <div class="min-width-zero">
+                                        <a href="javascript:;">
+                                            <p class="mb-0 truncate">{{contact.title}}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="searchKeyword!==''">
+                        <div class="d-flex flex-row mb-3 border-bottom pb-3" *ngFor="let contact of contacts$ | async">
+                            <a class="d-flex" href="javascript:;">
+                                <img [alt]="contact.title" [src]="contact.img"
+                                    class="img-thumbnail border-0 rounded-circle mr-3 list-thumbnail align-self-center xsmall">
+                            </a>
+                            <div class="d-flex flex-grow-1 min-width-zero">
+                                <div
+                                    class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                    <div class="min-width-zero">
+                                        <a href="javascript:;">
+                                            <p class="mb-0 truncate">{{contact.title}}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </perfect-scrollbar>
+            </div>
+        </tab>
+    </tabset>
+</app-application-menu>

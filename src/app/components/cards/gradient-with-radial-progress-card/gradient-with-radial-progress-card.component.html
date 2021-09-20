@@ -1,0 +1,17 @@
+<div class="card progress-banner">
+    <div class="card-body justify-content-between d-flex flex-row align-items-center">
+        <div>
+            <i [class]="'mr-2 text-white align-text-bottom d-inline-block ' + icon"></i>
+            <div>
+                <p class="lead text-white">{{title}}</p>
+                <p class="text-small text-white">{{detail}}</p>
+            </div>
+        </div>
+        <div class="progress-bar-circle progress-bar-banner position-relative">
+            <div class="progressbar-text">{{ progressText }}</div>
+            <round-progress [current]="percent" [max]="100" [responsive]="true" [duration]="800"
+                [animation]="'easeInOutQuart'" [animationDelay]="0" [radius]="50" [rounded]="true" [stroke]="4">
+            </round-progress>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12">
+    <h5 class="mb-4">25 March 2020</h5>
+  </div>
+</div>
+<div class="row gallery gallery-page mb-5">
+  <div class="col-6 col-lg-2 col-md-4" *ngFor="let item of gallerySmall; let i=index;">
+    <img class="img-fluid border-radius c-pointer" [src]="item.thumb" (click)="openLightbox(gallerySmall,i)"/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h5 class="mb-4">04 April 2020</h5>
+  </div>
+</div>
+<div class="row gallery gallery-page mb-5">
+  <div class="col-6 col-md-6" *ngFor="let item of galleryXlarge; let i=index;">
+    <img class="img-fluid border-radius c-pointer" [src]="item.thumb" (click)="openLightbox(galleryXlarge,i)"/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <h5 class="mb-4">18 July 2020</h5>
+  </div>
+</div>
+<div class="row gallery gallery-page mb-5">
+  <div class="col-6 col-md-3" *ngFor="let item of galleryLarge; let i=index;">
+    <img class="img-fluid border-radius c-pointer" [src]="item.thumb" (click)="openLightbox(galleryLarge,i)"/>
+  </div>
+</div>

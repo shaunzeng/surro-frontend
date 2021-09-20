@@ -1,0 +1,43 @@
+<app-list-page-header [selectAllState]="selectAllState" (selectAllChange)="selectAllChange($event)"
+  [showOrderBy]="false" [showDisplayMode]="false" (searchKeyUp)="updateFilter($event)" [itemsPerPage]="itemsPerPage" [showItemsPerPage]="false">
+</app-list-page-header>
+
+<div class="row" style="min-height: 1080px;">
+  <div class="col-12 mb-4 data-table-rows data-table-scrollable">
+    <ngx-datatable [rows]="rows" [columns]="columns" [columnMode]="ColumnMode.flex" #table [headerHeight]="20"
+      [sorts]="[{ prop: 'title', dir: 'asc' }]" (select)="onSelect($event)" [selected]="selected"
+      [selectionType]="SelectionType.checkbox">
+      <ngx-datatable-column name="Title" [flexGrow]="1.2">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <a class="c-pointer">{{ value }}</a>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Sales" [flexGrow]="0.7">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Category" [flexGrow]="1.1">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{ value }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Id" [width]="120" [sortable]="false" [canAutoResize]="false" [draggable]="false">
+        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+          let-selectFn="selectFn">
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-isSelected="isSelected" let-value="value"
+          let-onCheckboxChangeFn="onCheckboxChangeFn">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" [id]="'customCheck'+value" [checked]="isSelected"
+              (change)="onCheckboxChangeFn($event)">
+            <label class="custom-control-label" [for]="'customCheck'+value"></label>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+    <div *ngIf="endOfTheList" class="text-center text-muted text-small">
+      End of the list!
+    </div>
+  </div>
+</div>

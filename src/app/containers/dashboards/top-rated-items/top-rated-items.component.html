@@ -1,0 +1,24 @@
+<div class="card dashboard-top-rated">
+  <div class="card-body">
+    <h5 class="card-title">{{ 'dashboards.top-rated-items' | translate }}</h5>
+    <app-glide [settings]="{
+        type: 'carousel',
+        gap: 5,
+        perView: 1,
+        hideNav: true,
+        peek: { 'before': 0, 'after': 100 },
+        breakpoints: { '480': { perView: 1 }, '992': { perView: 2 }, '1200': { perView: 1 }}
+    }">
+      <div *ngFor="let item of data">
+        <img [src]="item.image" [alt]="item.title" class="mb-4" />
+        <h6 class="mb-1">
+          <span class="mr-2">{{item.order}}.</span>
+          {{item.title}}
+        </h6>
+        <rating [readonly]="true" [max]="5" [(ngModel)]="item.rate" [customTemplate]="t"></rating>
+        <ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+        <p class="text-small text-muted mb-0 d-inline-block">({{item.rateCount}})</p>
+      </div>
+    </app-glide>
+  </div>
+</div>

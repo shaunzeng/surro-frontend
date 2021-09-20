@@ -1,0 +1,24 @@
+<div class="row">
+
+  <div class="col-12 col-sm-12 col-lg-6 col-xl-4" *ngFor="let item of data">
+    <div class="card d-flex flex-row mb-4">
+      <a class="d-flex" href="javascript:;">
+        <img alt="Profile" [src]="item.thumb"
+          class="img-thumbnail border-0 rounded-circle m-4 list-thumbnail align-self-center">
+      </a>
+      <div class=" d-flex flex-grow-1 min-width-zero">
+        <div
+          class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+          <div class="min-width-zero">
+            <a href="javascript:;">
+              <p class="list-item-heading mb-1 truncate">{{item.name}}</p>
+            </a>
+            <p class="mb-2 text-muted text-small">{{item.status}}</p>
+            <button type="button" class="btn btn-xs btn-outline-primary">View</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

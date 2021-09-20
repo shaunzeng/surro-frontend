@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'editors.quill-standart' | translate}}</h5>
+        <quill-editor [placeholder]="''"></quill-editor>
+      </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="mb-4">{{'editors.quill-bubble' | translate}}</h5>
+          <quill-editor [theme]="'bubble'" [modules]="modulesBubble" [placeholder]="''"></quill-editor>
+        </div>
+      </div>
+  </div>
+</div>

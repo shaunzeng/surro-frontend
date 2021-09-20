@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'icons.simplelineicons' | translate}}</h5>
+        <div class="simple-line-icons">
+          <div class="glyph" *ngFor="let icon of simpleLineIcons">
+            <div [class]="'glyph-icon ' + icon"></div>
+            <div class="class-name">{{icon}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'icons.iconsmind' | translate}}</h5>
+        <div class="mind-icons">
+          <div class="mb-5" *ngFor="let iconSet of iconsMind">
+            <h6 class="mb-4">{{iconSet.title}}</h6>
+            <div class="glyph" *ngFor="let icon of iconSet.icons">
+              <div [class]="'glyph-icon ' + icon"></div>
+              <div class="class-name">{{icon}}</div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

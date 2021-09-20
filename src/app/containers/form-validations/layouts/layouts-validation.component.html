@@ -1,0 +1,74 @@
+<div class="card mb-4">
+  <div class="card-body">
+
+    <h6 class="mb-4">Top Labels In Input</h6>
+    <form class="mb-5" #inInputForm="ngForm" novalidate>
+      <label class="form-group has-top-label">
+        <input class="form-control" required ngModel #email="ngModel" name="email"/>
+        <span>{{ 'forms.email' | translate | uppercase }}</span>
+        <div *ngIf="!email.valid && inInputForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-top-label">
+        <input class="form-control" id="password" type="password" placeholder="" required ngModel #password="ngModel" name="password" />
+        <span>{{ 'forms.password' | translate | uppercase  }}</span>
+        <div *ngIf="!password.valid && inInputForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-top-label">
+        <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']" [addTag]="addTagFn" [hideSelected]="true"
+          multiple="true" bindLabel="name" required ngModel #tags="ngModel" name="tags">
+        </ng-select>
+        <span>{{ 'forms.tags' | translate | uppercase }}</span>
+        <div *ngIf="!tags.valid && inInputForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-top-label">
+        <input class="form-control" bsDatepicker [container]="'html'" required ngModel #date="ngModel" name="date">
+        <span>{{ 'forms.date' | translate | uppercase }}</span>
+        <div *ngIf="!date.valid && inInputForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-top-label">
+        <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
+          bindValue="id"  required ngModel #ngSelectSingle="ngModel" name="ngSelectSingle">
+        </ng-select>
+        <span>{{ 'forms.state' | translate | uppercase }}</span>
+        <div *ngIf="!ngSelectSingle.valid && inInputForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <button class="btn btn-primary" type="submit">{{ 'forms.signup' | translate }}</button>
+    </form>
+
+    <h6 class="mb-4">Top Labels Over Line</h6>
+    <form #overLineForm="ngForm" novalidate>
+      <label class="form-group has-float-label">
+        <input class="form-control" required ngModel #email2="ngModel" name="email2"/>
+        <span>{{ 'forms.email' | translate }}</span>
+        <div *ngIf="!email2.valid && overLineForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" type="password" placeholder="" required ngModel #password2="ngModel" name="password2"/>
+        <span>{{ 'forms.password' | translate }}</span>
+        <div *ngIf="!password2.valid && overLineForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']" [addTag]="addTagFn" [hideSelected]="true"
+          multiple="true" bindLabel="name" required ngModel #tags2="ngModel" name="tags2">
+        </ng-select>
+        <span>{{ 'forms.tags' | translate }}</span>
+        <div *ngIf="!tags2.valid && overLineForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" bsDatepicker [container]="'html'" required ngModel #date2="ngModel" name="date2">
+        <span>{{ 'forms.date' | translate }}</span>
+        <div *ngIf="!date2.valid && overLineForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <label class="form-group has-float-label">
+        <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
+          bindValue="id" required ngModel #ngSelectSingle2="ngModel" name="ngSelectSingle2">
+        </ng-select>
+        <span>{{ 'forms.state' | translate }}</span>
+        <div *ngIf="!ngSelectSingle2.valid && overLineForm.submitted" class="invalid-tooltip">Value is required!</div>
+      </label>
+      <button class="btn btn-primary" type="submit">{{ 'forms.signup' | translate }}</button>
+    </form >
+
+  </div>
+</div>
+

@@ -1,0 +1,32 @@
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{'pages.add-new-modal-title' | translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label>{{ 'pages.product-name' | translate }}</label>
+            <input type="email" class="form-control" placeholder="">
+        </div>
+        <div class="mt-4">
+            <label>{{ 'pages.category' | translate }}</label>
+            <label class="w-100">
+                <ng-select appearance="outline" [searchable]="false">
+                    <ng-option *ngFor="let item of categories" [value]="item.value">{{item.label}}
+                    </ng-option>
+                </ng-select>
+            </label>
+        </div>
+        <div class="mt-4">
+            <label>{{ 'pages.description' | translate }}</label>
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary"
+            (click)="modalRef.hide()">{{'pages.cancel' | translate }}</button>
+        <button type="submit" class="btn btn-primary float-right">{{ 'pages.submit' | translate}}</button>
+    </div>
+</ng-template>

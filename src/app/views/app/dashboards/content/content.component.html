@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-12">
+      <app-heading></app-heading>
+      <app-breadcrumb></app-breadcrumb>
+      <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-xl-6">
+        <app-icon-cards-carousel></app-icon-cards-carousel>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <app-quick-post></app-quick-post>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-xl-6 mb-4">
+        <app-best-sellers title="dashboards.top-viewed-posts"></app-best-sellers>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <app-cakes></app-cakes>
+    </div>
+    <div class="col-md-6 col-lg-8 mb-4">
+        <app-new-comments></app-new-comments>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-md-6 mb-4">
+        <app-website-visits-chart-card></app-website-visits-chart-card>
+    </div>
+    <div class="col-sm-12 col-md-6 mb-4">
+        <app-conversion-rates-chart-card></app-conversion-rates-chart-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6 mb-4">
+        <app-gradient-with-radial-progress-card [icon]="'iconsminds-clock'"
+            [title]="'5 ' + ('dashboards.files' | translate)" [detail]="'dashboards.pending-for-print' | translate"
+            [percent]="(5 * 100) / 12" [progressText]="'5/12'">
+        </app-gradient-with-radial-progress-card>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+        <app-gradient-with-radial-progress-card [icon]="'iconsminds-male'"
+            [title]="'4 ' + ('dashboards.orders' | translate)" [detail]="'dashboards.on-approval-process' | translate"
+            [percent]="(4 * 100) / 6" [progressText]="'4/6'">
+        </app-gradient-with-radial-progress-card>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+        <app-gradient-with-radial-progress-card [icon]="'iconsminds-bell'"
+            [title]="'8 ' + ('dashboards.alerts' | translate)" [detail]="'dashboards.waiting-for-notice' | translate"
+            [percent]="(8 * 100) / 10" [progressText]="'8/10'">
+        </app-gradient-with-radial-progress-card>
+    </div>
+</div>

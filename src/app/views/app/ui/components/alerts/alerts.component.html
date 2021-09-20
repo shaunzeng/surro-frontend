@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-lg-6 mb-5">
+    <h5 class="mb-5">{{'alert.bootstrap-alerts' | translate}}</h5>
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="mb-4">{{'alert.rounded' | translate}}</h5>
+            <alert type="primary rounded">{{'alert.primary-text' | translate}}</alert>
+            <alert type="secondary rounded">{{'alert.secondary-text' | translate}}</alert>
+            <alert type="success rounded">{{'alert.success-text' | translate}}</alert>
+            <alert type="danger rounded">{{'alert.danger-text' | translate}}</alert>
+            <alert type="warning rounded">{{'alert.warning-text' | translate}}</alert>
+            <alert type="info rounded">{{'alert.info-text' | translate}}</alert>
+            <alert type="light rounded">{{'alert.light-text' | translate}}</alert>
+            <alert type="dark rounded">{{'alert.dark-text' | translate}}</alert>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="mb-4">{{'alert.dismissing' | translate}}</h5>
+            <alert type="warning rounded" [dismissible]="true">{{'alert.dismissing-without-animate-text' | translate}}
+            </alert>
+            <alert type="danger rounded" [dismissible]="true" [dismissOnTimeout]="10000">
+              {{'alert.dismissing-without-animate-text' | translate}} (10 seconds)</alert>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="mb-4">{{'alert.additional-content' | translate}}</h5>
+            <alert type="success mb-0 rounded">
+              <h4 class="alert-heading">{{'alert.well-done' | translate}}</h4>
+              <p class="mb-0"> Nim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+                moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+                shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                proident.</p>
+            </alert>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="mb-4">{{'alert.default' | translate}}</h5>
+            <alert type="primary">{{'alert.primary-text' | translate}}</alert>
+            <alert type="secondary">{{'alert.secondary-text' | translate}}</alert>
+            <alert type="success">{{'alert.success-text' | translate}}</alert>
+            <alert type="danger">{{'alert.danger-text' | translate}}</alert>
+            <alert type="warning">{{'alert.warning-text' | translate}}</alert>
+            <alert type="info">{{'alert.info-text' | translate}}</alert>
+            <alert type="light">{{'alert.light-text' | translate}}</alert>
+            <alert type="dark">{{'alert.dark-text' | translate}}</alert>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 mb-5">
+    <h5 class="mb-5">{{'alert.angular-notifications' | translate}}</h5>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-4">
+              <h5 class="mb-4">{{'alert.outline' | translate}}</h5>
+              <button (click)="onPrimaryOutline()" class="btn btn-outline-primary mb-2">{{'alert.primary' | translate}}</button>{{' '}}
+              <button (click)="onSecondaryOutline()" class="btn btn-outline-secondary mb-2">{{'alert.secondary' | translate}}</button>{{' '}}
+              <button (click)="onInfoOutline()" class="btn btn-outline-info mb-2">{{'alert.info' | translate}}</button>{{' '}}
+              <button (click)="onSuccessOutline()" class="btn btn-outline-success mb-2">{{'alert.success' | translate}}</button>{{' '}}
+              <button (click)="onErrorOutline()" class="btn btn-outline-danger mb-2">{{'alert.error' | translate}}</button>{{' '}}
+              <button (click)="onWarningOutline()" class="btn btn-outline-warning mb-2">{{'alert.warning' | translate}}</button>{{' '}}
+            </div>
+            <div class="mb-4">
+              <h5 class="mb-4">{{'alert.filled' | translate}}</h5>
+              <button (click)="onPrimary()" class="btn btn-primary mb-2">{{'alert.primary' | translate}}</button>{{' '}}
+              <button (click)="onSecondary()" class="btn btn-secondary mb-2">{{'alert.secondary' | translate}}</button>{{' '}}
+              <button (click)="onInfo()" class="btn btn-info mb-2">{{'alert.info' | translate}}</button>{{' '}}
+              <button (click)="onSuccess()" class="btn btn-success mb-2">{{'alert.success' | translate}}</button>{{' '}}
+              <button (click)="onError()" class="btn btn-danger mb-2">{{'alert.error' | translate}}</button>{{' '}}
+              <button (click)="onWarning()" class="btn btn-warning mb-2">{{'alert.warning' | translate}}</button>{{' '}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<simple-notifications></simple-notifications>

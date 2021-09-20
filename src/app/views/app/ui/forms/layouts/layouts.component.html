@@ -1,0 +1,248 @@
+<div class="row">
+  <div class="col-12">
+      <app-heading></app-heading>
+      <app-breadcrumb></app-breadcrumb>
+      <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'forms.basic' | translate }}</h5>
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">{{ 'forms.email' | translate }}</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="{{ 'forms.email' | translate }}">
+            <small id="emailHelp" class="form-text text-muted">{{ 'forms.email-muted' | translate }}</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">{{ 'forms.password' | translate }}</label>
+            <input type="password" class="form-control" id="exampleInputPassword1"
+              placeholder="{{ 'forms.password' | translate }}">
+          </div>
+          <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1">{{ 'forms.custom-checkbox' | translate }}</label>
+          </div>
+          <button type="submit" class="btn btn-primary mb-0">{{ 'forms.submit' | translate }}</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'forms.horizontal' | translate }}</h5>
+        <form>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">{{ 'forms.email' | translate }}</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputEmail3" placeholder="{{ 'forms.email' | translate }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">{{ 'forms.password' | translate }}</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword3"
+                placeholder="{{ 'forms.password' | translate }}">
+            </div>
+          </div>
+          <fieldset class="form-group">
+            <div class="row">
+              <label class="col-form-label col-sm-2 pt-0">{{ 'forms.radios' | translate }}</label>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
+                    checked>
+                  <label class="form-check-label" for="gridRadios1">
+                    {{ 'forms.first-radio' | translate }}
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                  <label class="form-check-label" for="gridRadios2">
+                    {{ 'forms.second-radio' | translate }}
+                  </label>
+                </div>
+                <div class="form-check disabled">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3"
+                    disabled>
+                  <label class="form-check-label" for="gridRadios3">
+                    {{ 'forms.third-radio-disabled' | translate }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group row">
+            <div class="col-sm-2">{{ 'forms.checkbox' | translate }}</div>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1">
+                  {{ 'forms.checkbox-example' | translate }}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-0">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary mb-0">{{ 'forms.signup' | translate }}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'forms.top-labels-over-line' | translate }}</h5>
+
+        <form>
+          <label class="form-group has-float-label">
+            <input class="form-control" />
+            <span>{{ 'forms.email' | translate }}</span>
+          </label>
+          <label class="form-group has-float-label">
+            <input class="form-control" type="password" placeholder="" />
+            <span>{{ 'forms.password' | translate }}</span>
+          </label>
+          <label class="form-group has-float-label">
+            <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']" [addTag]="addTagFn" [hideSelected]="true"
+              multiple="true" bindLabel="name">
+            </ng-select>
+            <span>{{ 'forms.tags' | translate }}</span>
+          </label>
+          <label class="form-group has-float-label">
+            <input class="form-control" bsDatepicker [container]="'html'">
+            <span>{{ 'forms.date' | translate }}</span>
+          </label>
+          <label class="form-group has-float-label">
+            <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
+              bindValue="id">
+            </ng-select>
+            <span>{{ 'forms.state' | translate }}</span>
+          </label>
+          <button class="btn btn-primary" type="submit">{{ 'forms.signup' | translate }}</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'forms.top-labels-in-input' | translate }}</h5>
+
+        <form>
+          <label class="form-group has-top-label">
+            <input class="form-control" />
+            <span>{{ 'forms.email' | translate | uppercase }}</span>
+          </label>
+          <label class="form-group has-top-label">
+            <input class="form-control" id="password" type="password" placeholder="" />
+            <span>{{ 'forms.password' | translate | uppercase  }}</span>
+          </label>
+          <label class="form-group has-top-label">
+            <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']" [addTag]="addTagFn" [hideSelected]="true"
+              multiple="true" bindLabel="name">
+            </ng-select>
+            <span>{{ 'forms.tags' | translate | uppercase }}</span>
+          </label>
+          <label class="form-group has-top-label">
+            <input class="form-control" bsDatepicker [container]="'html'">
+            <span>{{ 'forms.date' | translate | uppercase }}</span>
+          </label>
+          <label class="form-group has-top-label">
+            <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
+              bindValue="id">
+            </ng-select>
+            <span>{{ 'forms.state' | translate | uppercase }}</span>
+          </label>
+          <button class="btn btn-primary" type="submit">{{ 'forms.signup' | translate }}</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'forms.grid' | translate }}</h5>
+
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">{{ 'forms.email' | translate }}</label>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="{{ 'forms.email' | translate }}">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">{{ 'forms.password' | translate }}</label>
+              <input type="password" class="form-control" id="inputPassword4" placeholder="{{ 'forms.password' | translate }}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">{{ 'forms.address' | translate }}</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="{{ 'forms.address' | translate }}">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">{{ 'forms.city' | translate }}</label>
+              <input type="text" class="form-control" id="inputCity" placeholder="{{ 'forms.city' | translate }}">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">{{ 'forms.state' | translate }}</label>
+              <select id="inputState" class="form-control">
+                <option selected>{{ 'input-groups.choose' | translate }}</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">{{ 'forms.zip' | translate }}</label>
+              <input type="text" class="form-control" id="inputZip" placeholder="{{ 'forms.zip' | translate }}">
+            </div>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <label class="form-check-label" for="inlineCheckbox1">1</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+            <label class="form-check-label" for="inlineCheckbox2">2</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
+            <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+          </div>
+          <button type="submit" class="btn btn-primary d-block mt-3">{{ 'forms.signup' | translate }}</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'forms.inline' | translate }}</h5>
+
+        <form class="form-inline">
+          <label class="sr-only" for="inlineFormInputName2">{{ 'forms.grid' | translate }}</label>
+          <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+          <label class="sr-only" for="inlineFormInputGroupUsername2">{{ 'forms.username' | translate }}</label>
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+          </div>
+          <div class="form-check mb-2 mr-sm-2">
+            <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+            <label class="form-check-label" for="inlineFormCheck">
+              {{ 'forms.remember-me' | translate }}
+            </label>
+          </div>
+          <button type="submit" class="btn btn-sm btn-outline-primary mb-2">{{ 'forms.signup' | translate }}</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

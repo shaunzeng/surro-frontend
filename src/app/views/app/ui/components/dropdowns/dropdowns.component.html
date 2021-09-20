@@ -1,0 +1,190 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'dropdowns.basic' | translate}}</h5>
+        <div class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-primary dropdown-toggle"
+            aria-controls="dropdown-basic">
+            Dropdown <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Something else here</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Separated link</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'dropdowns.split' | translate}}</h5>
+        <div class="btn-group" dropdown>
+          <button type="button" class="btn btn-primary">Action</button>
+          <button id="button-split" type="button" dropdownToggle
+            class="btn btn-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+          </button>
+          <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a>
+            </li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Something else
+                here</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Separated link</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body z-index-1" id="anchorDropdownContainer">
+        <h5 class="mb-4">{{'dropdowns.anchor' | translate}}</h5>
+        <span dropdown container="#anchorDropdownContainer" (onShown)="onShown()" (onHidden)="onHidden()" (isOpenChange)="isOpenChange()">
+          <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">Dropdown</a>
+          <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+            <li *ngFor="let choice of items">
+              <a class="dropdown-item" href="javascript:;">{{choice}}</a>
+            </li>
+          </ul>
+        </span>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'dropdowns.manual-triggering' | translate}}</h5>
+        <div class="d-inline-block position-relative" dropdown #dropdown="bs-dropdown" [autoClose]="false">
+          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            Dropdown <span class="caret"></span>
+          </button>
+          <ul id="dropdown-triggers-manual" *dropdownMenu class="dropdown-menu" role="menu"
+            aria-labelledby="button-triggers-manual">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a>
+            </li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Something else here</a></li>
+          </ul>
+        </div>{{" "}}
+        <button type="button" class="btn btn-outline-primary" (click)="dropdown.toggle(true)">Toggle</button>{{" "}}
+        <button type="button" class="btn btn-outline-primary" (click)="dropdown.show()">Show</button>{{" "}}
+        <button type="button" class="btn btn-outline-primary" (click)="dropdown.hide()">Hide</button>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'dropdowns.trigger-isopen' | translate}}</h5>
+        <div class="btn-group" dropdown #dropdown="bs-dropdown" [autoClose]="false" [isOpen]="manualTrigger">
+          <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+            Dropdown <span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a>
+            </li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Something else here</a></li>
+          </ul>
+        </div>{{" "}}
+        <button type="button" class="btn btn-outline-primary"
+          (click)="manualTrigger = !manualTrigger">Toggle</button>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'dropdowns.disabled' | translate}}</h5>
+
+        <div class="btn-group" dropdown [isDisabled]="true">
+          <button id="button-disabled-menu" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-disabled-menu">
+            Dropdown <span class="caret"></span>
+          </button>
+          <ul id="dropdown-disabled-menu" *dropdownMenu class="dropdown-menu" role="menu"
+            aria-labelledby="button-disabled-menu">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a>
+            </li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Something else
+                here</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Separated link</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{'dropdowns.alignment' | translate}}</h5>
+
+        <div class="btn-group" dropdown placement="bottom right">
+          <button id="button-alignment" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-alignment">
+            Bottom Right <span class="caret"></span>
+          </button>
+          <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+            aria-labelledby="button-alignment">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another</a></li>
+          </ul>
+        </div>
+        {{" "}}
+        <div class="btn-group" dropdown placement="bottom left">
+          <button id="button-alignment" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-alignment">
+            Bottom Left <span class="caret"></span>
+          </button>
+          <ul id="dropdown-alignment" *dropdownMenu class="dropdown-menu dropdown-menu-left" role="menu"
+            aria-labelledby="button-alignment">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another</a></li>
+          </ul>
+        </div>
+        {{" "}}
+        <div class="btn-group" dropdown [dropup]="true" placement="top right">
+          <button id="button-dropup" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-dropup">
+            Top Right <span class="caret"></span>
+          </button>
+          <ul id="dropdown-dropup" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="button-dropup">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a>
+            </li>
+          </ul>
+        </div>
+        {{" "}}
+        <div class="btn-group" dropdown [dropup]="true" placement="top left">
+          <button id="button-dropup" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-dropup">
+            Top Left <span class="caret"></span>
+          </button>
+          <ul id="dropdown-dropup" *dropdownMenu class="dropdown-menu dropdown-menu-left" role="menu" aria-labelledby="button-dropup">
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Action</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;">Another action</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

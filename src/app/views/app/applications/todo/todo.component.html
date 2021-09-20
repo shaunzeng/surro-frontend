@@ -1,0 +1,173 @@
+<div class="row app-row">
+    <div class="col-12">
+        <app-heading></app-heading>
+        <div class="top-right-button-container text-zero">
+            <button type="button" (click)="showAddNewModal()"
+                class="top-right-button btn btn-primary btn-lg mr-1">{{ 'pages.add-new' | translate}}</button>
+            <div class="btn-group" dropdown>
+                <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+                    <label class="custom-control custom-checkbox mb-0 d-inline-block">
+                        <input type="checkbox" class="custom-control-input" [checked]="selectAllState==='checked'"
+                            [indeterminate]="selectAllState === 'indeterminate'" (change)="selectAll($event)">
+                        <span class="custom-control-label">&nbsp;</span>
+                    </label>
+                </div>
+                <button id="button-split" type="button" dropdownToggle
+                    class="btn btn-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                    <span class="caret"></span>
+                </button>
+                <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                    aria-labelledby="button-split">
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="javascript:;">{{ 'pages.action' | translate }}</a></li>
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="javascript:;">{{ 'pages.another-action' | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <app-breadcrumb></app-breadcrumb>
+        <div class="display-options-container">
+            <a class="btn pt-0 pl-0 d-inline-block d-md-none c-pointer" data-toggle="collapse"
+                (click)="displayOptionsCollapsed = !displayOptionsCollapsed" role="button" aria-expanded="true"
+                aria-controls="displayOptions">
+                {{ 'pages.display-options' | translate}} {{' '}}
+                <i class="simple-icon-arrow-down align-middle"></i>
+            </a>
+            <div id="displayOptions" [collapse]="displayOptionsCollapsed" class="collapse dont-collapse-sm">
+                <div class="d-block d-md-inline-block">
+                    <div class="float-md-left mr-1 mb-1" dropdown>
+                        <button id="button-basic" dropdownToggle type="button"
+                            class="btn btn-outline-dark btn-xs dropdown-toggle" aria-controls="dropdown-basic">
+                            Order By : {{itemOrder}} <span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                            aria-labelledby="button-basic">
+                            <li role="menuitem" *ngFor="let item of itemOptionsOrders"><a
+                                    [ngClass]="item === itemOrder ? 'dropdown-item active' : 'dropdown-item'"
+                                    (click)="itemOrder = item">{{item}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-inline-block">
+                    <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+                        <input class="form-control" placeholder="Search">
+                        <!-- (keyup)="updateFilter($event)" -->
+                    </div>
+                </div>
+                <div class="float-right" id="pageCountDatatable">
+                    <span class="text-muted text-small">1-10 of 40 </span>
+                    <span dropdown class="d-inline-block position-relative">
+                        <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" dropdownToggle>
+                            {{itemsPerPage}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm text-right" *dropdownMenu>
+                            <li role="menuitem" *ngFor="let item of itemOptionsPerPage"><a
+                                    [ngClass]="item === itemsPerPage ? 'dropdown-item active' : 'dropdown-item'"
+                                    (click)="itemsPerPage = item">{{item}}</a></li>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="separator mb-4"></div>
+        </div>
+    </div>
+    <ng-container *ngIf="todoItems; else loading">
+        <div class="col-12" *ngFor="let item of todoItems; let i=index">
+            <div [ngClass]="{'card d-flex mb-3 card': true, 'active':isSelected(item)}">
+                <div class="d-flex flex-grow-1 min-width-zero">
+                    <div
+                        class="align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center card-body">
+                        <a class="list-item-heading mb-0 truncate w-40 w-xs-100  mb-1 mt-1" id="toggler1"
+                            href="javascript:;">
+                            <i
+                                [ngClass]="{'heading-icon':true, 'simple-icon-refresh' : item.status === 'COMPLETED', 'simple-icon-check' : item.status !== 'COMPLETED' }"></i>
+                            <span class="align-middle d-inline-block">{{ item.title }}</span></a>
+                        <p class="mb-1 text-muted text-small w-15 w-xs-100">{{ item.category }}</p>
+                        <p class="mb-1 text-muted text-small w-15 w-xs-100">{{ item.date }}</p>
+                        <div class="w-15 w-xs-100"><span
+                                [class]="'badge badge-pill badge-' + item.labelColor">{{ item.label }}</span></div>
+                    </div>
+                    <div class="custom-control custom-checkbox pl-1 align-self-center mr-4">
+                        <div class="itemCheck mb-0 custom-checkbox custom-control">
+                            <input type="checkbox" class="custom-control-input" [id]="'customCheck'+i"
+                                [checked]="isSelected(item)" (change)="onSelect(item)">
+                            <label class="custom-control-label" [for]="'customCheck'+i"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-1">
+                    <p class="mb-0">{{ item.detail }}</p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #loading>
+        <div class="loading"></div>
+    </ng-template>
+</div>
+<app-add-new-todo-modal #addNewModalRef></app-add-new-todo-modal>
+<app-application-menu>
+    <div class="p-4 h-100">
+        <div class="scroll">
+            <p class="text-muted text-small">{{ 'todo.status' | translate }}</p>
+            <ul class="list-unstyled mb-5">
+                <li class="active">
+                    <a href="javascript:;">
+                        <i class="simple-icon-refresh"></i>
+                        Pending Tasks
+                        <span class="float-right">12</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="simple-icon-check"></i>
+                        Completed Tasks
+                        <span class="float-right">24</span>
+                    </a>
+                </li>
+            </ul>
+            <p class="text-muted text-small">{{ 'todo.categories' | translate }}</p>
+            <ul class="list-unstyled mb-5">
+                <li>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="category1">
+                        <label class="custom-control-label" for="category1">Flexbox</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="category2">
+                        <label class="custom-control-label" for="category2">Sass</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="custom-control custom-checkbox ">
+                        <input type="checkbox" class="custom-control-input" id="category3">
+                        <label class="custom-control-label" for="category3">React</label>
+                    </div>
+                </li>
+            </ul>
+            <p class="text-muted text-small">{{ 'todo.labels' | translate }}</p>
+            <div>
+                <p class="d-sm-inline-block mb-1">
+                    <a href="javascript:;">
+                        <span class="badge badge-pill badge-outline-primary mb-1 mr-1">NEW FRAMEWORK</span>
+                    </a>
+                </p>
+
+                <p class="d-sm-inline-block mb-1">
+                    <a href="javascript:;">
+                        <span class="badge badge-pill badge-outline-theme-3 mb-1 mr-1">EDUCATION</span>
+                    </a>
+                </p>
+                <p class="d-sm-inline-block  mb-1">
+                    <a href="javascript:;">
+                        <span class="badge badge-pill badge-outline-secondary mb-1 mr-1">PERSONAL</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</app-application-menu>

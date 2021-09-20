@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ 'dashboards.sales' | translate}}</h5>
+    <div class="dashboard-line-chart">
+      <app-line-chart [shadow]="true" [options]="chartDataConfig.lineChartOptions" [data]="lineChartData">
+      </app-line-chart>
+    </div>
+  </div>
+</div>

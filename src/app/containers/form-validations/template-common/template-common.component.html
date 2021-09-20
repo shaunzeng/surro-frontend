@@ -1,0 +1,48 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h6 class="mb-4">{{ 'forms.common-rules' | translate }}</h6>
+
+    <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate class="tooltip-label-right">
+      <div class="form-group">
+        <label>{{ 'forms.name' | translate }}</label>
+        <input type="text" class="form-control" name="name" ngModel required #name="ngModel" minlength="2" pattern="^[A-Za-z]+$">
+        <small>Only letters and at least 2 characters</small>
+        <div *ngIf="name?.errors?.required && form.submitted" class="invalid-tooltip">Name is required!</div>
+        <div *ngIf="name?.errors?.minlength && form.submitted" class="invalid-tooltip">Name must contain at least 2 characters!</div>
+        <div *ngIf="name?.errors?.pattern && form.submitted" class="invalid-tooltip">Name must only contain letters!</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.age' | translate }}</label>
+        <input type="text" class="form-control" name="age" ngModel required #age="ngModel" pattern="^(?:1[01][0-9]|120|1[7-9]|[2-9][0-9])$">
+        <small>Only numbers and between 18-99</small>
+        <div *ngIf="age?.errors?.required && form.submitted" class="invalid-tooltip">Age is required!</div>
+        <div *ngIf="age?.errors?.pattern && form.submitted" class="invalid-tooltip">Age must only contain numbers and be between 17-120!</div>
+      </div>
+      <div class="form-group">
+        <label>{{ 'forms.email' | translate }}</label>
+        <input type="text" class="form-control" name="email" ngModel required #email="ngModel" email>
+        <small>Valid email</small>
+        <div *ngIf="email?.errors?.required && form.submitted" class="invalid-tooltip">Email is required!</div>
+        <div *ngIf="email?.errors?.email && form.submitted" class="invalid-tooltip">Email must be a valid address!</div>
+      </div>
+      <div class="form-group error-l-100">
+        <label>{{ 'forms.email-confirm' | translate }}</label>
+        <input type="text" class="form-control" name="emailConfirm" ngModel required #emailConfirm="ngModel" email>
+        <small>Emails must match and be a valid address</small>
+        <div *ngIf="emailConfirm?.errors?.required && form.submitted" class="invalid-tooltip">Email confirmation is required!</div>
+        <div *ngIf="emailConfirm?.errors?.email && form.submitted" class="invalid-tooltip">Email must be a valid address!</div>
+        <div *ngIf="(!emailConfirm?.errors?.email && (emailConfirm.value !== email.value)) && form.submitted" class="invalid-tooltip">Emails must match!</div>
+      </div>
+      <div class="form-group error-l-75">
+        <label>{{ 'forms.password' | translate }}</label>
+        <input type="text" class="form-control" name="password" ngModel required #password="ngModel" minlength="8" pattern="([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*">
+        <small>Must contain at least a letter and number and must be 8 characters or longer</small>
+        <div *ngIf="password?.errors?.required && form.submitted" class="invalid-tooltip">Password is required!</div>
+        <div *ngIf="password?.errors?.pattern && form.submitted" class="invalid-tooltip">Paswsword must contain at least a letter and a number!</div>
+        <div *ngIf="!password?.errors?.pattern && password?.errors?.minlength && form.submitted" class="invalid-tooltip">Paswsword must contain at least 8 characters!</div>
+      </div>
+      <button class="btn btn-primary" type="submit">{{ 'forms.submit' | translate }}</button>
+    </form>
+
+  </div>
+</div>

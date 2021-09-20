@@ -1,0 +1,13 @@
+<div class="card d-flex flex-row mb-3" *ngFor="let order of orders">
+  <div class="d-flex flex-grow-1 min-width-zero">
+    <div
+      class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
+      <a href="javascript:;" class="list-item-heading mb-1 truncate w-40 w-xs-100">{{order.name}}</a>
+      <p class="mb-1 text-muted text-small w-15 w-xs-100">{{order.address}}</p>
+      <p class="mb-1 text-muted text-small w-15 w-xs-100">{{order.date}}</p>
+      <div class="w-15 w-xs-100 text-right">
+        <span [class]="'badge badge-pill badge-'+order.statusColor">{{order.status}}</span>
+      </div>
+    </div>
+  </div>
+</div>

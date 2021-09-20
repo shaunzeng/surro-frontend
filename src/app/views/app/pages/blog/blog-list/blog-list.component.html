@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-12 col-lg-6 mb-5" *ngFor="let item of data">
+        <div class="card flex-row listing-card-container">
+            <div class="w-40 position-relative">
+                <a [routerLink]="adminRoot + '/pages/blog/blog-detail'">
+                    <img class="card-img-left" [src]="item.thumb" alt="Card image cap">
+                </a>
+            </div>
+            <div class="w-60 d-flex align-items-center">
+                <div class="card-body">
+                    <a [routerLink]="adminRoot + '/pages/blog/blog-detail'">
+                        <h5 class="mb-3 listing-heading" ellipsis>{{item.title}}</h5>
+                    </a>
+                    <p class="listing-desc text-muted" ellipsis>{{item.description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <pagination class="justify-content-center" [totalItems]="30"
+        [customNextTemplate]="nextTemplate" [customPreviousTemplate]="prevTemplate">
+        </pagination>
+    </div>
+</div>
+
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+    <i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+    <i class='simple-icon-arrow-left'></i>
+</ng-template>

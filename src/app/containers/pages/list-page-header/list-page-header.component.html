@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <div class="top-right-button-container text-zero">
+      <button type="button" (click)="onAddNewItem()"
+        class="top-right-button btn btn-primary btn-lg mr-1">{{ 'pages.add-new' | translate}}</button>
+      <div class="btn-group" dropdown>
+        <div class="btn btn-primary btn-lg pl-4 pr-0 check-button">
+          <label class="custom-control custom-checkbox mb-0 d-inline-block">
+            <input type="checkbox" class="custom-control-input" [checked]="selectAllState==='checked'"
+              [indeterminate]="selectAllState === 'indeterminate'" (change)="selectAll($event)">
+            <span class="custom-control-label">&nbsp;</span>
+          </label>
+        </div>
+        <button id="button-split" type="button" dropdownToggle
+          class="btn btn-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-split" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+          aria-labelledby="button-split">
+          <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.move' | translate }}</a></li>
+          <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'pages.delete' | translate }}</a></li>
+        </ul>
+      </div>
+    </div>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="display-options-container">
+      <a class="btn pt-0 pl-0 d-inline-block d-md-none c-pointer" data-toggle="collapse"
+        (click)="displayOptionsCollapsed = !displayOptionsCollapsed" role="button" aria-expanded="true"
+        aria-controls="displayOptions">
+        {{ 'pages.display-options' | translate}} {{' '}}
+        <i class="simple-icon-arrow-down align-middle"></i>
+      </a>
+      <div id="displayOptions" [collapse]="displayOptionsCollapsed" class="collapse dont-collapse-sm">
+        <span *ngIf="showDisplayMode" class="mr-3 mb-2 d-inline-block float-md-left">
+          <a href="javascript:;" [ngClass]="{'mr-2 view-icon':true , 'active' : displayMode==='list'}"
+            (click)="onSelectDisplayMode('list')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+              <path class="view-icon-svg" d="M17.5,3H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+              <path class="view-icon-svg" d="M17.5,10H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+              <path class="view-icon-svg" d="M17.5,17H.5a.5.5,0,0,1,0-1h17a.5.5,0,0,1,0,1Z" />
+            </svg>
+          </a>
+          <a href="javascript:;" [ngClass]="{'mr-2 view-icon':true , 'active' : displayMode==='thumb'}"
+            (click)="onSelectDisplayMode('thumb')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+              <path class="view-icon-svg" d="M17.5,3H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+              <path class="view-icon-svg"
+                d="M3,2V3H1V2H3m.12-1H.88A.87.87,0,0,0,0,1.88V3.12A.87.87,0,0,0,.88,4H3.12A.87.87,0,0,0,4,3.12V1.88A.87.87,0,0,0,3.12,1Z" />
+              <path class="view-icon-svg"
+                d="M3,9v1H1V9H3m.12-1H.88A.87.87,0,0,0,0,8.88v1.24A.87.87,0,0,0,.88,11H3.12A.87.87,0,0,0,4,10.12V8.88A.87.87,0,0,0,3.12,8Z" />
+              <path class="view-icon-svg"
+                d="M3,16v1H1V16H3m.12-1H.88a.87.87,0,0,0-.88.88v1.24A.87.87,0,0,0,.88,18H3.12A.87.87,0,0,0,4,17.12V15.88A.87.87,0,0,0,3.12,15Z" />
+              <path class="view-icon-svg" d="M17.5,10H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" />
+              <path class="view-icon-svg" d="M17.5,17H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" /></svg>
+          </a>
+          <a href="javascript:;" [ngClass]="{'mr-2 view-icon':true , 'active' : displayMode==='image'}"
+            (click)="onSelectDisplayMode('image')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19">
+              <path class="view-icon-svg"
+                d="M7,2V8H1V2H7m.12-1H.88A.87.87,0,0,0,0,1.88V8.12A.87.87,0,0,0,.88,9H7.12A.87.87,0,0,0,8,8.12V1.88A.87.87,0,0,0,7.12,1Z" />
+              <path class="view-icon-svg"
+                d="M17,2V8H11V2h6m.12-1H10.88a.87.87,0,0,0-.88.88V8.12a.87.87,0,0,0,.88.88h6.24A.87.87,0,0,0,18,8.12V1.88A.87.87,0,0,0,17.12,1Z" />
+              <path class="view-icon-svg"
+                d="M7,12v6H1V12H7m.12-1H.88a.87.87,0,0,0-.88.88v6.24A.87.87,0,0,0,.88,19H7.12A.87.87,0,0,0,8,18.12V11.88A.87.87,0,0,0,7.12,11Z" />
+              <path class="view-icon-svg"
+                d="M17,12v6H11V12h6m.12-1H10.88a.87.87,0,0,0-.88.88v6.24a.87.87,0,0,0,.88.88h6.24a.87.87,0,0,0,.88-.88V11.88a.87.87,0,0,0-.88-.88Z" />
+            </svg>
+          </a>
+        </span>
+        <div class="d-block d-md-inline-block position-relative" *ngIf="showOrderBy">
+          <div class="float-md-left mr-1 mb-1" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-dark btn-xs dropdown-toggle"
+              aria-controls="dropdown-basic">
+              Order By : {{itemOrder.label}} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem" *ngFor="let item of itemOptionsOrders"><a
+                  [ngClass]="item.value === itemOrder.value ? 'dropdown-item active' : 'dropdown-item'"
+                  (click)="onChangeOrderBy(item)">{{item.label}}</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="d-inline-block" *ngIf="showSearch">
+          <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
+            <input class="form-control" placeholder="Search" (keyup)="onSearchKeyUp($event)">
+          </div>
+        </div>
+        <div class="float-right" *ngIf="showItemsPerPage">
+          <span class="text-muted text-small">Per Page </span>
+          <span dropdown class="d-inline-block position-relative">
+            <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" dropdownToggle>
+              {{itemsPerPage}}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm text-right" *dropdownMenu>
+              <li role="menuitem" *ngFor="let item of itemOptionsPerPage"><a
+                  [ngClass]="item === itemsPerPage ? 'dropdown-item active' : 'dropdown-item'"
+                  (click)="onChangeItemsPerPage(item)">{{item}}</a></li>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="separator mb-4"></div>
+    </div>
+  </div>
+</div>

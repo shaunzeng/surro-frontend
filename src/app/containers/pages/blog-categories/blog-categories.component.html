@@ -1,0 +1,17 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">Categories</h5>
+
+    <div class="d-flex flex-row align-items-center mb-3" *ngFor="let item of data">
+      <a class="d-block position-relative" href="#">
+        <i [class]="item.icon + ' large-icon initial-height'"></i>
+      </a>
+      <div class="pl-3 pt-2 pr-2 pb-2">
+        <a href="javascript:;">
+          <p class="list-item-heading mb-1">{{item.title}}</p>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>

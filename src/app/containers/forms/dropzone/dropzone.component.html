@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'form-components.dropzone' | translate }}</h5>
+        <dropzone [config]="config" [message]="'form-components.dropzone-message' | translate" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+      </div>
+    </div>
+  </div>
+</div>

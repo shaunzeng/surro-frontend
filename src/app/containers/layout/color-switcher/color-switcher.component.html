@@ -1,0 +1,31 @@
+<div class="{{toggleClass}}">
+  <div class="p-4">
+    <p class="text-muted mb-2">Light Theme</p>
+    <div class="d-flex flex-row justify-content-between mb-3">
+      <a *ngFor="let color of colors.slice(0,5)"  (click)="changeColor('light.'+color)"  class="{{'c-pointer theme-color theme-color-'+color + (selectedColor==='light.'+color ? ' active':'')}}" ></a>
+    </div>
+    <div class="d-flex flex-row justify-content-between mb-4">
+      <a *ngFor="let color of colors.slice(5,10)"  (click)="changeColor('light.'+color)"  class="{{'c-pointer theme-color theme-color-'+color + (selectedColor==='light.'+color ? ' active':'')}}" ></a>
+    </div>
+    <p class="text-muted mb-2">Dark Theme</p>
+    <div class="d-flex flex-row justify-content-between mb-3">
+      <a *ngFor="let color of colors.slice(0,5)" (click)="changeColor('dark.'+color)" class="{{'c-pointer theme-color theme-color-'+color + (selectedColor==='dark.'+color ? ' active':'')}}" ></a>
+    </div>
+    <div class="d-flex flex-row justify-content-between">
+      <a *ngFor="let color of colors.slice(5,10)" (click)="changeColor('dark.'+color)" class="{{'c-pointer theme-color theme-color-'+color + (selectedColor==='dark.'+color ? ' active':'')}}" ></a>
+    </div>
+  </div>
+  <div class="p-4">
+    <p class="text-muted mb-2">Border Radius</p>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="ltrRadio" name="directionRadio" value="rounded" class="custom-control-input direction-radio" [checked]="radius === 'rounded' ? true : false" (click)="changeRadius('rounded')">
+      <label class="custom-control-label" for="ltrRadio">Rounded</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="rtlRadio" name="directionRadio" value="flat" class="custom-control-input direction-radio" [checked]="radius === 'rounded' ? false : true" (click)="changeRadius('flat')">
+      <label class="custom-control-label" for="rtlRadio">Flat</label>
+    </div>
+  </div>
+
+  <a (click)="toggleSwitcher($event)" class="c-pointer theme-button"> <i class="simple-icon-magic-wand"></i> </a>
+</div>

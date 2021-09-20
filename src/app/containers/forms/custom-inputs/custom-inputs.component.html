@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'form-components.custom-inputs' | translate }}</h5>
+        <h6>{{ 'form-components.checkboxes' | translate }}</h6>
+        <div class="mb-4">
+          <div class="custom-control custom-checkbox mb-4">
+            <input type="checkbox" class="custom-control-input" id="customCheckThis">
+            <label class="custom-control-label" for="customCheckThis">Check this custom
+              checkbox</label>
+          </div>
+        </div>
+        <h6>{{ 'form-components.radios' | translate }}</h6>
+        <div class="mb-4">
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio1">Toggle this custom
+              radio</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+            <label class="custom-control-label" for="customRadio2">Or toggle this other custom
+              radio</label>
+          </div>
+        </div>
+        <h6>{{ 'form-components.disabled' | translate }}</h6>
+        <div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheckDisabled" disabled>
+            <label class="custom-control-label" for="customCheckDisabled">Check this custom
+              checkbox</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="radio3" name="radioDisabled" class="custom-control-input" disabled>
+            <label class="custom-control-label">Toggle this custom radio</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

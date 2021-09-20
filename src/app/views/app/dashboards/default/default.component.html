@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-12">
+      <app-heading></app-heading>
+      <app-breadcrumb></app-breadcrumb>
+      <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-12">
+        <app-icon-cards-carousel></app-icon-cards-carousel>
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <app-sales-chart-card></app-sales-chart-card>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-xl-6 mb-4">
+        <app-recent-orders></app-recent-orders>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-12 mb-4">
+        <app-product-categories-polar-area [chartClass]="'dashboard-donut-chart'"></app-product-categories-polar-area>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+        <app-logs></app-logs>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+        <app-tickets></app-tickets>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-12 mb-4">
+        <app-calendar></app-calendar>
+    </div>
+    <div class="col-xl-6 col-lg-12 mb-4">
+        <app-best-sellers></app-best-sellers>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <app-profile-statuses></app-profile-statuses>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4">
+        <app-gradient-card-container></app-gradient-card-container>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4">
+        <app-cakes></app-cakes>
+    </div>
+</div>
+<app-sortable-statistics-row></app-sortable-statistics-row>
+<div class="row">
+    <div class="col-md-6 col-sm-12 mb-4">
+        <app-website-visits-chart-card></app-website-visits-chart-card>
+    </div>
+    <div class="col-md-6 col-sm-12 mb-4">
+        <app-conversion-rates-chart-card></app-conversion-rates-chart-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-12 col-xl-4">
+        <div class="row">
+            <div class="col-lg-4 col-xl-12 mb-4">
+                <app-gradient-with-radial-progress-card
+                    [icon]="'iconsminds-clock'"
+                    [title]="'5 ' + ('dashboards.files' | translate)"
+                    [detail]="'dashboards.pending-for-print' | translate"
+                    [percent]="(5 * 100) / 12"
+                    [progressText]="'5/12'">
+                </app-gradient-with-radial-progress-card>
+            </div>
+            <div class="col-lg-4 col-xl-12 mb-4">
+                <app-gradient-with-radial-progress-card
+                    [icon]="'iconsminds-male'"
+                    [title]="'4 ' + ('dashboards.orders' | translate)"
+                    [detail]="'dashboards.on-approval-process' | translate"
+                    [percent]="(4 * 100) / 6"
+                    [progressText]="'4/6'">
+                </app-gradient-with-radial-progress-card>
+            </div>
+            <div class="col-lg-4 col-xl-12 mb-4">
+                <app-gradient-with-radial-progress-card
+                    [icon]="'iconsminds-bell'"
+                    [title]="'8 ' + ('dashboards.alerts' | translate)"
+                    [detail]="'dashboards.waiting-for-notice' | translate"
+                    [percent]="(8 * 100) / 10"
+                    [progressText]="'8/10'">
+                </app-gradient-with-radial-progress-card>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xl-4 col-sm-12 mb-4">
+        <app-advanced-search></app-advanced-search>
+    </div>
+    <div class="col-lg-6 col-xl-4 mb-4">
+        <app-small-line-charts></app-small-line-charts>
+        <app-top-rated-items></app-top-rated-items>
+    </div>
+</div>

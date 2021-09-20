@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-body pt-5 pb-5 d-flex flex-lg-column flex-md-row flex-sm-row flex-column">
+    <div class="price-top-part">
+      <i [class]="'large-icon '+ price.icon"></i>
+      <h5 class=" mb-0 font-weight-semibold color-theme-1 mb-4">{{price.title}}</h5>
+      <p class="text-large mb-2 text-default">{{price.price}}</p>
+      <p class="text-muted text-small">{{price.detail}}</p>
+    </div>
+    <div class="pl-3 pr-3 pt-3 pb-0 d-flex price-feature-list flex-column flex-grow-1">
+      <ul class="list-unstyled">
+        <li *ngFor="let feature of price.features">
+          <p class="mb-0">{{feature}}</p>
+        </li>
+      </ul>
+      <div class="text-center">
+        <a [routerLink]="price.link" class="btn btn-link btn-empty btn-lg">{{'pages.purchase' | translate }} <i
+            class="simple-icon-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

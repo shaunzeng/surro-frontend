@@ -1,0 +1,9 @@
+<div class="card h-100">
+    <div class="card-body">
+        <h5 class="card-title">{{ 'dashboards.order-stock' | translate }}</h5>
+        <div class="chart-container">
+            <app-radar-chart [shadow]="true" [options]="chartDataConfig.radarChartOptions"
+                [data]="radarChartData"></app-radar-chart>
+        </div>
+    </div>
+</div>

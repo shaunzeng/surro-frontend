@@ -1,0 +1,26 @@
+<div [class]="'card dashboard-filled-line-chart '+class">
+    <div class="card-body">
+        <div class="float-left float-none-xs">
+            <div class="d-inline-block">
+                <h5 class="d-inline">{{ 'dashboards.website-visits' | translate }}</h5>
+                <span class="text-muted text-small d-block">{{ 'dashboards.unique-visitors' | translate }}</span>
+            </div>
+        </div>
+        <div *ngIf="control" class="btn-group float-right float-none-xs mt-2" dropdown>
+            <button id="button-basic" dropdownToggle type="button"
+                class="btn btn-outline-primary btn-xs dropdown-toggle" aria-controls="dropdown-basic">
+                {{ 'dashboards.this-week' | translate }} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'dashboards.last-week' | translate}}</a>
+                </li>
+                <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'dashboards.this-month' | translate}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <app-area-chart [shadow]="true" class="chart" [options]="chartDataConfig.areaChartOptions"
+            [data]="areaChartData"></app-area-chart>
+    </div>
+</div>

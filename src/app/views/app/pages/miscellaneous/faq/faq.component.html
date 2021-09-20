@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<div class="col-12 mb-4">
+  <div class="card d-flex mb-3" *ngFor="let item of data; let i = index;">
+      <div class="d-flex flex-grow-1 min-width-zero" role="tab">
+          <a href="javascript:;" class="card-body btn-empty btn-link list-item-heading text-left text-one" (click)="showItemIndex=i">{{item.question}}</a>
+      </div>
+      <div [collapse]="showItemIndex!==i" [isAnimated]="true">
+        <div class="card-body accordion-content pt-0" [innerHTML]="item.answer"></div>
+      </div>
+    </div>
+</div>
+

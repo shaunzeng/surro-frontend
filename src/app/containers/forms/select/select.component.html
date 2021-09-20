@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-4">{{ 'form-components.select' | translate }}</h5>
+        <div class="row">
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.basic' | translate }}</span></label>
+            <ng-select appearance="outline" #agreeSelect labelForId="yesno" [searchable]="false">
+              <ng-option [value]="true">Yes</ng-option>
+              <ng-option [value]="false">No</ng-option>
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.tags' | translate }}</span></label>
+            <ng-select [items]="companies" [addTag]="addTagFn" [hideSelected]="true" multiple="true" bindLabel="name"
+              [(ngModel)]="selectedCompanies">
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.single' | translate }}</span></label>
+            <ng-select [items]="people" bindLabel="name" bindValue="id" [(ngModel)]="selectedPersonId">
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.multiple' | translate }}</span></label>
+            <ng-select [items]="people" [multiple]="true" bindLabel="name" [closeOnSelect]="false"
+              [(ngModel)]="selectedPeople">
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.async' | translate }}</span></label>
+            <ng-select [items]="peopleAsync | async" bindLabel="name" bindValue="id"
+              [(ngModel)]="selectedPersonIdAsync">
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.ajax' | translate }}</span></label>
+            <ng-select [items]="githubUsers$ | async" [multiple]="true" bindLabel="login" bindValue="login"
+              [(ngModel)]="selectedUsers">
+              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                <span class="ng-value-label"><img [src]="item.avatar_url" width="12px" height="12px">
+                  {{item.login}}</span>
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item">
+                <img [src]="item.avatar_url" width="12px" height="12px"> {{item.login}}
+              </ng-template>
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.search' | translate }}</span></label>
+            <ng-select [items]="people" bindLabel="name" [loading]="peopleLoading">
+            </ng-select>
+          </div>
+
+          <div class="col-12 col-lg-6 mb-4">
+            <label><span>{{ 'form-components.search-async' | translate }}</span></label>
+            <ng-select [items]="peopleAsyncSearch | async" bindLabel="name" [addTag]="true" [multiple]="true"
+              [hideSelected]="true" [trackByFn]="trackByFn" [minTermLength]="2" [loading]="peopleLoadingAsyncSearch"
+              typeToSearchText="Please enter 2 or more characters" [typeahead]="peopleInputAsyncSearch"
+              [(ngModel)]="selectedPersonsAsyncSearch">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

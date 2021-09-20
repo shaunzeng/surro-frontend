@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-12">
+    <app-heading></app-heading>
+    <app-breadcrumb></app-breadcrumb>
+    <div class="separator mb-5"></div>
+  </div>
+</div>
+<h5 class="mb-4">{{'carousel.glide-basic' | translate}}</h5>
+<div class="row">
+  <div class="col-md-12 mb-4 pl-0 pr-0">
+
+    <app-glide [settings]="{
+      gap: 0,
+      type: 'carousel',
+      perView: 3,
+      breakpoints: { '600': { perView: 1 }, '1000': { perView: 2 } }
+    }">
+      <div *ngFor="let item of carouselItems" class="glide__slide">
+        <div class="card flex-row">
+          <div class="w-50 position-relative">
+            <img class="card-img-left" [src]="item.img" alt="Card image cap">
+            <span *ngFor="let badge of item.badges"
+              class="badge badge-pill badge-theme-1 position-absolute badge-top-left">{{badge}}</span>
+          </div>
+          <div class="w-50">
+            <div class="card-body">
+              <h6 class="mb-4">{{item.title}}</h6>
+              <footer>
+                <p class="text-muted text-small mb-0 font-weight-light">{{item.detail}}</p>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glide>
+
+  </div>
+</div>
+
+
+<h5 class="mb-4">{{'carousel.glide-centered' | translate}}</h5>
+<div class="row">
+  <div class="col-md-12 mb-4">
+
+    <app-glide [settings]="{
+      gap: 0,
+      type: 'carousel',
+      peek: { before: 50, after: 50 },
+      perView: 3,
+      breakpoints: { '600': { perView: 1 }, '1000': { perView: 2 } }
+    }">
+      <div *ngFor="let item of carouselItems" class="glide__slide">
+
+        <div class="card">
+          <div class="position-relative">
+            <img class="card-img-top" [src]="item.img" alt="Card image cap">
+            <span *ngFor="let badge of item.badges"
+              class="badge badge-pill badge-theme-1 position-absolute badge-top-left">{{badge}}</span>
+          </div>
+          <div class="card-body">
+            <h6 class="mb-4">{{item.title}}</h6>
+            <footer>
+              <p class="text-muted text-small mb-0 font-weight-light">{{item.detail}}</p>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+    </app-glide>
+
+  </div>
+</div>
+
+
+<h5 class="mb-4">{{'carousel.glide-single' | translate}}</h5>
+<div class="row">
+  <div class="col-md-12 mb-4 pl-0 pr-0">
+    <app-glide [settings]="{
+      gap: 0,
+      type: 'carousel',
+      perView: 1
+    }">
+      <div *ngFor="let item of carouselItems" class="glide__slide">
+        <div class="card d-flex flex-row">
+          <a class="d-flex" href="javascript:;">
+            <img alt="Thumbnail" [src]="item.img" class="list-thumbnail responsive border-0 card-img-left" />
+          </a>
+          <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+            <div
+              class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+              <a href="javascript:;">
+                <p class="list-item-heading mb-1 truncate">{{item.title}}</p>
+              </a>
+              <p class="mb-0 text-muted text-small">{{item.category}}</p>
+              <p class="mb-0 text-muted text-small">{{item.detail}}</p>
+              <div>
+                <span *ngFor="let badge of item.badges" class="badge badge-pill badge-primary">{{badge}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-glide>
+
+  </div>
+</div>
+
+<h5 class="mb-4">{{'carousel.without-controls' | translate}}</h5>
+<div class="row">
+  <div class="col-md-12 mb-4 pl-0 pr-0">
+
+    <app-glide [settings]="{
+      gap: 0,
+      type: 'carousel',
+      hideNav: true,
+      perView: 4,
+      breakpoints: {
+        '480': { perView: 1 },
+        '800': { perView: 2 },
+        '1200': { perView: 3 }
+      }
+    }">
+      <div *ngFor="let item of carouselItems" class="glide__slide">
+        <div class="card">
+          <div class="position-relative">
+            <img class="card-img-top" [src]="item.img" alt="Card image cap">
+            <span *ngFor="let badge of item.badges"
+              class="badge badge-pill badge-theme-1 position-absolute badge-top-left">{{badge}}</span>
+          </div>
+          <div class="card-body">
+            <h6 class="mb-4">{{item.title}}</h6>
+            <footer>
+              <p class="text-muted text-small mb-0 font-weight-light">{{item.detail}}</p>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </app-glide>
+
+  </div>
+</div>

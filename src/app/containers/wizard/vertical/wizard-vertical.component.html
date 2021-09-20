@@ -1,0 +1,79 @@
+<h5 class="mb-4">{{ 'wizard.vertical' | translate }}</h5>
+<div class="row">
+  <div class="col-12 col-xl-6">
+    <div class="card mb-5">
+      <div class="card-body">
+        <aw-wizard [navBarLocation]="'left'">
+          <aw-wizard-step stepTitle="Step 1" style="min-height: 120px;">
+            <div class="form-group">
+              <label>{{ 'forms.name' | translate }}</label>
+              <input type="text" class="form-control" name="name">
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" awPreviousStep disabled>{{ 'wizard.prev' | translate }}</button>{{" "}}
+              <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+            </div>
+          </aw-wizard-step>
+          <aw-wizard-step stepTitle="Step 2" style="min-height: 120px;">
+            <div class="form-group">
+              <label>{{ 'forms.email' | translate }}</label>
+              <input type="text" class="form-control" name="email">
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+              <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+            </div>
+          </aw-wizard-step>
+          <aw-wizard-step stepTitle="{{ 'wizard.done' | translate }}" style="height: 120px;">
+            <div class="text-center">
+              <h2 class="mb-2">{{ 'wizard.content-thanks' | translate }}</h2>
+              <p>{{ 'wizard.registered' | translate }}</p>
+              </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+              <button type="button" class="btn btn-primary" awNextStep disabled>{{ 'wizard.next' | translate }}</button>
+            </div>
+          </aw-wizard-step>
+        </aw-wizard>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-6">
+    <div class="card mb-5">
+      <div class="card-body">
+        <aw-wizard [navBarLocation]="'right'">
+          <aw-wizard-step stepTitle="Step 1" style="min-height: 120px;">
+            <div class="form-group">
+              <label>{{ 'forms.name' | translate }}</label>
+              <input type="text" class="form-control" name="name">
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" awPreviousStep disabled>{{ 'wizard.prev' | translate }}</button>{{" "}}
+              <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+            </div>
+          </aw-wizard-step>
+          <aw-wizard-step stepTitle="Step 2" style="min-height: 120px;">
+            <div class="form-group">
+              <label>{{ 'forms.email' | translate }}</label>
+              <input type="text" class="form-control" name="email">
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+              <button type="button" class="btn btn-primary" awNextStep>{{ 'wizard.next' | translate }}</button>
+            </div>
+          </aw-wizard-step>
+          <aw-wizard-step stepTitle="{{ 'wizard.done' | translate }}" style="height: 120px;">
+            <div class="text-center">
+              <h2 class="mb-2">{{ 'wizard.content-thanks' | translate }}</h2>
+              <p>{{ 'wizard.registered' | translate }}</p>
+              </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" awPreviousStep>{{ 'wizard.prev' | translate }}</button>{{" "}}
+              <button type="button" class="btn btn-primary" awNextStep disabled>{{ 'wizard.next' | translate }}</button>
+            </div>
+          </aw-wizard-step>
+        </aw-wizard>
+      </div>
+    </div>
+  </div>
+</div>

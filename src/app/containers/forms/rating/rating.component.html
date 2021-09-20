@@ -1,0 +1,25 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="mb-4">{{ 'form-components.rating' | translate }}</h5>
+    <div class="row">
+      <div class="col-12 col-xs-6 mb-3">
+        <div class="form-group mb-0">
+          <label>{{ 'form-components.interactive' | translate }}</label>
+          <div>
+            <rating [max]="5" [(ngModel)]="rate" [customTemplate]="t"></rating>
+            <ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-xs-6 mb-3">
+        <div class="form-group mb-0">
+          <label>{{ 'form-components.readonly' | translate }}</label>
+          <div>
+            <rating [readonly]="true" [max]="5" [(ngModel)]="rateReadonly" [customTemplate]="t"></rating>
+            <ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

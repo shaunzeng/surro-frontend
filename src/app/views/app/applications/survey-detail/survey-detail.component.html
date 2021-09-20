@@ -1,0 +1,294 @@
+<div class="disable-text-selection">
+  <div class=" row app-row survey-app pb-4">
+    <ng-container *ngIf="currentSurvey; else loading">
+      <div class="col-12">
+        <h1>
+          <i [ngClass]="{
+                  'heading-icon': true,
+                  'simple-icon-check': currentSurvey.status === 'COMPLETED',
+                  'simple-icon-refresh': currentSurvey.status !== 'COMPLETED'
+                }"></i>
+          <span class="align-middle d-inline-block pt-1">
+            {{ currentSurvey.title }}
+          </span>
+        </h1>
+        <div class="top-right-button-container">
+          <div class="btn-group" dropdown>
+            <button type="button"
+              class="btn btn-outline-primary btn-lg flex-grow-1">{{ 'survey.save' | translate }}</button>
+            <button id="button-split" type="button" dropdownToggle
+              class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+              <span class="caret"></span>
+            </button>
+            <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split">
+              <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'survey.edit' | translate }}</a></li>
+              <li role="menuitem"><a class="dropdown-item" href="javascript:;">{{ 'survey.delete' | translate }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <app-breadcrumb></app-breadcrumb>
+
+        <tabset class="separator-tabs ml-0">
+          <tab [heading]="('survey.details' | translate)" class="tab-content">
+            <div class="row">
+              <div class="col-12 col-lg-4 mb-4">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <p class="list-item-heading mb-4">{{ 'survey.summary' | translate }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.title' | translate }}</p>
+                    <p class="mb-3">{{ currentSurvey.title }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.details-lowercase' | translate }}</p>
+                    <p class="mb-3" [innerHTML]="currentSurvey.detail"></p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.category' | translate }}</p>
+                    <p class="mb-3">{{ currentSurvey.category }}</p>
+                    <p class="text-muted text-small mb-2">{{ 'survey.label' | translate }}</p>
+                    <div>
+                      <p class="d-sm-inline-block mb-1">
+                        <span
+                          [class]="'badge badge-pill badge-'+currentSurvey.labelColor">{{ currentSurvey.label }}</span>
+                      </p>
+                      <p class="d-sm-inline-block mb-1"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-8">
+                <div class="sortable-survey" [sortablejs]="[1,2,3,4]" [sortablejsOptions]="{ handle: '.drag' }">
+                  <app-question-builder *ngFor="let item of currentSurvey.questions; let i=index" [question]="item"
+                    [sort]="i+1"></app-question-builder>
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-outline-primary mt-3" (click)="addNewQuestion()"><i
+                      class="simple-icon-plus btn-group-icon"></i>
+                    {{ 'survey.add-question' | translate }}</button>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <tab [heading]="('survey.results' | translate)" class="tab-content">
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <p class="list-item-heading mb-4">{{ 'survey.quota' | translate }}</p>
+                    <div class="mb-4">
+                      <p class="mb-2">Gender</p>
+                      <progressbar class="mb-3"
+                        [value]="[{'value':60, type :'theme-1' },{'value':40, type :'theme-2' }]">
+                      </progressbar>
+                      <table class="table table-sm table-borderless">
+                        <tbody>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-1 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">105/125
+                                Male</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-2 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">90/125
+                                Female</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="mb-4">
+                      <p class="mb-2">Education</p>
+                      <div class="progress mb-3">
+                        <progressbar class="mb-3"
+                          [value]="[{'value':80, type :'theme-1' },{'value':20, type :'theme-2' }]">
+                        </progressbar>
+                      </div>
+                      <table class="table table-sm table-borderless">
+                        <tbody>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-1 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">139/125
+                                College</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-2 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">95/125
+                                High School</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="mb-4">
+                      <p class="mb-2">Age</p>
+                      <progressbar class="mb-3"
+                        [value]="[{'value':35, type :'theme-1' },{'value':25, type :'theme-2' },{'value':40, type :'theme-3' }]">
+                      </progressbar>
+                      <table class="table table-sm table-borderless">
+                        <tbody>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-1 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">50/75
+                                18-24</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-2 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">40/75
+                                24-30</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="p-0 pb-1 w-10">
+                              <span class="log-indicator border-theme-3 align-middle"></span>
+                            </td>
+                            <td class="p-0 pb-1">
+                              <span class="font-weight-medium text-muted text-small">60/75
+                                30-40</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-8">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title">How old are you?</h5>
+                    <div class="chart-container">
+                      <app-doughnut-chart [shadow]="true" [options]="chartDataConfig.doughnutChartOptions"
+                        [data]="ageChartData">
+                      </app-doughnut-chart>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title">What is your gender?</h5>
+                    <div class="chart-container">
+                      <app-doughnut-chart [shadow]="true" [options]="chartDataConfig.doughnutChartOptions"
+                        [data]="genderChartData">
+                      </app-doughnut-chart>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title">What is your employment status?</h5>
+                    <div class="chart-container">
+                      <app-doughnut-chart [shadow]="true" [options]="chartDataConfig.doughnutChartOptions"
+                        [data]="workChartData">
+                      </app-doughnut-chart>
+                    </div>
+                  </div>
+                </div>
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      What programming languages do you use?
+                    </h5>
+                    <div class="chart-container">
+                      <app-doughnut-chart [shadow]="true" [options]="chartDataConfig.doughnutChartOptions"
+                        [data]="codingChartData">
+                      </app-doughnut-chart>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <div class="loading"></div>
+    </ng-template>
+  </div>
+  <app-application-menu>
+    <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true, wheelPropagation: false}">
+      <div class="p-4 h-100">
+        <p class="text-muted text-small mb-3">{{ 'survey.status' | translate }}</p>
+        <ul class="list-unstyled mb-4">
+          <li class="nav-item">
+            <a href="#">
+              <i class="simple-icon-reload"></i>{{ 'survey.all-surveys' | translate }}
+              <span class="float-right">24</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <i class="simple-icon-refresh"></i>{{ 'survey.active-surveys' | translate }}
+              <span class="float-right">20</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <i class="simple-icon-check"></i>{{ 'survey.completed-surveys' | translate }}
+              <span class="float-right">4</span>
+            </a>
+          </li>
+        </ul>
+        <p class="text-muted text-small mb-4">
+          {{ 'survey.categories' | translate }}
+        </p>
+        <ul class="list-unstyled mb-5">
+          <li>
+            <div class="custom-control custom-checkbox mb-2">
+              <input type="checkbox" class="custom-control-input" id="category1">
+              <label class="custom-control-label" for="category1">Development</label>
+            </div>
+          </li>
+          <li>
+            <div class="custom-control custom-checkbox mb-2">
+              <input type="checkbox" class="custom-control-input" id="category2">
+              <label class="custom-control-label" for="category2">Workplace</label>
+            </div>
+          </li>
+          <li>
+            <div class="custom-control custom-checkbox ">
+              <input type="checkbox" class="custom-control-input" id="category3">
+              <label class="custom-control-label" for="category3">Hardware</label>
+            </div>
+          </li>
+        </ul>
+        <p class="text-muted text-small mb-3">{{ 'survey.labels' | translate }}</p>
+        <div>
+          <p class="d-sm-inline-block mb-1">
+            <a href="javascript:;">
+              <span class="badge badge-pill badge-outline-primary mb-1 mr-1">NEW FRAMEWORK</span>
+            </a>
+          </p>
+          <p class="d-sm-inline-block mb-1">
+            <a href="javascript:;">
+              <span class="badge badge-pill badge-outline-theme-3 mb-1 mr-1">EDUCATION</span>
+            </a>
+          </p>
+          <p class="d-sm-inline-block  mb-1">
+            <a href="javascript:;">
+              <span class="badge badge-pill badge-outline-secondary mb-1 mr-1">PERSONAL</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </app-application-menu>
+</div>

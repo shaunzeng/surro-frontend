@@ -1,0 +1,61 @@
+<div class="menu" (click)="menuClicked($event)">
+    <div class="main-menu">
+        <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true}">
+            <ul class="list-unstyled">
+                <li *ngFor="let item of filteredMenuItems(menuItems)"
+                    [ngClass]="{'active': (selectedParentMenu === item.to && viewingParentMenu === '') || viewingParentMenu === item.to}">
+                    <a *ngIf="item.newWindow" [href]="item.to" rel="noopener noreferrer" target="_blank">
+                        <i [ngClass]="item.icon"></i>{{item.label | translate}}</a>
+                    <a *ngIf="!item.newWindow && item.subs &&  item.subs.length>0"
+                        (click)="openSubMenu($event,item); false" [href]="item.to">
+                        <i [ngClass]="item.icon"></i> {{item.label | translate}}</a>
+                    <a *ngIf="!item.newWindow && (!item.subs || (item.subs &&  item.subs.length===0))"
+                        (click)="changeSelectedParentHasNoSubmenu(item.to); false" [routerLink]="item.to">
+                        <i [ngClass]="item.icon"></i> {{item.label | translate}}</a>
+
+                </li>
+            </ul>
+        </perfect-scrollbar>
+    </div>
+    <div class="sub-menu">
+        <perfect-scrollbar class="scroll" [config]="{suppressScrollX: true}">
+            <ul class="list-unstyled" *ngFor="let item of filteredMenuItems(menuItems)" [attr.data-parent]="item.to"
+                [ngClass]="{'d-block': (selectedParentMenu === item.to && viewingParentMenu==='') || viewingParentMenu === item.to}">
+                <li *ngFor="let sub of filteredMenuItems(item.subs)"
+                    [ngClass]="{'active': currentUrl === sub.to ,'has-sub-item' : sub.subs&& sub.subs.length>0 }">
+                    <a *ngIf="sub.newWindow" [href]="sub.to" rel="noopener noreferrer" target="_blank">
+                        <i [ngClass]="sub.icon"></i>
+                        <span class="d-inline-block">{{sub.label | translate}}</span>
+                    </a>
+                    <a *ngIf="!sub.newWindow && (!sub.subs || sub.subs.length<=0)" [routerLink]="[sub.to]"
+                        routerLinkActive="active">
+                        <i [ngClass]="sub.icon"></i>
+                        <span class="d-inline-block">{{sub.label | translate}}</span>
+                    </a>
+                    <a (click)="toggleCollapse(sub.to)" *ngIf="sub.subs && sub.subs.length > 0"
+                      [ngClass]="{'rotate-arrow-icon opacity-50 c-pointer': true, 'collapsed': closedCollapseList.includes(sub.to)}">
+                        <i class="simple-icon-arrow-down"></i>
+                        <span class="d-inline-block">{{sub.label | translate}}</span>
+                    </a>
+                    <div [collapse]="closedCollapseList.includes(sub.to)"  [isAnimated]="true">
+                        <div *ngIf="sub.subs && sub.subs.length > 0">
+                            <ul class="list-unstyled inner-level-menu">
+                                <li *ngFor="let deepSub of filteredMenuItems(sub.subs)" [ngClass]="{'active': currentUrl === deepSub.to}">
+                                    <a *ngIf="deepSub.newWindow" [href]="deepSub.to" rel="noopener noreferrer"
+                                        target="_blank">
+                                        <i [ngClass]="deepSub.icon"></i>
+                                        <span class="d-inline-block">{{deepSub.label | translate}}</span>
+                                    </a>
+                                    <a *ngIf="!deepSub.newWindow && (!deepSub.subs || deepSub.subs.length<=0)"
+                                        [routerLink]="[deepSub.to]" routerLinkActive="active">
+                                        <i [ngClass]="deepSub.icon"></i>
+                                        <span class="d-inline-block">{{deepSub.label | translate}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </ul>
+        </perfect-scrollbar>
+    </div>
+</div>

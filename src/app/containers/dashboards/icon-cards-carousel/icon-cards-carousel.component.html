@@ -1,0 +1,22 @@
+<div [class]="class">
+    <app-glide #carousel [settings]="{
+        type: 'carousel',
+        perView: 4,
+        hideNav: true,
+        breakpoints: { '320': { perView: 1 }, '576': { perView: 2 },'1800': { perView: 3 },'1900': { perView: 4 } }
+    }">
+        <div *ngFor="let item of data" class="glide__slide">
+            <div class="icon-row-item" style="width: inherit;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i [class]="item.icon"></i>
+                        <p class="card-text font-weight-semibold mb-0">
+                            {{item.title | translate}}
+                        </p>
+                        <p class="lead text-center">{{item.value}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-glide>
+</div>
