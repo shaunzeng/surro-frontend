@@ -1,6 +1,6 @@
 {
   "general": {
-    "copyright": "Vien Angular © 2020 All Rights Reserved."
+    "copyright": "Surro © 2021 All Rights Reserved."
   },
   "unauthorized": {
     "title": "Unauthorized Access Attempt",
@@ -732,5 +732,8 @@
     "icons": "Icons",
     "saving": "Saving...",
     "vertical": "Vertical"
+  },
+  "landing":{
+    "welcome":"Make your dream come true today"
   }
 }
