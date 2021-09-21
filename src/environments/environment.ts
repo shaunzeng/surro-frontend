@@ -8,13 +8,13 @@ export const environment = {
   production: false,
   buyUrl : 'https://1.envato.market/6NV1b',
   SCARF_ANALYTICS : false,
-  adminRoot: '/app',
+  adminRoot: '/',
   apiUrl: 'https://api.coloredstrategies.com',
   defaultMenuType: 'menu-default',
   subHiddenBreakpoint: 1440,
   menuHiddenBreakpoint: 768,
-  themeColorStorageKey: 'vien-themecolor',
-  isMultiColorActive: true,
+  themeColorStorageKey: 'surro-themecolor',
+  isMultiColorActive: false,
   /*
   Color Options:
   'light.blueyale', 'light.blueolympic', 'light.bluenavy', 'light.greenmoss',
@@ -25,7 +25,7 @@ export const environment = {
   'dark.greenlime', 'dark.yellowgranola', 'dark.greysteel', 'dark.orangecarrot',
   'dark.redruby', 'dark.purplemonster'
   */
-  defaultColor: 'light.blueyale',
+  defaultColor: 'light.redruby',
   isDarkSwitchActive: true,
   defaultDirection: 'ltr',
   themeRadiusStorageKey: 'vien-themeradius',

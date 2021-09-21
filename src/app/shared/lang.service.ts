@@ -3,8 +3,9 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 import en from '../../lang/en-US.json';
 import es from '../../lang/es-ES.json';
+import cn from '../../lang/cn-CN.json';
 import { Router } from '@angular/router';
-import { getThemeLang, setThemeLang } from 'src/app/utils/util';
+import { getThemeLang, setThemeLang } from '../../../src/app/utils/util';
 
 const languageKey = '__lang';
 
@@ -18,12 +19,8 @@ export class LangService {
   supportedLanguages: Language[] = [
     { code: 'en-US', direction: 'ltr', label: 'English', shorthand: 'en' },
     { code: 'es-ES', direction: 'ltr', label: 'Español', shorthand: 'es' },
-    {
-      code: 'en-EN',
-      direction: 'rtl',
-      label: 'English - RTL',
-      shorthand: 'enrtl',
-    },
+    { code: 'en-EN', direction: 'rtl', label: 'English - RTL', shorthand: 'enrtl'},
+    { code: 'en-CN', direction: 'rtl', label: 'English - CN', shorthand: 'cn'},
   ];
 
   constructor(
@@ -38,7 +35,9 @@ export class LangService {
     this.translate.setTranslation('en-US', en);
     this.translate.setTranslation('es-ES', es);
     this.translate.setTranslation('en-EN', en);
+    this.translate.setTranslation('en-CN', cn);
     this.translate.setDefaultLang(this.defaultLanguage);
+    console.log(this.translate.currentLang, ' language ?');
     if (this.isSingleLang) {
       this.translate.use(this.defaultLanguage);
     } else {
@@ -88,7 +87,7 @@ export class LangService {
   get languageShorthand(): string {
     return this.supportedLanguages.find(
       (item) => item.code === this.translate.currentLang
-    ).shorthand;
+    )?.shorthand || 'en-US';
   }
 
   get direction(): string {
