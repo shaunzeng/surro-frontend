@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" *ngIf="!isHidden">
     <div class="d-flex align-items-left navbar-left">
         <div class="logo-container d-xs-block d-sm-block">
             <div class="logo"></div>
@@ -44,10 +44,10 @@
   
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link c-pointer"><button type="button" class="btn btn-outline-primary">Login</button></a>
+                <a class="nav-link c-pointer" [routerLink]="['/login']"><button type="button" class="btn btn-outline-primary">Login</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link c-pointer"><button type="button" class="btn btn-primary">Sign Up</button></a>
+                <a class="nav-link c-pointer" [routerLink]="['/register']"><button type="button" class="btn btn-primary">Sign Up</button></a>
             </li>
         </ul>
   
@@ -144,4 +144,4 @@
       </div>
   
     </div>
-  </nav>
+</nav>

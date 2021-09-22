@@ -19,11 +19,20 @@ export interface IPasswordReset {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  isLoggedIn = false;
+
   constructor(private http: HttpClient) {}
 
   // tslint:disable-next-line:typedef
-  signIn(credentials: ISignInCredentials) {
-
+  async signIn(credentials: ISignInCredentials) {
+    return new Promise((res, rej) => {
+      setTimeout(() => {
+        res({
+          username:'xxx',
+          accessToken:'uasihdsuaixsam321dsadsa'
+        })
+      }, 5000);
+    })
   }
 
   signOut(){

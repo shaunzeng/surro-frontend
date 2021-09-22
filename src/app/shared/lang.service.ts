@@ -13,7 +13,7 @@ const languageKey = '__lang';
   providedIn: 'root',
 })
 export class LangService {
-  isSingleLang = false;
+  isSingleLang = true;
   renderer: Renderer2;
   defaultLanguage = getThemeLang();
   supportedLanguages: Language[] = [
@@ -37,7 +37,8 @@ export class LangService {
     this.translate.setTranslation('en-EN', en);
     this.translate.setTranslation('en-CN', cn);
     this.translate.setDefaultLang(this.defaultLanguage);
-    console.log(this.translate.currentLang, ' language ?');
+    this.translate.currentLang = this.defaultLanguage;
+    console.log(this.translate.currentLang, ' language ?', this.defaultLanguage);
     if (this.isSingleLang) {
       this.translate.use(this.defaultLanguage);
     } else {
@@ -87,7 +88,7 @@ export class LangService {
   get languageShorthand(): string {
     return this.supportedLanguages.find(
       (item) => item.code === this.translate.currentLang
-    )?.shorthand || 'en-US';
+    ).shorthand || 'en-US';
   }
 
   get direction(): string {

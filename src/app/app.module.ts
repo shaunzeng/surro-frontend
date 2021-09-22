@@ -8,7 +8,9 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { appInitializer } from './app-initializer';
 import { SharedModule } from './shared/shared.module';
-
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { LangService } from './shared/lang.service';
 
 @NgModule({
   imports: [
@@ -18,6 +20,8 @@ import { SharedModule } from './shared/shared.module';
     TranslateModule.forRoot(),
     HttpClientModule,
     HeadroomModule,
+    SimpleNotificationsModule.forRoot(),
+    PopoverModule.forRoot(),
     SharedModule
   ],
   declarations: [
@@ -26,7 +30,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [{
     provide:APP_INITIALIZER,
     useFactory:appInitializer,
-    deps:[],
+    deps:[LangService],
     multi:true
   }],
   bootstrap: [AppComponent]

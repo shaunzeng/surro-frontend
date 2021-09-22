@@ -1,0 +1,17 @@
+<button [class]="currentState + ' ' + btnClass + ' btn-multiple-state'" [disabled]="isDisabled" [popover]="message"
+  triggers="" [isOpen]="showMessage">
+  <div class="spinner d-inline-block">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+  <span class="icon success" data-toggle="tooltip" data-placement="top" title="Everything went right!">
+    <i class="simple-icon-check"></i>
+  </span>
+  <span class="icon fail" data-toggle="tooltip" data-placement="top" title="Something went wrong!">
+    <i class="simple-icon-exclamation"></i>
+  </span>
+  <span class="label">
+    <ng-content></ng-content>
+  </span>
+</button>

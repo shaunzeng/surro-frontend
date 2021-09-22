@@ -24,11 +24,11 @@ export class LandingContainer implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.renderer.addClass(document.body, 'no-footer');
+
   }
 
   ngOnDestroy(): void {
-    this.renderer.removeClass(document.body, 'no-footer');
+    
   }
 
   @HostListener('window:resize', ['$event'])

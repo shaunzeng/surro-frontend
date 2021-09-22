@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { LangService, Language } from 'src/app/shared/lang.service';
-import { AuthService } from 'src/app/shared/auth.service';
+import { filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { getThemeColor, setThemeColor } from 'src/app/utils/util';
 
@@ -15,13 +15,15 @@ export class TopnavComponent implements OnInit, OnDestroy {
   buyUrl = environment.buyUrl;
   adminRoot = environment.adminRoot;
   subscription: Subscription;
-  displayName = 'Sarah Cortney';
+  displayName = 'Shaun';
   languages: Language[];
   currentLanguage: string;
   isSingleLang;
   isFullScreen = false;
   isDarkModeActive = false;
   searchKey = '';
+  urlsToHide = ['/login','/register'];
+  isHidden = false;
 
   constructor(
     private router: Router,
@@ -31,6 +33,17 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentLanguage = this.langService.languageShorthand;
     this.isSingleLang = this.langService.isSingleLang;
     this.isDarkModeActive = getThemeColor().indexOf('dark') > -1 ? true : false;
+    
+    router
+    .events
+    .pipe(filter(e => e instanceof NavigationEnd))
+    .subscribe((e: NavigationEnd) => {
+      if (this.urlsToHide.includes(e.url) ) {
+        this.isHidden = true;
+      } else {
+        this.isHidden = false;
+      }
+    })
   }
 
   
@@ -57,7 +70,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentLanguage = this.langService.languageShorthand;
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
 
   }
 
@@ -84,6 +97,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
   searchAreaClick(event): void {
     event.stopPropagation();
   }
+
   searchClick(event): void {
     if (window.innerWidth < environment.menuHiddenBreakpoint) {
       let elem = event.target;
