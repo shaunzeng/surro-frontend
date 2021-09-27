@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '@env';
 
 export const getThemeColor = () => {
     let color = environment.defaultColor;
@@ -58,7 +58,7 @@ export const setThemeLang = (lang) => {
 }
 
 export const getUserRole = () => {
-  let role = environment.defaultRole;
+  let role = environment.defaultRole as string;
   try {
       role = localStorage.getItem('theme_user_role') || environment.defaultRole;
   } catch (error) {

@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { UserRole } from '../app/shared/auth.roles';
+import { UserRole } from '../app/core/services/auth.roles';
 
 export const environment = {
   production: false,
@@ -25,10 +25,10 @@ export const environment = {
   'dark.greenlime', 'dark.yellowgranola', 'dark.greysteel', 'dark.orangecarrot',
   'dark.redruby', 'dark.purplemonster'
   */
-  defaultColor: 'light.redruby',
+  defaultColor: 'dark.blueolympic',
   isDarkSwitchActive: true,
   defaultDirection: 'ltr',
-  themeRadiusStorageKey: 'vien-themeradius',
+  themeRadiusStorageKey: 'surro-key',
   isAuthGuardActive: true,
   defaultRole: UserRole.Admin,
 };

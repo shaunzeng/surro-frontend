@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { LangService, Language } from 'src/app/shared/lang.service';
-import { AuthService } from 'src/app/shared/auth.service';
-import { environment } from 'src/environments/environment';
+import { LangService, Language } from '../services/lang.service';
+import { environment } from '@env';
 import { getThemeColor, setThemeColor } from 'src/app/utils/util';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topnav',
@@ -12,25 +11,27 @@ import { getThemeColor, setThemeColor } from 'src/app/utils/util';
   styleUrls:['./navigation.component.scss']
 })
 export class TopnavComponent implements OnInit, OnDestroy {
-  buyUrl = environment.buyUrl;
+
   adminRoot = environment.adminRoot;
-  subscription: Subscription;
-  displayName = 'Sarah Cortney';
+  displayName = 'Shaun';
   languages: Language[];
   currentLanguage: string;
   isSingleLang;
   isFullScreen = false;
   isDarkModeActive = false;
   searchKey = '';
+  currentUrl = '/'
 
   constructor(
-    private router: Router,
-    private langService: LangService
+    public authService: AuthService,
+    private langService: LangService,
+    private router: Router
   ) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
     this.isSingleLang = this.langService.isSingleLang;
     this.isDarkModeActive = getThemeColor().indexOf('dark') > -1 ? true : false;
+    this.currentUrl = this.router.url;
   }
 
   
@@ -57,16 +58,16 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentLanguage = this.langService.languageShorthand;
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
 
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+
   }
 
   onSignOut(): void {
-
+    this.authService.signOut();
   }
 
   searchKeyUp(event: KeyboardEvent): void {
@@ -84,6 +85,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
   searchAreaClick(event): void {
     event.stopPropagation();
   }
+
   searchClick(event): void {
     if (window.innerWidth < environment.menuHiddenBreakpoint) {
       let elem = event.target;

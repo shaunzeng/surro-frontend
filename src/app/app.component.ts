@@ -1,6 +1,4 @@
 import { Component, OnInit, Renderer2, AfterViewInit } from '@angular/core';
-import { LangService } from './shared/lang.service';
-import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 
 @Component({
@@ -10,12 +8,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AppComponent implements OnInit, AfterViewInit {
-  isMultiColorActive = environment.isMultiColorActive;
-  constructor(private langService: LangService, private renderer: Renderer2) {}
+
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    console.log('called lang service')
-    this.langService.init();
+
   }
 
   ngAfterViewInit(): void {
