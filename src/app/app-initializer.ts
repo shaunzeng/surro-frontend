@@ -1,4 +1,4 @@
-import { LangService } from "./shared/lang.service";
+import { LangService } from "./core/services/lang.service";
 
 export const appInitializer = (langService: LangService) => async () => {
     langService.init();

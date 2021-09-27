@@ -20,7 +20,6 @@ export class LandingContainer implements OnInit, OnDestroy {
   constructor(
       private renderer: Renderer2, 
       private elRef: ElementRef, 
-      private scrollToService: ScrollToService
   ) {}
 
   ngOnInit(): void {
@@ -44,14 +43,5 @@ export class LandingContainer implements OnInit, OnDestroy {
   @HostListener('window:scroll', ['$event'])
   onScroll(event): void {
 
-  }
-
-  scrollTo(target): void {
-    const config: ScrollToConfigOptions = {
-      target,
-      offset: -150
-    };
-
-    this.scrollToService.scrollTo(config);
   }
 }
