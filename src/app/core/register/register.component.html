@@ -59,6 +59,11 @@
               <span>{{ 'user.password' | translate }}</span>
               <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password is required!</div>
             </label>
+            <label class="form-group has-float-label">
+              <input class="form-control" type="text" placeholder="Zipcode" minlength="5" maxlength="5" pattern="[0-9]*"required ngModel #zipcode="ngModel" name="zipcode"/>
+              <span>{{ 'user.zipcode' | translate }}</span>
+              <div *ngIf="!zipcode.valid && registerForm.submitted" class="invalid-tooltip">Zipcode is required!</div>
+            </label>
             <div class="d-flex justify-content-between align-items-center">
               <div></div>
               <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"

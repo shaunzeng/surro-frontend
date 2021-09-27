@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { LangService, Language } from '../services/lang.service';
 import { environment } from '@env';
 import { getThemeColor, setThemeColor } from 'src/app/utils/util';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topnav',
@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls:['./navigation.component.scss']
 })
 export class TopnavComponent implements OnInit, OnDestroy {
-  buyUrl = environment.buyUrl;
+
   adminRoot = environment.adminRoot;
   displayName = 'Shaun';
   languages: Language[];
@@ -20,15 +20,18 @@ export class TopnavComponent implements OnInit, OnDestroy {
   isFullScreen = false;
   isDarkModeActive = false;
   searchKey = '';
+  currentUrl = '/'
 
   constructor(
     public authService: AuthService,
-    private langService: LangService
+    private langService: LangService,
+    private router: Router
   ) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
     this.isSingleLang = this.langService.isSingleLang;
     this.isDarkModeActive = getThemeColor().indexOf('dark') > -1 ? true : false;
+    this.currentUrl = this.router.url;
   }
 
   

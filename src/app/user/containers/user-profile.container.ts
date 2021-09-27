@@ -6,15 +6,13 @@ import {
     HostListener,
     ElementRef,
   } from '@angular/core';
-  import { ScrollToService, ScrollToConfigOptions } from '@nicky-lenaers/ngx-scroll-to';
   
   
   @Component({
     selector: 'app-user',
-    templateUrl: './user.container.html',
-    styleUrls:['./user.component.scss']
+    templateUrl: './user-profile.container.html',
   })
-  export class UserContainer implements OnInit, OnDestroy {
+  export class UserProfileContainer implements OnInit, OnDestroy {
 
     constructor(
         private renderer: Renderer2, 

@@ -13,6 +13,7 @@
     "email": "E-mail",
     "password": "Password",
     "password-again": "Password Again",
+    "zipcode":"Zip Code",
     "forgot-password-question": "Forget password?",
     "firstName": "First Name",
     "lastName": "Last Name",

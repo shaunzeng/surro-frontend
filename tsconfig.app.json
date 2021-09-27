@@ -7,7 +7,7 @@
     "paths":{
       "@env":["src/environments/environment"],
       "@core":["src/app/core"],
-      "@Shared":["src/app/shared"]
+      "@shared":["src/app/shared"]
     }
   },
   "files": [

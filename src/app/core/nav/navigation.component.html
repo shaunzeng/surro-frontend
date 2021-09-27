@@ -1,20 +1,41 @@
 <nav class="navbar">
-    <div class="d-flex align-items-left navbar-left">
-        <div class="logo-container d-xs-block d-sm-block">
+    <div class="d-flex align-items-center">
+        <div class="logo-container d-xs-none d-sm-none d-md-block">
             <div class="logo"></div>
         </div>
-        <ul class="nav nav-pills">
+
+        <div class="user d-xs-block d-sm-block d-md-none" dropdown >
+          <a class="menu-button-mobile" dropdownToggle>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
+              <rect x="0.5" y="0.5" width="25" height="1" />
+              <rect x="0.5" y="7.5" width="25" height="1" />
+              <rect x="0.5" y="15.5" width="25" height="1" />
+            </svg>
+          </a>
+    
+          <div class="dropdown-menu dropdown-menu-left mt-3" *dropdownMenu role="menu">
+            <a class="dropdown-item c-pointer" [routerLink]="['/']" [ngClass]="{'active': currentUrl==='/'}">Home</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/blogs']" [ngClass]="{'active': currentUrl==='/blogs'}">Blogs</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/community']" [ngClass]="{'active': currentUrl==='/blogs'}">Community</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/about']" [ngClass]="{'active': currentUrl==='/blogs'}">About Us</a>
+          </div>
+        </div>
+        <div>
+          
+        </div>
+        
+        <ul class="nav nav-pills d-xs-none d-sm-none d-md-flex">
             <li class="nav-item">
-                <a class="nav-link c-pointer active">Home</a>
+                <a class="nav-link c-pointer" [routerLink]="['/']" [ngClass]="{'active': currentUrl==='/'}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link c-pointer">Blogs</a>
+                <a class="nav-link c-pointer" [routerLink]="['/blogs']" [ngClass]="{'active': currentUrl==='/blogs'}">Blogs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link c-pointer">Community</a>
+                <a class="nav-link c-pointer" [routerLink]="['/community']" [ngClass]="{'active': currentUrl==='/blogs'}">Community</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link c-pointer">About us</a>
+                <a class="nav-link c-pointer" [routerLink]="['/about']" [ngClass]="{'active': currentUrl==='/blogs'}">About us</a>
             </li>
         </ul>
       <!--div class="search" (click)="searchAreaClick($event)">
@@ -35,19 +56,15 @@
       </div-->
     </div>
 
-    <div class="navbar-middle">
-
-    </div>
-
-    <div class="navbar-right">
+    <div class="navbar-right align-items-center">
       <div class="header-icons d-inline-block align-middle">
   
         <ul class="nav nav-pills" *ngIf="!authService.isLoggedIn">
             <li class="nav-item">
-                <a class="nav-link c-pointer" [routerLink]="['/login']"><button type="button" class="btn btn-outline-primary">Login</button></a>
+                <a class="nav-link c-pointer" [routerLink]="['/login']"><button type="button" class="btn btn-sm btn-outline-primary">Login</button></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link c-pointer" [routerLink]="['/register']"><button type="button" class="btn btn-primary">Sign Up</button></a>
+                <a class="nav-link c-pointer" [routerLink]="['/register']"><button type="button" class="btn btn-sm btn-primary">Sign Up</button></a>
             </li>
         </ul>
   
@@ -134,10 +151,8 @@
         </button>
   
         <div class="dropdown-menu dropdown-menu-right mt-3" *dropdownMenu role="menu">
-          <a class="dropdown-item c-pointer">Account</a>
-          <a class="dropdown-item c-pointer">Features</a>
-          <a class="dropdown-item c-pointer">History</a>
-          <a class="dropdown-item c-pointer">Support</a>
+          <a class="dropdown-item c-pointer" [routerLink]="['/user/profile','321dsaFDS$#']">My Profile</a>
+          <a class="dropdown-item c-pointer" [routerLink]="['/user/account','321dsaFDS$#']">Account Settings</a>
           <li class="divider dropdown-divider"></li>
           <a class="dropdown-item c-pointer" (click)="onSignOut()">Sign out</a>
         </div>

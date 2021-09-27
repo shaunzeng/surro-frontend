@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRoutingModule } from './user.routing';
+import { UserProfileContainer } from './containers/user-profile.container';
 import { TranslateModule } from '@ngx-translate/core';
-import { CoreModule} from '@core';
+import { CoreModule } from '@core';
+import { SharedModule } from '@shared';
+import { ProfileComponent } from './components/profile.component';
+import { UserAccountContainer} from './containers/user-account.container';
 
 @NgModule({
   imports: [
@@ -13,7 +17,9 @@ import { CoreModule} from '@core';
     TranslateModule,
   ],
   declarations: [
-    AppComponent,
+    UserProfileContainer,
+    ProfileComponent,
+    UserAccountContainer
   ],
   providers: [],
 })
