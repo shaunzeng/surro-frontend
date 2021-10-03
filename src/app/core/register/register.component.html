@@ -1,6 +1,6 @@
 
 <div class="container mt-5">
-  <div class="row h-100">
+  <div class="row">
     <div class="col-12 col-md-10 mx-auto my-auto">
       <div class="card auth-card">
         <div class="position-relative image-side ">
@@ -54,11 +54,19 @@
               <div *ngIf="!email.valid && registerForm.submitted" class="invalid-tooltip">Email is required!</div>
               <div *ngIf="email?.errors?.email && registerForm.submitted" class="invalid-tooltip">Email must be a valid address!</div>
             </label>
+            
             <label class="form-group has-float-label">
               <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="password"/>
               <span>{{ 'user.password' | translate }}</span>
               <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password is required!</div>
             </label>
+
+            <label class="form-group has-float-label">
+              <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="passwordAgain"/>
+              <span>{{ 'user.passwordAgain' | translate }}</span>
+              <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password again</div>
+            </label>
+
             <label class="form-group has-float-label">
               <input class="form-control" type="text" placeholder="Zipcode" minlength="5" maxlength="5" pattern="[0-9]*"required ngModel #zipcode="ngModel" name="zipcode"/>
               <span>{{ 'user.zipcode' | translate }}</span>

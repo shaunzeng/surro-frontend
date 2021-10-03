@@ -4,6 +4,8 @@ import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { environment } from '@env';
+import { Store } from '@ngrx/store';
+import { setupUser } from '../../actions';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginComponent {
   constructor(
     private notifications: NotificationsService, 
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private store: Store) { }
 
 
   onSubmit(): void {
@@ -29,25 +32,39 @@ export class LoginComponent {
 
         this.buttonDisabled = true;
         this.buttonState = 'show-spinner';
-        this.authService.signIn(this.loginForm.value).then((data) => {
+
+        this.authService
+        .signIn(this.loginForm.value)
+        .then((data) => {
+          
+          this.setupUser(data);
+
           this.buttonDisabled = true;
           this.buttonState = '';
 
-          this.notifications.create('Success', "Welcome back", NotificationType.Success, {
-            theClass: 'outline primary',
-            timeOut: 2000,
-            showProgressBar: false
-          });
+          this.notifications.create(
+            'Success', 
+            "Welcome back", 
+            NotificationType.Success, 
+            {
+              theClass: 'outline primary',
+              timeOut: 2000,
+              showProgressBar: false
+            });
 
-          setTimeout(()=>{
+          setTimeout(() => {
             this.authService.isLoggedIn = true;
             this.router.navigate([environment.adminRoot]);
-          },2000)
+          },2000);
           
-        }).catch((error) => {
+        }).catch(({error}) => {
+
           this.buttonDisabled = false;
           this.buttonState = '';
-          this.notifications.create('Error', error.message, NotificationType.Bare, {
+          this.notifications.create(
+            'Error', 
+            error.message, 
+            NotificationType.Bare, {
             theClass: 'outline primary',
             timeOut: 6000,
             showProgressBar: false
@@ -56,4 +73,9 @@ export class LoginComponent {
       }
     }
   }
+
+  private setupUser(user) {
+    this.store.dispatch(setupUser(user));
+  }
+
 }

@@ -1,5 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { environment as env } from '@env';
+import { tap } from 'rxjs/operators';
+
 
 export interface ISignInCredentials {
   email: string;
@@ -18,44 +22,55 @@ export interface IPasswordReset {
 }
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AuthService extends ApiService {
   isLoggedIn = false;
 
-  constructor(private http: HttpClient) {}
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true, 
+    observe: 'response'
+  }; 
 
-  // tslint:disable-next-line:typedef
-  async signIn(credentials: ISignInCredentials) {
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        res({
-          username:'xxx',
-          accessToken:'uasihdsuaixsam321dsadsa'
-        })
-      }, 5000);
+  constructor(private http: HttpClient) {
+    super()
+  }
+
+  signIn(credentials: ISignInCredentials) {
+    return this.http
+    .post(`${env.apiUrl}/login`, credentials, {
+      withCredentials:true
     })
+    .toPromise();
   }
 
   signOut(){
-    this.isLoggedIn = false;
+    return this.http
+    .get(`${env.apiUrl}/logout`)
+    .toPromise()
   };
 
-  // tslint:disable-next-line:typedef
-  register(data:any) {
 
+  register(data:any) {
+    return this.http
+    .post(`${env.apiUrl}/register`, data)
+    .toPromise();
   }
 
-  // tslint:disable-next-line:typedef
+
   sendPasswordEmail(email) {
 
   }
 
-  // tslint:disable-next-line:typedef
+
   resetPassword(credentials: IPasswordReset) {
 
   }
 
-  // tslint:disable-next-line:typedef
+
   async getUser() {
  
   }
+
+
+
 }

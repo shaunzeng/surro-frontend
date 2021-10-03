@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { environment as env} from '@env';
 
 @Component({
   selector: 'app-root',
