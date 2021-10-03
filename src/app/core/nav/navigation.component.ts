@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as selectors from '../selectors';
 import { logout } from '../../actions';
+import { NotificationsService, NotificationType } from 'angular2-notifications';
 
 @Component({
   selector: 'app-topnav',
@@ -27,13 +28,14 @@ export class TopnavComponent implements OnInit, OnDestroy {
   currentUrl = '/';
 
   isLoggedIn$: Observable<boolean>;
-  nameSelector$: Observable<string>;
+  name$: Observable<string>;
 
   constructor(
     public authService: AuthService,
     private langService: LangService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private notifications: NotificationsService, 
   ) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
@@ -68,7 +70,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoggedIn$ = this.store.select(selectors.selectIsLoggedIn);
-    this.nameSelector$ = this.store.select(selectors.selectName);
+    this.name$ = this.store.select(selectors.selectName);
   }
 
   ngOnDestroy(): void {
@@ -76,8 +78,22 @@ export class TopnavComponent implements OnInit, OnDestroy {
   }
 
   onSignOut(): void {
-    this.authService.signOut();
-    this.store.dispatch(logout())
+    this.authService
+    .signOut()
+    .then(() => {
+      this.store.dispatch(logout())
+    })
+    .catch(err => {
+      this.notifications.create(
+        'Error', 
+        err.error, 
+        NotificationType.Bare, {
+        theClass: 'outline primary',
+        timeOut: 6000,
+        showProgressBar: false
+      });
+    })
+    
   }
 
   searchKeyUp(event: KeyboardEvent): void {
