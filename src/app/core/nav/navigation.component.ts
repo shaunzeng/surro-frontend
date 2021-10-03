@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { LangService, Language } from '../services/lang.service';
 import { environment } from '@env';
-import { getThemeColor, setThemeColor } from 'src/app/utils/util';
+import { getThemeColor } from 'src/app/utils/util';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as selectors from '../selectors';
+import { logout } from '../../actions';
 
 @Component({
   selector: 'app-topnav',
@@ -20,12 +24,16 @@ export class TopnavComponent implements OnInit, OnDestroy {
   isFullScreen = false;
   isDarkModeActive = false;
   searchKey = '';
-  currentUrl = '/'
+  currentUrl = '/';
+
+  isLoggedIn$: Observable<boolean>;
+  nameSelector$: Observable<string>;
 
   constructor(
     public authService: AuthService,
     private langService: LangService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
@@ -59,7 +67,8 @@ export class TopnavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.isLoggedIn$ = this.store.select(selectors.selectIsLoggedIn);
+    this.nameSelector$ = this.store.select(selectors.selectName);
   }
 
   ngOnDestroy(): void {
@@ -68,6 +77,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
   onSignOut(): void {
     this.authService.signOut();
+    this.store.dispatch(logout())
   }
 
   searchKeyUp(event: KeyboardEvent): void {

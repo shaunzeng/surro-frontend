@@ -9,7 +9,7 @@ export const environment = {
   buyUrl : 'https://1.envato.market/6NV1b',
   SCARF_ANALYTICS : false,
   adminRoot: '/',
-  apiUrl: 'https://api.coloredstrategies.com',
+  apiUrl: '/api',
   defaultMenuType: 'menu-default',
   subHiddenBreakpoint: 1440,
   menuHiddenBreakpoint: 768,
@@ -25,10 +25,11 @@ export const environment = {
   'dark.greenlime', 'dark.yellowgranola', 'dark.greysteel', 'dark.orangecarrot',
   'dark.redruby', 'dark.purplemonster'
   */
-  defaultColor: 'dark.blueolympic',
+  defaultColor: 'light.yellowgranola',
   isDarkSwitchActive: true,
   defaultDirection: 'ltr',
   themeRadiusStorageKey: 'surro-key',
   isAuthGuardActive: true,
   defaultRole: UserRole.Admin,
+  localStorageKey:'surro'
 };
