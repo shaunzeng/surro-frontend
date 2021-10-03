@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as selectors from '../selectors';
 import { logout } from '../../actions';
-import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-topnav',
@@ -29,13 +29,16 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
   isLoggedIn$: Observable<boolean>;
   name$: Observable<string>;
+  
+
+  modalRef: BsModalRef;
 
   constructor(
     public authService: AuthService,
     private langService: LangService,
     private router: Router,
     private store: Store,
-    private notifications: NotificationsService, 
+    private modalService: BsModalService, 
   ) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
@@ -81,19 +84,22 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.authService
     .signOut()
     .then(() => {
-      this.store.dispatch(logout())
+      this.store.dispatch(logout());
+      this.modalRef = this.modalService.show('Logged out!', {
+        backdrop:false
+      });
+
+      setTimeout(()=>{
+        this.router.navigate(['/']);
+        this.modalRef.hide();
+      }, 2000);
+      
     })
     .catch(err => {
-      this.notifications.create(
-        'Error', 
-        err.error, 
-        NotificationType.Bare, {
-        theClass: 'outline primary',
-        timeOut: 6000,
-        showProgressBar: false
+      this.modalRef = this.modalService.show(err.error, {
+        backdrop:false
       });
     })
-    
   }
 
   searchKeyUp(event: KeyboardEvent): void {

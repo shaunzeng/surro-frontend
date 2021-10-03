@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule, Store } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -12,10 +12,11 @@ import { environment } from '@env';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { appInitializer } from './app-initializer';
-import { SharedModule } from './shared/shared.module';
 import { LangService } from './core/services/lang.service';
 import { CoreModule } from './core/core.module';
 import { reducers, metaReducers } from './store';
+import { SharedModule } from '@shared';
+import { AuthService } from '@core';
 
 const envImports = environment.production ?
   [] 
@@ -48,7 +49,7 @@ const envImports = environment.production ?
     useFactory:appInitializer,
     deps:[
       LangService,
-      HttpClient,
+      AuthService,
       Store
     ],
     multi:true

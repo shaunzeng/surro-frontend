@@ -8,7 +8,9 @@ export interface User {
     id:string,
     bookmarks:string[],
     img:string[],
-    isLoggedIn:boolean
+    isLoggedIn:boolean,
+    userType:string,
+    accountType:string
 }
 
 export interface RootState {
@@ -23,6 +25,8 @@ const initialState : User = {
     id:null,
     bookmarks:null,
     img:null,
+    userType:null,
+    accountType:null,
     isLoggedIn:false
 }
 

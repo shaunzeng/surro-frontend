@@ -3,53 +3,33 @@ import {
   Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  CanActivateChild,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+import { take, tap } from 'rxjs/operators';
+import { RootState } from '../../store';
+import { Observable } from 'rxjs';
+import * as selectors from '../selectors';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private authService: AuthService, private router: Router) {}
-  async canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Promise<boolean> {
-    const currentUser = await this.authService.getUser();
+export class isAuthenticated implements CanActivate {
 
-    if (currentUser) {
-      if (route.data && route.data.roles) {
-        if (route.data.roles.includes(currentUser.role)) {
-          return true;
-        } else {
-          this.router.navigate(['/unauthorized']);
-          return false;
-        }
-      } else {
-        return true;
-      }
-    } else {
-      this.router.navigate(['/user/login']);
-      return false;
-    }
+  constructor( private router: Router, private store: Store<RootState>) {}
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store
+      .select(selectors.selectIsLoggedIn)
+      .pipe(
+        take(1),
+        tap({
+          next: this.handler.bind(this)
+        })
+      );
   }
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    const currentUser = await this.authService.getUser();
 
-    if (currentUser) {
-      if (route.data && route.data.roles) {
-        if (route.data.roles.includes(currentUser.role)) {
-          return true;
-        } else {
-          this.router.navigate(['/unauthorized']);
-          return false;
-        }
-      } else {
-        return true;
-      }
-    } else {
-      this.router.navigate(['/user/login']);
-      return false;
+  private handler(val:boolean) {
+    if (!val) {
+      this.router.navigate(['/'])
     }
   }
 }

@@ -4,17 +4,19 @@ import { LangService } from "./core/services/lang.service";
 import { environment as env} from "@env";
 import { Store } from "@ngrx/store";
 import { setupUser } from "./actions";
+import { AuthService } from "./core/services/auth.service";
 
-export const appInitializer = (langService: LangService, http: HttpClient, store : Store) => async () => {
+export const appInitializer = (
+    langService: LangService, 
+    authService: AuthService,
+    store: Store) => async () => {
+
     langService.init();
-    return http
-            .get(`${env.apiUrl}/user`)
-            .pipe(
-                take(1),
-                tap({next:nextHandler(store)}),
-                catchError(errorHandler)
-            )
-            .toPromise();
+
+    return authService
+            .getUser()
+            .then(nextHandler(store))
+            .catch(errorHandler)
 }   
 
 const nextHandler = (store) => (data) => {
