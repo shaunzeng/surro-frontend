@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef } from '@angular/core';
 import { LangService, Language } from '../services/lang.service';
 import { environment } from '@env';
 import { getThemeColor } from 'src/app/utils/util';
@@ -33,6 +33,12 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
   modalRef: BsModalRef;
 
+  @ViewChild('msgTemp')
+  private msgTemp: TemplateRef<any>;
+
+  msg = '';
+
+
   constructor(
     public authService: AuthService,
     private langService: LangService,
@@ -47,7 +53,17 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentUrl = this.router.url;
   }
 
+
+  ngOnInit() {
+    this.isLoggedIn$ = this.store.select(selectors.selectIsLoggedIn);
+    this.name$ = this.store.select(selectors.selectName);
+    
+  }
   
+  ngOnDestroy(): void {
+
+  }
+
 
   fullScreenClick(): void {
     if (document.fullscreenElement) {
@@ -71,35 +87,33 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentLanguage = this.langService.languageShorthand;
   }
 
-  ngOnInit() {
-    this.isLoggedIn$ = this.store.select(selectors.selectIsLoggedIn);
-    this.name$ = this.store.select(selectors.selectName);
-  }
-
-  ngOnDestroy(): void {
-
-  }
 
   onSignOut(): void {
     this.authService
     .signOut()
-    .then(() => {
-      this.store.dispatch(logout());
-      this.modalRef = this.modalService.show('Logged out!', {
-        backdrop:false
-      });
+    .then(this.logoutSuccess.bind(this))
+    .catch(this.showMsg.bind(this))
+  }
 
-      setTimeout(()=>{
-        this.router.navigate(['/']);
-        this.modalRef.hide();
-      }, 2000);
-      
-    })
-    .catch(err => {
-      this.modalRef = this.modalService.show(err.error, {
-        backdrop:false
-      });
-    })
+  private logoutSuccess() {
+    this.store.dispatch(logout());
+    this.showMsg('Logged out');
+
+    setTimeout(()=>{
+      this.router.navigate(['/']);
+    }, 2000);
+  }
+
+  private showMsg(msg:string) {
+    this.msg = msg;
+    this.modalRef = this.modalService.show(this.msgTemp, {
+      backdrop:false,
+    });
+
+    setTimeout(() => {
+      this.modalRef.hide();
+      this.msg = '';
+    }, 2000)
   }
 
   searchKeyUp(event: KeyboardEvent): void {

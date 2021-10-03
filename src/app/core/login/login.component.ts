@@ -65,6 +65,7 @@ export class LoginComponent {
 
       setTimeout(() => {
         this.modalRef.hide();
+        this.loginMsg = '';
         this.router.navigate([environment.adminRoot]);
       },2000);
   }
@@ -87,6 +88,7 @@ export class LoginComponent {
 
     setTimeout(()=>{
       this.modalRef.hide();
+      this.loginMsg = '';
     },3000)
   }
 

@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { environment as env } from '@env';
-import { catchError, take, tap } from 'rxjs/operators';
+import { take} from 'rxjs/operators';
 
 
 export interface ISignInCredentials {
@@ -10,10 +10,12 @@ export interface ISignInCredentials {
   password: string;
 }
 
-export interface ICreateCredentials {
+export interface IRegisterInfo {
   email: string;
   password: string;
-  displayName: string;
+  firstName: string;
+  lastName:string;
+  zipcode:string;
 }
 
 export interface IPasswordReset {
@@ -36,34 +38,31 @@ export class AuthService extends ApiService {
   signIn(credentials: ISignInCredentials) {
     return this.http
     .post(`${env.apiUrl}/login`, credentials, this.httpOptions)
-    .pipe(
-      take(1)
-    )
+    .pipe(take(1))
     .toPromise();
   }
 
   signOut(){
     return this.http
     .get(`${env.apiUrl}/logout`)
-    .pipe(
-      take(1),
-    )
+    .pipe(take(1))
     .toPromise()
   };
 
 
-  register(data:any) {
+  register(data:IRegisterInfo) {
     return this.http
     .post(`${env.apiUrl}/register`, data, this.httpOptions)
-    .pipe(
-      take(1),
-    )
+    .pipe(take(1))
     .toPromise();
   }
 
 
-  sendPasswordEmail(email) {
-
+  getPasswordCode(email:string) {
+    return this.http
+    .post(`${env.apiUrl}/code-request`, {email}, this.httpOptions)
+    .pipe(take(1))
+    .toPromise();
   }
 
 

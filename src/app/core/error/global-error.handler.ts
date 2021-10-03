@@ -12,10 +12,11 @@ export class GlobalErrorHandler implements ErrorHandler {
         if (!(error instanceof HttpErrorResponse)) {
             error = error.rejection; // get the error object
         }
+        /*
         this.zone.run(() =>
-            alert('Something went wrong')
+            console.warn('Something went wrong')
         );
-
+*/
         console.error('Error from global error handler', error);
     }
 }

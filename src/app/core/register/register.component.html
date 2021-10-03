@@ -10,7 +10,7 @@
             <a href="#" class="white white-underline-link">Terms of Service</a> and <a href="#" class="white white-underline-link">Privacy Policy</a>.
           </p>
           <br>
-          <p class="white mb-0">Already have an account ? <a href="/login" class="white white-underline-link">Log in here</a></p>
+          <p class="white mb-0">Already have an account ? <a routerLink="/login" class="white white-underline-link">Log in here</a></p>
         </div>
         <div class="form-side">
           <a class="c-pointer">
@@ -72,10 +72,11 @@
               <span>{{ 'user.zipcode' | translate }}</span>
               <div *ngIf="!zipcode.valid && registerForm.submitted" class="invalid-tooltip">Zipcode is required!</div>
             </label>
+            
             <div class="d-flex justify-content-between align-items-center">
               <div></div>
               <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"
-                [isDisabled]="buttonDisabled" click="onLoginClick()">
+                [isDisabled]="buttonDisabled" >
                 {{ 'user.register-button' | translate | uppercase }}
               </app-state-button>
       
@@ -87,5 +88,10 @@
     </div>
   </div>
 </div>
-<simple-notifications></simple-notifications>
+
+<ng-template #msgTmp>
+  <div class="modal-body text-center">
+    {{msg}}
+  </div>
+</ng-template>
 

@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GlobalErrorHandler } from './error/global-error.handler';
 import { HttpLoadingInterceptor } from './error/http-loading.interceptor';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpLoadingInterceptor } from './error/http-loading.interceptor';
     NotFoundComponent,
     LoginComponent,
     RegisterComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     TranslateModule,
@@ -42,6 +44,7 @@ import { HttpLoadingInterceptor } from './error/http-loading.interceptor';
     LoginComponent,
     RegisterComponent,
     UnauthorizedComponent,
+    ForgetPasswordComponent
   ],
 })
 export class CoreModule {}

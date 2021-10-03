@@ -10,6 +10,7 @@ import { HttpLoadingInterceptor } from './error/http-loading.interceptor';
 import { isAuthenticated } from './services/auth.guard';
 import { isNotAuthenticated } from './services/notAuth.guard';
 import { AuthService } from './services/auth.service';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 export {
     CoreModule ,
@@ -23,5 +24,6 @@ export {
     HttpLoadingInterceptor,
     isAuthenticated,
     isNotAuthenticated,
-    AuthService
+    AuthService,
+    ForgetPasswordComponent
 };
