@@ -1,11 +1,10 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '@core';
 import { environment } from '@env';
 import { Store } from '@ngrx/store';
-import { setupUser } from '../../actions';
+import { setupUser } from '../data/actions';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { HttpErrorResponse } from '@angular/common/http';
 

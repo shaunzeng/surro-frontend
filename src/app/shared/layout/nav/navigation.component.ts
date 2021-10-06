@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef } from '@angular/core';
-import { LangService, Language } from '../services/lang.service';
+import { LangService, Language, AuthService } from '@core';
 import { environment } from '@env';
 import { getThemeColor } from 'src/app/utils/util';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as selectors from '../selectors';
-import { logout } from '../../actions';
+import * as selectors from '../../pages/data/selectors';
+import { logout } from '../../pages/data/actions';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -101,7 +100,7 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
     setTimeout(()=>{
       this.router.navigate(['/']);
-    }, 2000);
+    }, 1000);
   }
 
   private showMsg(msg:string) {

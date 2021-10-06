@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { take, tap } from 'rxjs/operators';
 import { RootState } from '../../store';
 import { Observable } from 'rxjs';
-import * as selectors from '../selectors';
+import * as selectors from '../data/selectors';
 
 @Injectable({ providedIn: 'root' })
 export class isAuthenticated implements CanActivate {

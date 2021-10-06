@@ -2,7 +2,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '@core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

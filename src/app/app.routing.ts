@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { 
-  isAuthenticated, 
-  isNotAuthenticated , 
   ForgetPasswordComponent, 
   NotFoundComponent, 
   LoginComponent, 
   RegisterComponent 
-} from '@core';
+} from '@shared';
+
+import { 
+  isAuthenticated, 
+  isNotAuthenticated 
+} from '@core'
 
 
 

@@ -9,8 +9,21 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="assets/fonts/iconsmind-s/css/iconsminds.css">
   <link rel="stylesheet" href="assets/fonts/simple-line-icons/css/simple-line-icons.css">
+  <style>
+    .app-error{
+      width:100%;
+      height:30px;
+    }
+
+    .app-error.hidden{
+      display: none;
+    }
+  </style>
 </head>
 <body class="rounded">
+  <div class="app-error hidden alert alert-danger" role="alert">
+    Something went wrong!!
+  </div>
   <app-root></app-root>
 </body>
 </html>
