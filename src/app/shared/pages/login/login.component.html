@@ -11,7 +11,7 @@
           <br>
           <p class="white mb-0">
             Don't have an account ?
-            <a href="/register" class="white white-underline-link">Sign up here</a>.
+            <a routerLink="/register" class="white white-underline-link">Sign up here</a>.
           </p>
         </div>
         <div class="form-side">
@@ -46,9 +46,9 @@
               <div *ngIf="!password.valid && loginForm.submitted" class="invalid-tooltip">Password is required!</div>
             </label>
             <div class="d-flex justify-content-between align-items-center">
-              <a routerLink="/forgot-password">{{ 'user.forgot-password' | translate }}?</a>
+              <a routerLink="/forget-password">{{ 'user.forgot-password' | translate }}?</a>
               <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"
-                [isDisabled]="buttonDisabled" click="onLoginClick()">
+                [isDisabled]="buttonDisabled" >
                 {{ 'user.login-button' | translate | uppercase }}
               </app-state-button>
             </div>
@@ -59,7 +59,13 @@
     </div>
   </div>
 </div>
-<simple-notifications></simple-notifications>
+
+<ng-template #loginTemp>
+  <div class="modal-body text-center">
+    {{loginMsg}}
+  </div>
+</ng-template>
+
 
 
 

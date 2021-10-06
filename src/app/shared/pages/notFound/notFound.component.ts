@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { environment } from '@env';
 
 @Component({
-  selector: 'app-error',
-  templateUrl: './error.component.html'
+  selector: 'app-not-found',
+  templateUrl: './notFound.component.html'
 })
-export class ErrorComponent implements OnInit, OnDestroy {
+export class NotFoundComponent implements OnInit, OnDestroy {
   root = environment.adminRoot;
 
   constructor() { }

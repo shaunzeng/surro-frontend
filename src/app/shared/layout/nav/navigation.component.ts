@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { LangService, Language } from '../services/lang.service';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, TemplateRef } from '@angular/core';
+import { LangService, Language, AuthService } from '@core';
 import { environment } from '@env';
 import { getThemeColor } from 'src/app/utils/util';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as selectors from '../selectors';
-import { logout } from '../../actions';
-import { NotificationsService, NotificationType } from 'angular2-notifications';
+import * as selectors from '../../pages/data/selectors';
+import { logout } from '../../pages/data/actions';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-topnav',
@@ -29,13 +28,22 @@ export class TopnavComponent implements OnInit, OnDestroy {
 
   isLoggedIn$: Observable<boolean>;
   name$: Observable<string>;
+  
+
+  modalRef: BsModalRef;
+
+  @ViewChild('msgTemp')
+  private msgTemp: TemplateRef<any>;
+
+  msg = '';
+
 
   constructor(
     public authService: AuthService,
     private langService: LangService,
     private router: Router,
     private store: Store,
-    private notifications: NotificationsService, 
+    private modalService: BsModalService, 
   ) {
     this.languages = this.langService.supportedLanguages;
     this.currentLanguage = this.langService.languageShorthand;
@@ -44,7 +52,17 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentUrl = this.router.url;
   }
 
+
+  ngOnInit() {
+    this.isLoggedIn$ = this.store.select(selectors.selectIsLoggedIn);
+    this.name$ = this.store.select(selectors.selectName);
+    
+  }
   
+  ngOnDestroy(): void {
+
+  }
+
 
   fullScreenClick(): void {
     if (document.fullscreenElement) {
@@ -68,32 +86,33 @@ export class TopnavComponent implements OnInit, OnDestroy {
     this.currentLanguage = this.langService.languageShorthand;
   }
 
-  ngOnInit() {
-    this.isLoggedIn$ = this.store.select(selectors.selectIsLoggedIn);
-    this.name$ = this.store.select(selectors.selectName);
-  }
-
-  ngOnDestroy(): void {
-
-  }
 
   onSignOut(): void {
     this.authService
     .signOut()
-    .then(() => {
-      this.store.dispatch(logout())
-    })
-    .catch(err => {
-      this.notifications.create(
-        'Error', 
-        err.error, 
-        NotificationType.Bare, {
-        theClass: 'outline primary',
-        timeOut: 6000,
-        showProgressBar: false
-      });
-    })
-    
+    .then(this.logoutSuccess.bind(this))
+    .catch(this.showMsg.bind(this))
+  }
+
+  private logoutSuccess() {
+    this.store.dispatch(logout());
+    this.showMsg('Logged out');
+
+    setTimeout(()=>{
+      this.router.navigate(['/']);
+    }, 1000);
+  }
+
+  private showMsg(msg:string) {
+    this.msg = msg;
+    this.modalRef = this.modalService.show(this.msgTemp, {
+      backdrop:false,
+    });
+
+    setTimeout(() => {
+      this.modalRef.hide();
+      this.msg = '';
+    }, 2000)
   }
 
   searchKeyUp(event: KeyboardEvent): void {

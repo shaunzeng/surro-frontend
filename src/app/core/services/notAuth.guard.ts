@@ -6,13 +6,13 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { take, tap } from 'rxjs/operators';
+import { take, map, tap } from 'rxjs/operators';
 import { RootState } from '../../store';
 import { Observable } from 'rxjs';
 import * as selectors from '../data/selectors';
 
 @Injectable({ providedIn: 'root' })
-export class isAuthenticated implements CanActivate {
+export class isNotAuthenticated implements CanActivate {
 
   constructor( private router: Router, private store: Store<RootState>) {}
 
@@ -21,15 +21,16 @@ export class isAuthenticated implements CanActivate {
       .select(selectors.selectIsLoggedIn)
       .pipe(
         take(1),
+        map(val => !val),
         tap({
-          next: this.handler.bind(this)
+            next: this.handler.bind(this)
         })
       );
   }
 
-  private handler(val:boolean) {
-    if (!val) {
-      this.router.navigate(['/'])
-    }
+  private handler(value:boolean) {
+      if (!value){
+          this.router.navigate(['/']);
+      }
   }
 }

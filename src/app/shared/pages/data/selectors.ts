@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { RootState, User } from '../store';
+import { RootState, User } from './models';
  
 export const selectFeature = (state: RootState) => state.user;
  

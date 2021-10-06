@@ -1,33 +1,21 @@
-import { NgModule } from '@angular/core';
-import { TopnavComponent } from './nav/navigation.component';
-import { FooterComponent } from './footer/footer.component';
-import { ErrorComponent } from './error/error.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UnauthorizedComponent } from './unathorized/unauthorized.component';
-import { SharedModule } from '../shared/shared.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GlobalErrorHandler } from './error/global-error.handler';
+import { HttpLoadingInterceptor } from './error/http-loading.interceptor';
+
 
 @NgModule({
-  declarations: [
-    TopnavComponent,
-    FooterComponent,
-    ErrorComponent,
-    LoginComponent,
-    RegisterComponent,
-    UnauthorizedComponent
-  ],
-  imports: [
-    TranslateModule,
-    SharedModule,
-  ],
-  exports: [
-    TopnavComponent,
-    FooterComponent,
-    ErrorComponent,
-    LoginComponent,
-    RegisterComponent,
-    UnauthorizedComponent
+  imports: [],
+  providers:[
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoadingInterceptor,
+      multi: true,
+    },
   ],
 })
 export class CoreModule {}

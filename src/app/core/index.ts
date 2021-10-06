@@ -1,17 +1,18 @@
 import { CoreModule } from './core.module';
-import { ErrorComponent } from './error/error.component';
-import { FooterComponent } from './footer/footer.component';
-import { LoginComponent } from './login/login.component';
-import { TopnavComponent } from './nav/navigation.component';
-import { RegisterComponent } from './register/register.component';
-import { UnauthorizedComponent } from './unathorized/unauthorized.component';
+import { GlobalErrorHandler } from './error/global-error.handler';
+import { HttpLoadingInterceptor } from './error/http-loading.interceptor';
+import { isAuthenticated } from './services/auth.guard';
+import { isNotAuthenticated } from './services/notAuth.guard';
+import { AuthService } from './services/auth.service';
+import { LangService , Language} from './services/lang.service';
 
 export {
-    CoreModule ,
-    TopnavComponent,
-    FooterComponent,
-    ErrorComponent,
-    LoginComponent,
-    RegisterComponent,
-    UnauthorizedComponent
+    CoreModule,
+    GlobalErrorHandler,
+    HttpLoadingInterceptor,
+    isAuthenticated,
+    isNotAuthenticated,
+    AuthService,
+    LangService,
+    Language
 };

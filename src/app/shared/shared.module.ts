@@ -12,11 +12,27 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { HeaderFooterLayoutComponent } from './layout/header-footer/header-footer.layout';
 import { BodyOnlyLayoutComponent } from './layout/body-only/body-only.layout';
 import { HeadroomModule } from '@ctrl/ngx-headroom';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NotFoundComponent } from './pages/notFound/notFound.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { UnauthorizedComponent } from './pages/unathorized/unauthorized.component';
+import { TopnavComponent } from './layout/nav/navigation.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   declarations: [
     HeaderFooterLayoutComponent,
-    BodyOnlyLayoutComponent
+    BodyOnlyLayoutComponent,
+    ForgetPasswordComponent,
+    LoginComponent,
+    NotFoundComponent,
+    RegisterComponent,
+    UnauthorizedComponent,
+    FooterComponent,
+    TopnavComponent
   ],
   imports: [
     RouterModule,
@@ -26,6 +42,7 @@ import { HeadroomModule } from '@ctrl/ngx-headroom';
     ComponentsStateButtonModule,
     ComponentsCardsModule,
     BootstrapModule,
+    TranslateModule,
     TabsModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     PopoverModule.forRoot(),
@@ -43,7 +60,14 @@ import { HeadroomModule } from '@ctrl/ngx-headroom';
     SimpleNotificationsModule,
     PopoverModule,
     HeaderFooterLayoutComponent,
-    BodyOnlyLayoutComponent
+    BodyOnlyLayoutComponent,
+    ForgetPasswordComponent,
+    LoginComponent,
+    NotFoundComponent,
+    RegisterComponent,
+    UnauthorizedComponent,
+    FooterComponent,
+    TopnavComponent
   ],
 })
 export class SharedModule {}
