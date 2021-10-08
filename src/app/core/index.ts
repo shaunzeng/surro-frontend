@@ -5,6 +5,9 @@ import { isAuthenticated } from './services/auth.guard';
 import { isNotAuthenticated } from './services/notAuth.guard';
 import { AuthService } from './services/auth.service';
 import { LangService , Language} from './services/lang.service';
+import { SearchService } from './services/search.service';
+import { User, RootState} from './data/models';
+
 
 export {
     CoreModule,
@@ -14,5 +17,8 @@ export {
     isNotAuthenticated,
     AuthService,
     LangService,
-    Language
+    Language,
+    SearchService,
+    User,
+    RootState
 };

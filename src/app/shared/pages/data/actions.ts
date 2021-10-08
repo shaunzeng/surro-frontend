@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from './models';
+import { User } from '@core';
 
 export const USER_SETUP = '[User] Setup';
 export const USER_LOGOUT = '[User] Logout';

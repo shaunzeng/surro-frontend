@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { LandingRoutingModule } from './landing.routing';
 import { LandingContainer } from './landing.container';
-import { CoreModule } from '../core/core.module';
+import { landingFeatureKey , lReducer } from './data/reducer';
 import { TranslateModule } from '@ngx-translate/core';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [LandingContainer],
   imports: [
+    StoreModule.forFeature(landingFeatureKey,lReducer ),
     TranslateModule.forChild(),
     SharedModule,
-    CoreModule,
     LandingRoutingModule,
   ],
   providers: [],

@@ -1,22 +1,6 @@
 import { ActionReducerMap, MetaReducer, Action, createReducer, on} from '@ngrx/store';
 import { createAction, props } from '@ngrx/store';
-
-export interface User {
-    email:string,
-    firstName:string,
-    lastName:string,
-    id:string,
-    bookmarks:string[],
-    img:string[],
-    isLoggedIn:boolean,
-    userType:string,
-    accountType:string
-}
-
-export interface RootState {
-    user: User
-}
-
+import { User, RootState } from '@core';
 
 const initialState : User = {
     email:null,
@@ -27,7 +11,8 @@ const initialState : User = {
     img:null,
     userType:null,
     accountType:null,
-    isLoggedIn:false
+    isLoggedIn:false,
+    zipcode:null
 }
 
 export const USER_SETUP = '[User] Setup';
@@ -53,7 +38,7 @@ const cReduer = createReducer(
     }))
 )
 
-const userReducer = (state:User | undefined, action : Action) => cReduer(state, action);
+const userReducer = (state: User | undefined, action : Action) => cReduer(state, action);
 
 export const reducers : ActionReducerMap<RootState> = {
     user: userReducer

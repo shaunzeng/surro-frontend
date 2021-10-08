@@ -18,7 +18,11 @@
                             </span>
                         </div>
                         <div class="main-search-right" >
-                            <input placeholder="Your city, town or zip">
+                            <input [(ngModel)]="zip" 
+                                    placeholder="Zipcode" 
+                                    [typeahead]="suggestions$"
+                                    [typeaheadAsync]="true"
+                                    >
                             <span class="search-icon" >
                                 <i class="simple-icon-map"></i>
                             </span>

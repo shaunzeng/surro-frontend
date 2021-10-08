@@ -10,7 +10,6 @@ import { UnauthorizedComponent } from './pages/unathorized/unauthorized.componen
 import { SharedModule } from './shared.module';
 import * as actions from './pages/data/actions';
 import * as selectors from './pages/data/selectors';
-import { RootState, User } from './pages/data/models';
 
 export {
     SharedModule,
@@ -24,7 +23,5 @@ export {
     FooterComponent,
     TopnavComponent,
     actions,
-    selectors,
-    User,
-    RootState
+    selectors
 }
