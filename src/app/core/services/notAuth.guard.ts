@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take, map, tap } from 'rxjs/operators';
-import { RootState } from '../../store';
+import { RootState } from '@core';
 import { Observable } from 'rxjs';
 import * as selectors from '../data/selectors';
 

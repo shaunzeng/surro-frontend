@@ -28,14 +28,18 @@ export class RegisterComponent {
       if (!this.buttonDisabled) {
         this.buttonDisabled = true;
         this.buttonState = 'show-spinner';
-
+        /*
         const { password, passwordAgain } = this.registerForm.value;
 
         if(password !== passwordAgain) {
           this.registerForm.resetForm();
+
+          this.buttonDisabled = false;
+          this.buttonState = '';
+
           this.showMsg('Passwords dont match, please try again');
           return ;
-        }
+        }*/
 
         this.authService
         .register({
@@ -66,11 +70,9 @@ export class RegisterComponent {
     this.buttonState='';
     this.buttonDisabled = false;
 
-    if (err instanceof HttpErrorResponse){
-      this.showMsg(err.error.message);
-    } else {
-      this.showMsg(err);
-    }
+    this.registerForm.resetForm();
+
+    this.showMsg(err instanceof HttpErrorResponse ? err.error.message : err);
   }
 
   private showMsg(msg:string) {

@@ -56,15 +56,16 @@
             </label>
             
             <label class="form-group has-float-label">
-              <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="password"/>
+              <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="password" minlength="8" pattern="([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*"/>
               <span>{{ 'user.password' | translate }}</span>
               <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password is required!</div>
             </label>
 
             <label class="form-group has-float-label">
-              <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="passwordAgain"/>
+              <input class="form-control" type="password" placeholder="" required ngModel #passwordAgain="ngModel" name="passwordAgain" minlength="8" pattern="([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*"/>
               <span>{{ 'user.passwordAgain' | translate }}</span>
               <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password again</div>
+              <div *ngIf="(passwordAgain.value !== password.value) && registerForm.submitted" class="invalid-tooltip">Emails must match!</div>
             </label>
 
             <label class="form-group has-float-label">
