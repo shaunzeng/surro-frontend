@@ -20,7 +20,7 @@ import { UnauthorizedComponent } from './pages/unathorized/unauthorized.componen
 import { TopnavComponent } from './layout/nav/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { SearchSwitcherDirective } from './directives/search-switcher.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { TranslateModule } from '@ngx-translate/core';
     RegisterComponent,
     UnauthorizedComponent,
     FooterComponent,
-    TopnavComponent
+    TopnavComponent,
+    SearchSwitcherDirective
   ],
   imports: [
     RouterModule,
@@ -67,7 +68,8 @@ import { TranslateModule } from '@ngx-translate/core';
     RegisterComponent,
     UnauthorizedComponent,
     FooterComponent,
-    TopnavComponent
+    TopnavComponent,
+    SearchSwitcherDirective
   ],
 })
 export class SharedModule {}

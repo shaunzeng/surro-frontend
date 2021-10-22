@@ -16,6 +16,7 @@ import {
 
 const routes: Routes = [
   { path: '', pathMatch:"full", loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)},
+  { path: 'search', loadChildren: () => import('./search-result/search-result.module').then(m => m.SearchResultsModule)},
   { path: 'user',            canActivate:[isAuthenticated], loadChildren: () => import('./user/user.module').then(m => m.UserModule)},
   { path: 'login',           canActivate:[isNotAuthenticated], component: LoginComponent},
   { path: 'register',        canActivate:[isNotAuthenticated], component: RegisterComponent},

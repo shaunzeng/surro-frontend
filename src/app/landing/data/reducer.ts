@@ -1,19 +1,19 @@
-import { Action, ActionReducerMap, createReducer } from "@ngrx/store";
+import { Action, ActionReducerMap, createReducer, on } from "@ngrx/store";
+import { SetupZipcode } from "./actions";
 
 export const landingFeatureKey = 'landing';
 
 export interface State {
     zipcode:string,
-    searchKeyword:string
 }
 
 const initialState: State = {
     zipcode:null,
-    searchKeyword:null
 }
 
 const landingReducer = createReducer(
     initialState,
+    on(SetupZipcode, (state, { zipcode }) => ({...state, zipcode:zipcode}))
 )
 
-export const lReducer = (state:State | undefined, action : Action) => landingReducer(state, action);
+export const lReducer = (state: State | undefined, action : Action) => landingReducer(state, action);
