@@ -1,11 +1,87 @@
 <app-header-footer-layout>
     <app-topnav header></app-topnav>
 
+    
+    <div body>
+        <div class="row mb-5 mt-3">
+            <div class="col-md-12">
+                <form class="form-inline" #searchForm ="ngForm" novalidate (ngSubmit)="onSubmit()">
+                    <label style="width: 35%;" class="form-group has-float-label mr-2" for="keyword">
+                        <input type="text" style="width: 100%;" class="form-control" id="keyword" name="keyword" placeholder="Keyword" [(ngModel)]="keyword">
+                        <span>Keyword</span>
+                    </label>
+        
+                    <label class="form-group has-float-label mr-2">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="zipcode" 
+                            name="zipcode" 
+                            placeholder="Zipcode" 
+                            [(ngModel)]="zipcode"
+                            [typeahead]="suggestedZips$"
+                            [typeaheadAsync]="true"
+                            [typeaheadMinLength]="0">
+                        <span>Zipcode</span>
+                    </label>
+        
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Find <i class="simple-icon-magnifier"></i></button>
+                </form>
+            </div>
+        </div> 
+    
+        <div class="row mt-5 mb-5">
+            <div class="col-md-3 d-none d-sm-none d-md-block">
+                <ul class="list-group list-search-btns list-hover">
+                    <li class="list-group-item" 
+                        *ngFor="let category of searchCategories" 
+                        [ngClass]="{'active': filter === category}"
+                        (click)="onFilterResult(category)">
+                        {{category}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="row">
+                    <div class="col-md-6">United States > New Jersey > Sayreville</div>
+                    <div class="col-md-6">
+                        <div dropdown class="text-right">
+                            <button class="btn btn-empty p-0" type="button" dropdownToggle>
+                              <span class="name">Sort by: </span>
+                              <a href="javascript:;" >
+                                {{sortedBy}} <i class="glyph-icon iconsminds-arrow-down"></i>
+                              </a>
+                            </button>
+                        
+                            <div class="dropdown-menu dropdown-menu-right mt-3" *dropdownMenu role="menu">
+                              <a class="dropdown-item c-pointer" (click)="onSortChange('Distance')">Distance</a>
+                              <a class="dropdown-item c-pointer" (click)="onSortChange('Ratings')">Ratings</a>
+                              <a class="dropdown-item c-pointer" (click)="onSortChange('Recommended')">Recommended</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div body class="row">
-        <div class="col-md-3">menu</div>
-        <div class="col-md-6">results</div>
-        <div class="col-md-3">map</div>
+
+        
+                <div class="row mt-1">
+                    <div class="col-md-12">
+                        <hr>
+                        test
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-none d-sm-none d-md-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="width: 100%; height:400px; background-color: lightgray;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
     </div>
 
     <app-footer footer></app-footer>

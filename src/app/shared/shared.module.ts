@@ -21,6 +21,8 @@ import { TopnavComponent } from './layout/nav/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchSwitcherDirective } from './directives/search-switcher.directive';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { SearchSwitcherDirective } from './directives/search-switcher.directive'
     TabsModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     PopoverModule.forRoot(),
-    HeadroomModule
+    HeadroomModule,
+    NgSelectModule
   ],
   exports: [
     RouterModule,
@@ -69,7 +72,8 @@ import { SearchSwitcherDirective } from './directives/search-switcher.directive'
     UnauthorizedComponent,
     FooterComponent,
     TopnavComponent,
-    SearchSwitcherDirective
+    SearchSwitcherDirective,
+    NgSelectModule
   ],
 })
 export class SharedModule {}

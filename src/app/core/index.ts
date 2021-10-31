@@ -7,7 +7,7 @@ import { AuthService } from './services/auth.service';
 import { LangService , Language} from './services/lang.service';
 import { SearchService } from './services/search.service';
 import { User, RootState} from './data/models';
-
+import { NavigationService } from './services/navigation.service';
 
 export {
     CoreModule,
@@ -20,5 +20,6 @@ export {
     Language,
     SearchService,
     User,
-    RootState
+    RootState,
+    NavigationService
 };

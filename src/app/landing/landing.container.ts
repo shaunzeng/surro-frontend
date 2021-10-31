@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { debounceTime, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { SetupZipcode } from './data/actions';
+import { SetupZipcode, SubmitSearch } from './data/actions';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +23,8 @@ export class LandingContainer implements OnInit, OnDestroy {
   @ViewChild('searchForm') searchForm: NgForm;
 
   topic:string = "IVF CLINICS";
-  zip = '10281';
-  search = '';
+  zipcode = '10281';
+  keyword = '';
   suggestedZips$?: Observable<string>;
   unsubscribe$: Subject<boolean> = new Subject();
   errorMsg?: string;
@@ -41,12 +41,12 @@ export class LandingContainer implements OnInit, OnDestroy {
       .pipe(
         take(1),
       ).subscribe(zip => {
-        this.zip = zip;
+        this.zipcode = zip;
         this.store.dispatch(SetupZipcode({zipcode:zip}))
       });
 
     this.suggestedZips$ = new Observable<string>((subscriber: Subscriber<string | undefined>) => {
-        subscriber.next(this.zip);
+        subscriber.next(this.zipcode);
       }).pipe(
         takeUntil(this.unsubscribe$),
         debounceTime(100),
@@ -64,18 +64,24 @@ export class LandingContainer implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.keyword = '';
   }
 
   onSubmit(){
     if (this.searchForm.valid) {
-      
+      this.store.dispatch(
+        SubmitSearch(
+          { 
+            keyword: this.searchForm.value.keyword, 
+            zipcode: this.searchForm.value.zipcode
+          }
+        )
+      );
     }
-    console.log(this.searchForm);
   }
 
   onSelectZip(e:TypeaheadMatch){
-    this.zip = e.value;
+    this.zipcode = e.value;
     this.store.dispatch(SetupZipcode({zipcode:e.value}));
   }
 

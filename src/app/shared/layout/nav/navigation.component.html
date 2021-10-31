@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center navbar-left">
         <div class="logo-container d-xs-none d-sm-none d-md-block">
             <div class="logo"></div>
         </div>
@@ -56,7 +56,7 @@
       </div-->
     </div>
 
-    <div class="navbar-right align-items-center">
+    <div class="align-items-center navbar-right">
 
       <div *ngIf="isLoggedIn$ | async; else loggedOutTemp">
         <div class="header-icons d-inline-block align-middle">

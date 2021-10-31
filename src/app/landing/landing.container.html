@@ -13,14 +13,14 @@
                         <form #searchForm ="ngForm" novalidate (ngSubmit)="onSubmit()" class="mt-5 mb-5" >
                             <div class="d-flex">
                                 <div class="main-search-left" >
-                                    <input placeholder="Find" required name="search" [(ngModel)]="search" >
+                                    <input placeholder="Find" required name="keyword" [(ngModel)]="keyword" >
                                     <span class="search-icon" >
                                         <button type="submit" class="btn btn-sm btn-link pl-0 pr-0 pt-0 pb-0"><i class="simple-icon-magnifier"></i></button>
                                     </span>
                                 </div>
                                 <div class="main-search-right" >
-                                    <input [(ngModel)]="zip" 
-                                            name="zip"
+                                    <input [(ngModel)]="zipcode" 
+                                            name="zipcode"
                                             placeholder="Near zipcode" 
                                             [typeahead]="suggestedZips$"
                                             [typeaheadAsync]="true"

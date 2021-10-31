@@ -4,7 +4,7 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output, 
   selector: '[app-search-switcher]'
 })
 export class SearchSwitcherDirective implements AfterViewInit, OnDestroy {
-  texts = ['IVF Clinics', 'Agencies', ' Egg+Sperm Banks', 'Egg Donors', ' Surrogates',' Attorneys'];
+  texts = ['IVF Clinics', 'Agencies', 'Egg+Sperm Banks', 'Egg Donors', 'Surrogates', 'Attorneys'];
   current = 0;
   gap = 6000;
   inter: any;
