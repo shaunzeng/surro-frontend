@@ -26,4 +26,11 @@ export class SearchService extends ApiService {
     .toPromise();
   }
 
+  searchContent(keyword: string, zipcode: string) {
+    return this.http
+    .post(`${env.apiUrl}/search/content`, { keyword: keyword, zipcode: zipcode}, this.httpOptions )
+    .pipe(take(1))
+    .toPromise();
+  }
+
 }

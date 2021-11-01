@@ -11,7 +11,20 @@ export interface User {
     zipcode:string
 }
 
+export interface LandingState {
+    zipcode: string,
+    keyword: string
+}
+
+export interface SearchState {
+    data: any;
+    zipcode: string;
+    keyword: string;
+    isLoading: boolean
+}
 
 export interface RootState {
-    user: User
+    user: User,
+    landing: LandingState,
+    search: SearchState,
 }

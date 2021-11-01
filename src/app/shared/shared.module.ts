@@ -22,7 +22,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchSwitcherDirective } from './directives/search-switcher.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { LoaderComponent } from './components/loader.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     UnauthorizedComponent,
     FooterComponent,
     TopnavComponent,
-    SearchSwitcherDirective
+    SearchSwitcherDirective,
+    LoaderComponent
   ],
   imports: [
     RouterModule,
@@ -73,7 +74,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FooterComponent,
     TopnavComponent,
     SearchSwitcherDirective,
-    NgSelectModule
+    NgSelectModule,
+    LoaderComponent
   ],
 })
 export class SharedModule {}

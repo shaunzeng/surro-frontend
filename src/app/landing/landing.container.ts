@@ -72,8 +72,8 @@ export class LandingContainer implements OnInit, OnDestroy {
       this.store.dispatch(
         SubmitSearch(
           { 
-            keyword: this.searchForm.value.keyword, 
-            zipcode: this.searchForm.value.zipcode
+            keyword: this.keyword, 
+            zipcode: this.zipcode
           }
         )
       );
@@ -90,7 +90,15 @@ export class LandingContainer implements OnInit, OnDestroy {
   }
 
   onSwitcherClick(e: string) {
-    console.log(e);
+    if (!this.zipcode) return;
+    this.store.dispatch(
+      SubmitSearch(
+        { 
+          keyword: e, 
+          zipcode: this.zipcode
+        }
+      )
+    );
   }
 
   @HostListener('window:resize', ['$event'])

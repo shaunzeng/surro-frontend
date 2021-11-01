@@ -12,7 +12,8 @@ import { Store } from '@ngrx/store';
 import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
 import { PRESET_KEYWORDS } from './data/constants';
-
+import { FecthSearchResults } from './data/actions';
+import { selectSearchResults, selectBusy } from './data/selectors';
   
   @Component({
     selector: 'app-search-results',
@@ -20,13 +21,16 @@ import { PRESET_KEYWORDS } from './data/constants';
     styleUrls:['./search-result.container.scss']
   })
   export class SearcherResultsContainer implements OnInit, OnDestroy {
-    searchCategories = PRESET_KEYWORDS;
+    
     keyword: string;
     zipcode: string;
     suggestedZips$?: Observable<string>;
     unsubscribe$: Subject<boolean> = new Subject();
     filter = 'ALL';
+    filters = PRESET_KEYWORDS;
     sortedBy = 'Distance';
+    data$: Observable<string[]>;
+    isBusy$: Observable<boolean>;
 
     @ViewChild('searchForm') searchForm: NgForm;
 
@@ -40,8 +44,11 @@ import { PRESET_KEYWORDS } from './data/constants';
         const snapshot = this.activatedRoute.snapshot;
         this.keyword = snapshot.queryParams.search;
         this.zipcode = snapshot.queryParams.zipcode;
+        this.data$ = this.store.select(selectSearchResults);
+        this.isBusy$ = this.store.select(selectBusy);
 
         this.initZipcodeSearch();
+        this.loadSearchResults(this.keyword, this.zipcode);
     }
   
     ngOnDestroy(): void {
@@ -50,11 +57,11 @@ import { PRESET_KEYWORDS } from './data/constants';
 
     onSubmit(){
       if (this.searchForm.valid){
-        alert('good');
+        this.loadSearchResults(this.keyword, this.zipcode);
       }
     }
 
-    onFilterResult(ctg: string) {
+    onFilterBy(ctg: string) {
       this.filter = ctg;
     }
 
@@ -78,6 +85,12 @@ import { PRESET_KEYWORDS } from './data/constants';
               .pipe(
                 map(data => data['zips'] || null)) 
               : of([]);
+    }
+
+    private loadSearchResults(keyword: string, zipcode: string){
+      if (!!keyword && !!zipcode) {
+        this.store.dispatch(FecthSearchResults({keyword, zipcode}));
+      }
     }
   
     @HostListener('window:resize', ['$event'])

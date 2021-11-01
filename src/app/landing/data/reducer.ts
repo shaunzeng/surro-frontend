@@ -1,14 +1,10 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { SetupZipcode, SubmitSearch } from "./actions";
+import { LandingState } from '@core';
 
 export const landingFeatureKey = 'landing';
 
-export interface State {
-    zipcode: string,
-    keyword: string
-}
-
-const initialState: State = {
+const initialState: LandingState = {
     zipcode: null,
     keyword: null
 }
@@ -19,4 +15,4 @@ const landingReducer = createReducer(
     on(SubmitSearch, (state, { keyword, zipcode }) => ({...state, keyword, zipcode}))
 )
 
-export const lReducer = (state: State | undefined, action : Action) => landingReducer(state, action);
+export const lReducer = (state: LandingState | undefined, action : Action) => landingReducer(state, action);
