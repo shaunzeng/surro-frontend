@@ -20,7 +20,9 @@ import { UnauthorizedComponent } from './pages/unathorized/unauthorized.componen
 import { TopnavComponent } from './layout/nav/navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { SearchSwitcherDirective } from './directives/search-switcher.directive';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { LoaderComponent } from './components/loader.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { TranslateModule } from '@ngx-translate/core';
     RegisterComponent,
     UnauthorizedComponent,
     FooterComponent,
-    TopnavComponent
+    TopnavComponent,
+    SearchSwitcherDirective,
+    LoaderComponent
   ],
   imports: [
     RouterModule,
@@ -46,7 +50,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TabsModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     PopoverModule.forRoot(),
-    HeadroomModule
+    HeadroomModule,
+    NgSelectModule
   ],
   exports: [
     RouterModule,
@@ -67,7 +72,10 @@ import { TranslateModule } from '@ngx-translate/core';
     RegisterComponent,
     UnauthorizedComponent,
     FooterComponent,
-    TopnavComponent
+    TopnavComponent,
+    SearchSwitcherDirective,
+    NgSelectModule,
+    LoaderComponent
   ],
 })
 export class SharedModule {}

@@ -28,18 +28,6 @@ export class RegisterComponent {
       if (!this.buttonDisabled) {
         this.buttonDisabled = true;
         this.buttonState = 'show-spinner';
-        /*
-        const { password, passwordAgain } = this.registerForm.value;
-
-        if(password !== passwordAgain) {
-          this.registerForm.resetForm();
-
-          this.buttonDisabled = false;
-          this.buttonState = '';
-
-          this.showMsg('Passwords dont match, please try again');
-          return ;
-        }*/
 
         this.authService
         .register({

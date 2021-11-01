@@ -2,54 +2,67 @@
     <app-topnav header></app-topnav>
 
 
-    <div body class="row">
-        <div class="col-12">
-            <app-gradient-card>
-                
-                <div class="jumbotron">
-                    <h2 class="display-4 white" style="width:45%">Find <b>{{ topic }}</b>, and {{'landing.welcome' | translate}}</h2>
-                    <br>
-                    <br>
-                    <div class="d-flex">
-                        <div class="main-search-left" >
-                            <input placeholder="Search anything">
-                            <span class="search-icon" >
-                                <i class="simple-icon-magnifier"></i>
-                            </span>
-                        </div>
-                        <div class="main-search-right" >
-                            <input [(ngModel)]="zip" 
-                                    placeholder="Zipcode" 
-                                    [typeahead]="suggestions$"
-                                    [typeaheadAsync]="true"
-                                    >
-                            <span class="search-icon" >
-                                <i class="simple-icon-map"></i>
-                            </span>
-                        </div>
+    <div body>
+        <div class="row">
+            <div class="col-12">
+                <app-gradient-card> 
+                    <div class="jumbotron">
+                        <h2 class="display-4 white col-md-8 col-sm-12" >Find <b app-search-switcher (textClicked)="onSwitcherClick($event)">{{ topic }}</b>, and </h2>   
+                        <h2 class="display-4 white col-md-8 col-sm-12" >{{'landing.welcome' | translate}}</h2>
+                        <br>
+                        <form #searchForm ="ngForm" novalidate (ngSubmit)="onSubmit()" class="mt-5 mb-5" >
+                            <div class="d-flex">
+                                <div class="main-search-left" >
+                                    <input placeholder="Find" required name="keyword" [(ngModel)]="keyword" >
+                                    <span class="search-icon" >
+                                        <button type="submit" class="btn btn-sm btn-link pl-0 pr-0 pt-0 pb-0"><i class="simple-icon-magnifier"></i></button>
+                                    </span>
+                                </div>
+                                <div class="main-search-right" >
+                                    <input [(ngModel)]="zipcode" 
+                                            name="zipcode"
+                                            placeholder="Near zipcode" 
+                                            [typeahead]="suggestedZips$"
+                                            [typeaheadAsync]="true"
+                                            [typeaheadMinLength]="0"
+                                            (typeaheadOnSelect)="onSelectZip($event)"
+                                            (typeaheadOnBlur)="onBlur($event)"
+                                            required
+                                            >
+                                    <span class="search-icon" >
+                                        <i class="simple-icon-map"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+    
+                        <div class="d-flex" style="align-items: center;">
+                            <h5 class="white mr-5" >Quick Search <i class="iconsminds-next-1"></i></h5>
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link c-pointer white" (click)="onSwitcherClick('IVF Clinics')">IVF Clinics</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Surrogacy Agencies')">Surrogacy Agencies</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Egg + Sperm Banks')">Egg + Sperm Banks</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Egg donors')">Egg donors</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Surrgates')">Surrgates</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Attorneys')">Attorneys</a></li>
+                            </ul>
+                        </div> 
                     </div>
-            
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="d-flex" style="align-items: center;">
-                        <h5 class="white mr-5" >Quick Search <i class="iconsminds-next-1"></i></h5>
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link c-pointer white">IVF Clinics</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link c-pointer white">Surrogacy Agencies</a></li>
-                            <li class="nav-item"><a class="nav-link c-pointer white">Egg + Sperm Banks</a></li>
-                            <li class="nav-item"><a class="nav-link c-pointer white">Egg donors</a></li>
-                            <li class="nav-item"><a class="nav-link c-pointer white">Surrgates</a></li>
-                            <li class="nav-item"><a class="nav-link c-pointer white">Attorneys</a></li>
-                        </ul>
-                    </div> 
-                </div>
-                    
-            </app-gradient-card>
+                        
+                </app-gradient-card>
+            </div>
         </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <app-home-blogs></app-home-blogs>
     </div>
 
     <app-footer footer></app-footer>

@@ -14,7 +14,8 @@ import { AppComponent } from './app.component';
 import { appInitializer } from './app-initializer';
 import { LangService } from './core/services/lang.service';
 import { CoreModule } from './core/core.module';
-import { reducers, metaReducers } from './store';
+import { reducers} from './store';
+import { metaReducers } from '@core';
 import { SharedModule } from '@shared';
 import { AuthService } from '@core';
 

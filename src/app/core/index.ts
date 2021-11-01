@@ -6,8 +6,9 @@ import { isNotAuthenticated } from './services/notAuth.guard';
 import { AuthService } from './services/auth.service';
 import { LangService , Language} from './services/lang.service';
 import { SearchService } from './services/search.service';
-import { User, RootState} from './data/models';
-
+import { User, RootState, LandingState, SearchState} from './data/models';
+import { NavigationService } from './services/navigation.service';
+import { metaReducers } from './helpers/store.helper';
 
 export {
     CoreModule,
@@ -20,5 +21,9 @@ export {
     Language,
     SearchService,
     User,
-    RootState
+    RootState,
+    NavigationService,
+    LandingState,
+    SearchState,
+    metaReducers
 };

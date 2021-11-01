@@ -1,17 +1,17 @@
 import {
   Component,
   OnInit,
-  Renderer2,
   OnDestroy,
   HostListener,
-  ElementRef,
+  ViewChild,
 } from '@angular/core';
-import { SearchService } from '@core';
+import { NgForm } from '@angular/forms';
+import { SearchService, RootState } from '@core';
 import { Store } from '@ngrx/store';
-import { RootState } from '@core';
-import { from, Observable, Observer, of, Subject, Subscriber } from 'rxjs';
-import { debounceTime, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { from, Observable, of, Subject, Subscriber } from 'rxjs';
+import { debounceTime, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { SetupZipcode, SubmitSearch } from './data/actions';
 
 @Component({
   selector: 'app-home',
@@ -19,48 +19,86 @@ import { debounceTime, filter, map, switchMap, take, takeUntil, tap } from 'rxjs
   styleUrls:['./landing.component.scss']
 })
 export class LandingContainer implements OnInit, OnDestroy {
-  topic:string = "IVF CLINICS";
-  defaultZip = '10281';
-  zip?:string;
-  suggestions$?: Observable<string>;
-  errorMsg?:string;
-  unsubscribe$:Subject<boolean> = new Subject();
 
+  @ViewChild('searchForm') searchForm: NgForm;
+
+  topic:string = "IVF CLINICS";
+  zipcode = '10281';
+  keyword = '';
+  suggestedZips$?: Observable<string>;
+  unsubscribe$: Subject<boolean> = new Subject();
+  errorMsg?: string;
+  
   constructor(
-      private searchService:SearchService,
-      private elRef: ElementRef, 
+      public searchService:SearchService,
       private store: Store
   ) {}
 
   ngOnInit(): void {
+    
     this.store
-    .select((state:RootState) => state.user.zipcode)
-    .pipe(take(1)).subscribe(this.assignZip.bind(this));
+      .select((state:RootState) => state.user.zipcode)
+      .pipe(
+        take(1),
+      ).subscribe(zip => {
+        this.zipcode = zip;
+        this.store.dispatch(SetupZipcode({zipcode:zip}))
+      });
 
-    this.initTypeahead();
+    this.suggestedZips$ = new Observable<string>((subscriber: Subscriber<string | undefined>) => {
+        subscriber.next(this.zipcode);
+      }).pipe(
+        takeUntil(this.unsubscribe$),
+        debounceTime(100),
+        switchMap(this.handlerZipResult.bind(this))
+      )
+  }
+
+
+  private handlerZipResult(query:string) {
+    return (!!query && query.length > 1 && query.length < 6) ? 
+            from(this.searchService.searchZip(query))
+            .pipe(
+              map(data => data['zips'] || null)) 
+            : of([]);
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next(true);
-    this.unsubscribe$.complete();
+    this.keyword = '';
   }
 
-  private assignZip(val:string) {
-    this.zip = val ? val : this.defaultZip;
+  onSubmit(){
+    if (this.searchForm.valid) {
+      this.store.dispatch(
+        SubmitSearch(
+          { 
+            keyword: this.keyword, 
+            zipcode: this.zipcode
+          }
+        )
+      );
+    }
   }
 
-  private initTypeahead(){
-    this.suggestions$ = 
-    new Observable<string>((subscriber: Subscriber<string | undefined>) => {
-      subscriber.next(this.zip);
-    }).pipe(
-      takeUntil(this.unsubscribe$),
-      debounceTime(100),
-      switchMap((query:string) => {
-        return (!!query && query.length > 2 && query.length < 6) ? from(this.searchService.searchZip(query))
-          .pipe(map(data => data['zips'] || null),tap({next:console.log})) : of([]);
-      })
-    )
+  onSelectZip(e:TypeaheadMatch){
+    this.zipcode = e.value;
+    this.store.dispatch(SetupZipcode({zipcode:e.value}));
+  }
+
+  onBlur(e: TypeaheadMatch){
+    console.log(e);
+  }
+
+  onSwitcherClick(e: string) {
+    if (!this.zipcode) return;
+    this.store.dispatch(
+      SubmitSearch(
+        { 
+          keyword: e, 
+          zipcode: this.zipcode
+        }
+      )
+    );
   }
 
   @HostListener('window:resize', ['$event'])
