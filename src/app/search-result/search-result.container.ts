@@ -13,7 +13,8 @@ import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
 import { PRESET_KEYWORDS } from './data/constants';
 import { FecthSearchResults } from './data/actions';
-import { selectSearchResults, selectBusy } from './data/selectors';
+import { selectSearchResults, isBusySelector } from './data/selectors';
+import { FetchRequest } from './data/models';
   
   @Component({
     selector: 'app-search-results',
@@ -24,13 +25,17 @@ import { selectSearchResults, selectBusy } from './data/selectors';
     
     keyword: string;
     zipcode: string;
+    filter: string;
+    currentPage = 0;
+    perPage = 10;
+
     suggestedZips$?: Observable<string>;
     unsubscribe$: Subject<boolean> = new Subject();
-    filter = 'ALL';
+    
     filters = PRESET_KEYWORDS;
-    sortedBy = 'Distance';
     data$: Observable<string[]>;
     isBusy$: Observable<boolean>;
+    
 
     @ViewChild('searchForm') searchForm: NgForm;
 
@@ -42,13 +47,22 @@ import { selectSearchResults, selectBusy } from './data/selectors';
   
     ngOnInit(): void {
         const snapshot = this.activatedRoute.snapshot;
-        this.keyword = snapshot.queryParams.search;
+        this.keyword = snapshot.queryParams.keyword;
         this.zipcode = snapshot.queryParams.zipcode;
+        this.filter = snapshot.queryParams.bizType;
+
         this.data$ = this.store.select(selectSearchResults);
-        this.isBusy$ = this.store.select(selectBusy);
+        this.data$.subscribe(console.log);
+        this.isBusy$ = this.store.select(isBusySelector);
 
         this.initZipcodeSearch();
-        this.loadSearchResults(this.keyword, this.zipcode);
+        this.loadSearchResults({
+          keyword: this.keyword,
+          bizType: this.filter,
+          zipcode: this.zipcode,
+          start: this.currentPage.toString(),
+          perPage: this.perPage.toString()
+        });
     }
   
     ngOnDestroy(): void {
@@ -56,17 +70,35 @@ import { selectSearchResults, selectBusy } from './data/selectors';
     }
 
     onSubmit(){
-      if (this.searchForm.valid){
-        this.loadSearchResults(this.keyword, this.zipcode);
+      if ( this.zipcode ){ 
+        this.loadSearchResults({
+          keyword: this.keyword,
+          bizType: this.filter,
+          zipcode: this.zipcode,
+          start: this.perPage.toString(),
+          perPage: this.perPage.toString()
+        });
       }
     }
 
     onFilterBy(ctg: string) {
       this.filter = ctg;
+      this.onSubmit();
     }
 
     onSortChange(order: string){
-      this.sortedBy = order;
+      
+    }
+
+    onPerPageChange(num: number) {
+      this.perPage = num;
+      this.loadSearchResults({
+        keyword: this.keyword,
+        zipcode: this.zipcode,
+        perPage: this.perPage.toString(),
+        bizType: this.filter,
+        start: this.currentPage.toString()
+      })
     }
 
     private initZipcodeSearch(){
@@ -87,9 +119,9 @@ import { selectSearchResults, selectBusy } from './data/selectors';
               : of([]);
     }
 
-    private loadSearchResults(keyword: string, zipcode: string){
-      if (!!keyword && !!zipcode) {
-        this.store.dispatch(FecthSearchResults({keyword, zipcode}));
+    private loadSearchResults(request: FetchRequest){
+      if (!!request.zipcode) {
+        this.store.dispatch(FecthSearchResults(request));
       }
     }
   

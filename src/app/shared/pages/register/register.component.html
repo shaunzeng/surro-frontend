@@ -56,20 +56,37 @@
             </label>
             
             <label class="form-group has-float-label">
-              <input class="form-control" type="password" placeholder="" required ngModel #password="ngModel" name="password" minlength="8" pattern="([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*"/>
+              <input class="form-control" type="password" placeholder="Password" required ngModel #password="ngModel" name="password" minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
               <span>{{ 'user.password' | translate }}</span>
-              <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password is required!</div>
+              <div *ngIf="password.errors?.required && registerForm.submitted" class="invalid-tooltip" >Password is required</div>
+              <div *ngIf="password.errors?.pattern" class="invalid-tooltip">Password must have at least 1 letter and 1 number</div> 
+              <div *ngIf="password.errors?.minlength && registerForm.submitted" class="invalid-tooltip" >Password needs to be 8 characters and longer</div>
             </label>
 
             <label class="form-group has-float-label">
-              <input class="form-control" type="password" placeholder="" required ngModel #passwordAgain="ngModel" name="passwordAgain" minlength="8" pattern="([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*"/>
+              <input class="form-control" type="password" placeholder="Confirm password" required ngModel #passwordAgain="ngModel" name="passwordAgain" minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
               <span>{{ 'user.passwordAgain' | translate }}</span>
-              <div *ngIf="!password.valid && registerForm.submitted" class="invalid-tooltip">Password again</div>
-              <div *ngIf="(passwordAgain.value !== password.value) && registerForm.submitted" class="invalid-tooltip">Emails must match!</div>
+              <div *ngIf="!passwordAgain.valid && registerForm.submitted" class="invalid-tooltip">Password again</div>
+              <div *ngIf="(passwordAgain.value !== password.value) && registerForm.submitted" class="invalid-tooltip">Passwords must match!</div>
             </label>
 
             <label class="form-group has-float-label">
-              <input class="form-control" type="text" placeholder="Zipcode" minlength="5" maxlength="5" pattern="[0-9]*"required ngModel #zipcode="ngModel" name="zipcode"/>
+              <input 
+              class="form-control" 
+              type="text" 
+              placeholder="Zipcode" 
+              minlength="5" 
+              maxlength="5" 
+              pattern="[0-9]*"
+              required 
+              ngModel 
+              #zipcode="ngModel" 
+              (ngModelChange)="onZipcodeChange($event)"
+              name="zipcode"
+              [typeahead]="suggestedZips$"
+              [typeaheadAsync]="true"
+              [typeaheadMinLength]="0"
+              />
               <span>{{ 'user.zipcode' | translate }}</span>
               <div *ngIf="!zipcode.valid && registerForm.submitted" class="invalid-tooltip">Zipcode is required!</div>
             </label>

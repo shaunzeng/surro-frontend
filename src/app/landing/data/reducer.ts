@@ -6,13 +6,14 @@ export const landingFeatureKey = 'landing';
 
 const initialState: LandingState = {
     zipcode: null,
-    keyword: null
+    keyword: null,
+    bizType: null
 }
 
 const landingReducer = createReducer(
     initialState,
     on(SetupZipcode, (state, { zipcode }) => ({...state, zipcode:zipcode})),
-    on(SubmitSearch, (state, { keyword, zipcode }) => ({...state, keyword, zipcode}))
+    on(SubmitSearch, (state, { keyword, zipcode, bizType }) => ({...state, keyword, zipcode, bizType}))
 )
 
 export const lReducer = (state: LandingState | undefined, action : Action) => landingReducer(state, action);

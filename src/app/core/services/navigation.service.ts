@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { SearchPageParams } from './api.models';
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
@@ -13,7 +14,7 @@ export class NavigationService {
         this.router.navigateByUrl('');
     }
 
-    toSearchResults(search: string, zipcode: string){
-        this.router.navigate(['/search'], { queryParams: { search, zipcode }});
+    toSearchResults(params: SearchPageParams){
+        this.router.navigate(['/search'], { queryParams: params });
     }
 }

@@ -45,63 +45,29 @@
                 <ul class="list-group list-search-btns list-hover">
                     <li class="list-group-item" 
                         *ngFor="let f of filters" 
-                        [ngClass]="{'active': filter === f}"
-                        (click)="onFilterBy(f)">
-                        {{f}}
+                        [ngClass]="{'active': filter === f.value || (!f.value && !filter)}"
+                        (click)="onFilterBy(f.value)">
+                        {{f.label}}
                     </li>
                 </ul>
             </div>
             <div class="col-md-6 col-sm-12">
 
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div dropdown class="text-left d-md-none" >
-                            <span class="name">Filtered By: </span>
-                            <button class="btn btn-empty p-0" type="button" dropdownToggle>
-                              <a href="javascript:;" >
-                                {{filter}} <i class="glyph-icon iconsminds-arrow-down"></i>
-                              </a>
-                            </button>
-                        
-                            <div class="dropdown-menu dropdown-menu-left mt-3" *dropdownMenu role="menu">
-                              <a class="dropdown-item c-pointer" *ngFor="let f of filters"  (click)="onFilterBy(f)">{{f}}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div dropdown class="text-right">
-                            <span class="name">Sort by: </span>
-                            <button class="btn btn-empty p-0" type="button" dropdownToggle>
-                              <a href="javascript:;" >
-                                {{sortedBy}} <i class="glyph-icon iconsminds-arrow-down"></i>
-                              </a>
-                            </button>
-                        
-                            <div class="dropdown-menu dropdown-menu-right mt-3" *dropdownMenu role="menu">
-                              <a class="dropdown-item c-pointer" (click)="onSortChange('Distance')">Distance</a>
-                              <a class="dropdown-item c-pointer" (click)="onSortChange('Ratings')">Ratings</a>
-                              <a class="dropdown-item c-pointer" (click)="onSortChange('Recommended')">Recommended</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <app-list-header (itemsPerPageChange)="onPerPageChange($event)"></app-list-header>
         
-                <div class="row mt-3">
+                <div class="row mt-3 mb-3">
+                    
                     <div class="col-md-12">
-                        <div *ngFor="let row of (data$ | async)">
-                            
-                            <div class="card">
-                                <div class="card-body">
-                                    [{{row.user_type}}] {{row.name}}
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div *ngIf="!(data$ | async)">
+                        <div *ngIf="!(data$ | async) else listView ">
                             No Results
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12 col-12">
+                      <pagination [totalItems]="'10'" [(ngModel)]="currentPage"></pagination>
+                    </div>
+                  </div>
             </div>
             <div class="col-md-3 d-none d-sm-none d-md-block">
                 <div class="row">
@@ -115,4 +81,15 @@
 
     <app-footer footer></app-footer>
 </app-header-footer-layout>
+
+
+<ng-template #listView let-item="item" let-index="index">
+    
+    <div class="card mt-3" *ngFor="let row of (data$ | async).data">
+        <div class="card-body">
+            [{{row.type}}] {{row.name}}
+        </div>
+    </div>
+
+</ng-template>
 

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { FecthSearchResults, FecthSearchResultsSuccess } from './actions';
 import { SearchService } from '@core';
 import { from, of } from 'rxjs';
-import { catchError, map, take, switchMap, mergeMap, exhaustMap, delay } from 'rxjs/operators';
+import { catchError, map, take, switchMap } from 'rxjs/operators';
 import { FetchResponse } from './models';
 import { Store } from '@ngrx/store';
 
@@ -19,19 +19,19 @@ export class SearchEffects {
     navigateToSearch$ = createEffect(
       () => this.actions$.pipe(
         ofType(FecthSearchResults),
-        exhaustMap(action => 
-            from(this.searchService.searchContent(action.keyword, action.zipcode))
+        switchMap(action => 
+            from(this.searchService.searchContent({
+                query: action.keyword, 
+                zipcode: action.zipcode, 
+                page: action.start,
+                type: action.bizType,
+                perPage: action.perPage
+            }))
             .pipe(
                 take(1),
-                delay(5000),
-                map((response: FetchResponse) => { 
-                    console.log('here ', response); 
-                    this.store.dispatch(FecthSearchResultsSuccess(response));
-                    // todo : returning action is not working, need analysis
-                    return FecthSearchResultsSuccess(response)
-                }),
+                map((response: FetchResponse) => FecthSearchResultsSuccess({ payload: response })),
                 catchError(e => of(e))
             )
         )
-    ), {dispatch:false})
+    ), { dispatch:true })
 }

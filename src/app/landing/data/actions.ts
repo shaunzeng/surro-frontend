@@ -10,5 +10,5 @@ export const SetupZipcode = createAction(
 
 export const SubmitSearch = createAction(
   SUBMIT_SEARCH,
-  props<{ keyword: string, zipcode: string }>()
+  props<{ keyword?: string, zipcode: string, bizType?: string}>()
 );

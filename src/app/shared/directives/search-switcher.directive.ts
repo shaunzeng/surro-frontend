@@ -4,7 +4,25 @@ import { AfterViewInit, Directive, ElementRef, EventEmitter, OnDestroy, Output, 
   selector: '[app-search-switcher]'
 })
 export class SearchSwitcherDirective implements AfterViewInit, OnDestroy {
-  texts = ['IVF Clinics', 'Agencies', 'Egg+Sperm Banks', 'Egg Donors', 'Surrogates', 'Attorneys'];
+  texts = [{
+    label: 'IVF Clinics',
+    value: 'CLINIC'
+  },{ 
+    label: 'Agencies',
+    value: 'AGENCY'
+  }, {
+    label: 'Egg+Sperm Banks',
+    value: 'BANK'
+  },{
+     label: 'Egg Donors',
+     value: 'EGG'
+  },{
+     label: 'Surrogates',
+     value: 'SURROGATE'
+  },{
+    label: 'Attorneys',
+    value: 'ATTORNEY'
+  }];
   current = 0;
   gap = 6000;
   inter: any;
@@ -24,7 +42,7 @@ export class SearchSwitcherDirective implements AfterViewInit, OnDestroy {
   }
 
   private clickHandler() {
-    this.textClicked.emit(this.texts[this.current]);
+    this.textClicked.emit(this.texts[this.current].value);
   }
 
   private startSwitching(){
@@ -33,7 +51,7 @@ export class SearchSwitcherDirective implements AfterViewInit, OnDestroy {
       if (this.current >= this.texts.length) {
         this.current = 0;
       }
-      this.el.nativeElement.innerHTML = this.texts[this.current];
+      this.el.nativeElement.innerHTML = this.texts[this.current].label;
     }, this.gap);
   }
 

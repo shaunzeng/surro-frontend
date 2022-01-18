@@ -13,14 +13,16 @@ export interface User {
 
 export interface LandingState {
     zipcode: string,
-    keyword: string
+    keyword: string,
+    bizType: string
 }
 
 export interface SearchState {
     data: any;
     zipcode: string;
     keyword: string;
-    isLoading: boolean
+    bizType: string;
+    isLoading: boolean;
 }
 
 export interface RootState {
