@@ -1,15 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { FetchResponse, FetchRquest } from './models';
+import { FetchResponse, FetchRequest } from './models';
 
 export const FETCH_SEARCH_RESULTS = '[Search] Fetch Search Results';
 export const FETCH_SEARCH_RESULTS_SUCCESS = '[Search] Fetch Search Results Success';
 
 export const FecthSearchResults = createAction(
   FETCH_SEARCH_RESULTS,
-  props<FetchRquest>()
+  props<FetchRequest>()
 );
 
 export const FecthSearchResultsSuccess = createAction(
-    FETCH_SEARCH_RESULTS_SUCCESS,
-    props<FetchResponse>()
-  );
+  FETCH_SEARCH_RESULTS_SUCCESS,
+  props<{payload: FetchResponse}>()
+);

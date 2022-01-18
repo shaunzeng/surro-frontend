@@ -3,16 +3,18 @@ interface Row {
     name?: string
 }
 
-export interface FetchRquest {
-    keyword: string,
-    zipcode: string
+export interface FetchRequest {
+    keyword?: string,
+    zipcode: string,
+    start?: string,
+    bizType?: string,
+    perPage: string
 }
 
 export interface FetchResponse {
-    is_preview: string,
-    source: {
-        keyword:string,
-        zipcode:string
-    },
-    data: Row[]
+    perPage: string,
+    totalCount: number,
+    start: string,
+    data: any[],
+    _id: string | number
 }

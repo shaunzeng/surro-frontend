@@ -8,13 +8,14 @@ const initialState: SearchState = {
     data:null,
     zipcode: null,
     keyword: null,
+    bizType: null,
     isLoading: false,
 }
 
 const searchReducer = createReducer(
     initialState,
-    on(FecthSearchResults, (state, { keyword, zipcode }) => ({...state, keyword, zipcode, isLoading: true})),
-    on(FecthSearchResultsSuccess, (state, response) => ({...state, data: response, isLoading: false}))
+    on(FecthSearchResults, (state, { keyword, zipcode, bizType }) => ({...state, keyword, zipcode, bizType, isLoading: true})),
+    on(FecthSearchResultsSuccess, (state, { payload } ) => ({...state, data: payload, isLoading: false}))
 )
 
 export const sReducer = (state: SearchState | undefined, action : Action) => searchReducer(state, action);

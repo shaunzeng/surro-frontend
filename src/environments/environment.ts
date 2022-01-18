@@ -6,7 +6,6 @@ import { UserRole } from '../app/core/services/auth.roles';
 
 export const environment = {
   production: false,
-  buyUrl : 'https://1.envato.market/6NV1b',
   SCARF_ANALYTICS : false,
   adminRoot: '/',
   apiUrl: '/api',

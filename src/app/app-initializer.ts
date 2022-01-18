@@ -20,7 +20,7 @@ const nextHandler = (store) => (data) => {
     if (data['visitor']) {
         console.log('Visitor');
     } else {
-        console.log('logged in user');
+        console.log('Welcome back ', data.firstName);
         store.dispatch(actions.setupUser(data));
     }     
 }

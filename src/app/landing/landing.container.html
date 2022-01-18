@@ -13,7 +13,16 @@
                         <form #searchForm ="ngForm" novalidate (ngSubmit)="onSubmit()" class="mt-5 mb-5" >
                             <div class="d-flex">
                                 <div class="main-search-left" >
-                                    <input placeholder="Find" required name="keyword" [(ngModel)]="keyword" >
+                                    <input placeholder="Find" 
+                                            required 
+                                            name="keyword" 
+                                            [(ngModel)]="keyword" 
+                                            [typeahead]="suggestedPreview$"
+                                            [typeaheadAsync]="true"
+                                            [typeaheadMinLength]="0"
+                                            typeaheadOptionField="name"
+                                            [typeaheadItemTemplate]="previewSearchTemp"
+                                            (typeaheadOnSelect)="onSelectPreview($event)">
                                     <span class="search-icon" >
                                         <button type="submit" class="btn btn-sm btn-link pl-0 pr-0 pt-0 pb-0"><i class="simple-icon-magnifier"></i></button>
                                     </span>
@@ -39,14 +48,12 @@
                         <div class="d-flex" style="align-items: center;">
                             <h5 class="white mr-5" >Quick Search <i class="iconsminds-next-1"></i></h5>
                             <ul class="nav">
-                                <li class="nav-item">
-                                    <a class="nav-link c-pointer white" (click)="onSwitcherClick('IVF Clinics')">IVF Clinics</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Surrogacy Agencies')">Surrogacy Agencies</a></li>
-                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Egg + Sperm Banks')">Egg + Sperm Banks</a></li>
-                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Egg donors')">Egg donors</a></li>
-                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Surrgates')">Surrgates</a></li>
-                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('Attorneys')">Attorneys</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('CLINIC')">IVF Clinics</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('AGENCY')">Surrogacy Agencies</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('BANK')">Egg + Sperm Banks</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('EGG')">Egg donors</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('SURROGATE')">Surrgates</a></li>
+                                <li class="nav-item"><a class="nav-link c-pointer white" (click)="onSwitcherClick('ATTORNEY')">Attorneys</a></li>
                             </ul>
                         </div> 
                     </div>
@@ -67,4 +74,9 @@
 
     <app-footer footer></app-footer>
 </app-header-footer-layout>
+
+<ng-template #previewSearchTemp let-item="item" let-index="index">
+    <p class="mb-0">{{item.name}}</p>
+    <small>{{item.address}} {{item.city}} {{item.state}}</small>
+</ng-template>
 

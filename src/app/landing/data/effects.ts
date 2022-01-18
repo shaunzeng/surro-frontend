@@ -15,7 +15,11 @@ export class LandingEffects {
     navigateToSearch$ = createEffect(
       () => this.actions$.pipe(
         ofType(SubmitSearch),
-        tap(action => this.navService.toSearchResults(action.keyword, action.zipcode)
+        tap(action => this.navService.toSearchResults({
+          keyword: action.keyword,
+          zipcode: action.zipcode,
+          bizType: action.bizType
+        })
       )
     ), {dispatch:false})
 }

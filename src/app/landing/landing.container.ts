@@ -10,7 +10,7 @@ import { SearchService, RootState } from '@core';
 import { Store } from '@ngrx/store';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { from, Observable, of, Subject, Subscriber } from 'rxjs';
-import { debounceTime, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { catchError, debounceTime, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { SetupZipcode, SubmitSearch } from './data/actions';
 
 @Component({
@@ -26,6 +26,7 @@ export class LandingContainer implements OnInit, OnDestroy {
   zipcode = '10281';
   keyword = '';
   suggestedZips$?: Observable<string>;
+  suggestedPreview$?: Observable<any>;
   unsubscribe$: Subject<boolean> = new Subject();
   errorMsg?: string;
   
@@ -40,31 +41,53 @@ export class LandingContainer implements OnInit, OnDestroy {
       .select((state:RootState) => state.user.zipcode)
       .pipe(
         take(1),
-      ).subscribe(zip => {
-        this.zipcode = zip;
-        this.store.dispatch(SetupZipcode({zipcode:zip}))
-      });
+        tap(zipcode => {
+          this.zipcode = zipcode;
+          this.store.dispatch(SetupZipcode({ zipcode }));
+        })
+      ).subscribe(console.log);
 
     this.suggestedZips$ = new Observable<string>((subscriber: Subscriber<string | undefined>) => {
         subscriber.next(this.zipcode);
       }).pipe(
+        filter(query => !!query && query.length > 1 && query.length < 6),
         takeUntil(this.unsubscribe$),
-        debounceTime(100),
+        debounceTime(300),
         switchMap(this.handlerZipResult.bind(this))
-      )
+      );
+    
+    this.suggestedPreview$ = new Observable<any>((subscriber: Subscriber<any>) => {
+      subscriber.next(this.keyword);
+    }).pipe(
+      takeUntil(this.unsubscribe$),
+      debounceTime(300),
+      switchMap(this.handlerPreviewResults.bind(this))
+    )
   }
 
 
   private handlerZipResult(query:string) {
-    return (!!query && query.length > 1 && query.length < 6) ? 
-            from(this.searchService.searchZip(query))
+    return from(this.searchService.searchZip(query))
             .pipe(
-              map(data => data['zips'] || null)) 
-            : of([]);
+              map(data => data['zips'] || null),
+              catchError(e => of([]))
+            );
+  }
+
+  private handlerPreviewResults(query: string) {
+    return (!!query && query.length > 1) ? 
+      from(this.searchService.searchPreview({
+        query,
+        zipcode: this.zipcode
+      }))
+      .pipe(map(data => data['data'])) : of([]);
   }
 
   ngOnDestroy(): void {
     this.keyword = '';
+    this.zipcode = '10281';
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   onSubmit(){
@@ -80,13 +103,17 @@ export class LandingContainer implements OnInit, OnDestroy {
     }
   }
 
-  onSelectZip(e:TypeaheadMatch){
+  onSelectZip(e: TypeaheadMatch){
     this.zipcode = e.value;
     this.store.dispatch(SetupZipcode({zipcode:e.value}));
   }
 
+  onSelectPreview(e: TypeaheadMatch){
+    this.onSubmit();
+  }
+
   onBlur(e: TypeaheadMatch){
-    console.log(e);
+    
   }
 
   onSwitcherClick(e: string) {
@@ -94,7 +121,7 @@ export class LandingContainer implements OnInit, OnDestroy {
     this.store.dispatch(
       SubmitSearch(
         { 
-          keyword: e, 
+          bizType: e,
           zipcode: this.zipcode
         }
       )
