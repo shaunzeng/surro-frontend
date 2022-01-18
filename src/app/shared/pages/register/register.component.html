@@ -1,0 +1,115 @@
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto my-auto">
+      <div class="card auth-card">
+        <div class="position-relative image-side ">
+          <p class=" text-white h2">Sign Up for Surro</p>
+          <p class="white mb-0">
+            By signing up, you agree to Surro's
+            <a href="#" class="white white-underline-link">Terms of Service</a> and <a href="#" class="white white-underline-link">Privacy Policy</a>.
+          </p>
+          <br>
+          <p class="white mb-0">Already have an account ? <a routerLink="/login" class="white white-underline-link">Log in here</a></p>
+        </div>
+        <div class="form-side">
+          <a class="c-pointer">
+            <span class="logo-single"></span>
+          </a>
+          <h6 class="mb-4">Sign Up</h6>
+
+          <div style="width:300px; text-align: center;background-color: rgb(55, 55, 196);padding: 10px;">
+            <a href="" class="white"><i class="iconsminds-facebook"></i> Continue with Facebook</a>
+          </div>
+          <br>
+          <div style="width:300px; text-align: center;border: 1px solid lightgray;padding: 10px;">
+            <a><i class="iconsminds-plaxo"></i> Continue with Google</a>
+          </div>
+          <br>
+          <div>Or</div>
+          <br>
+      
+          <form #registerForm="ngForm" novalidate  (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-group has-float-label">
+                  <input class="form-control" required ngModel #displayName="ngModel" name="firstName"/>
+                  <span>{{ 'user.firstName' | translate }}</span>
+                  <div *ngIf="!displayName.valid && registerForm.submitted" class="invalid-tooltip">First Name is required!</div>
+                </label>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-group has-float-label">
+                  <input class="form-control" required ngModel #displayName="ngModel" name="lastName"/>
+                  <span>{{ 'user.lastName' | translate }}</span>
+                  <div *ngIf="!displayName.valid && registerForm.submitted" class="invalid-tooltip">Last Name is required!</div>
+                </label>
+              </div>
+            </div>
+
+            
+            <label class="form-group has-float-label">
+              <input class="form-control" required email ngModel #email="ngModel" name="email"/>
+              <span>{{ 'user.email' | translate }}</span>
+              <div *ngIf="!email.valid && registerForm.submitted" class="invalid-tooltip">Email is required!</div>
+              <div *ngIf="email?.errors?.email && registerForm.submitted" class="invalid-tooltip">Email must be a valid address!</div>
+            </label>
+            
+            <label class="form-group has-float-label">
+              <input class="form-control" type="password" placeholder="Password" required ngModel #password="ngModel" name="password" minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
+              <span>{{ 'user.password' | translate }}</span>
+              <div *ngIf="password.errors?.required && registerForm.submitted" class="invalid-tooltip" >Password is required</div>
+              <div *ngIf="password.errors?.pattern" class="invalid-tooltip">Password must have at least 1 letter and 1 number</div> 
+              <div *ngIf="password.errors?.minlength && registerForm.submitted" class="invalid-tooltip" >Password needs to be 8 characters and longer</div>
+            </label>
+
+            <label class="form-group has-float-label">
+              <input class="form-control" type="password" placeholder="Confirm password" required ngModel #passwordAgain="ngModel" name="passwordAgain" minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
+              <span>{{ 'user.passwordAgain' | translate }}</span>
+              <div *ngIf="!passwordAgain.valid && registerForm.submitted" class="invalid-tooltip">Password again</div>
+              <div *ngIf="(passwordAgain.value !== password.value) && registerForm.submitted" class="invalid-tooltip">Passwords must match!</div>
+            </label>
+
+            <label class="form-group has-float-label">
+              <input 
+              class="form-control" 
+              type="text" 
+              placeholder="Zipcode" 
+              minlength="5" 
+              maxlength="5" 
+              pattern="[0-9]*"
+              required 
+              ngModel 
+              #zipcode="ngModel" 
+              (ngModelChange)="onZipcodeChange($event)"
+              name="zipcode"
+              [typeahead]="suggestedZips$"
+              [typeaheadAsync]="true"
+              [typeaheadMinLength]="0"
+              />
+              <span>{{ 'user.zipcode' | translate }}</span>
+              <div *ngIf="!zipcode.valid && registerForm.submitted" class="invalid-tooltip">Zipcode is required!</div>
+            </label>
+            
+            <div class="d-flex justify-content-between align-items-center">
+              <div></div>
+              <app-state-button [btnClass]="'btn btn-primary btn-lg btn-shadow'" [currentState]="buttonState"
+                [isDisabled]="buttonDisabled" >
+                {{ 'user.register-button' | translate | uppercase }}
+              </app-state-button>
+      
+            </div>
+          </form >
+      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #msgTmp>
+  <div class="modal-body text-center">
+    {{msg}}
+  </div>
+</ng-template>
+

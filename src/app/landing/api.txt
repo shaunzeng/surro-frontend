@@ -1,0 +1,4 @@
+GET  /api/user
+GET  /api/search/preview/  (params)
+GET  /api/search/content/  (params)
+GET  /api/search/zipcode/{zipcode}

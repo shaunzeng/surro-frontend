@@ -1844,7 +1844,7 @@ a.btn-secondary:not([href]):not([tabindex]) {
   }
 
   .navbar-left {
-    flex-basis: 40%;
+    flex-basis: 58%;
   }
 
   .navbar-right {
@@ -10776,5 +10776,26 @@ footer.page-footer {
   .mobile-menu-cta {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+
+.list-search-btns.list-hover{
+  .list-group-item{
+      background-color: inherit;
+      border:0px;
+      
+      &:hover{
+        color: $button-text-color;
+        background-color: darken($theme-color-1, 8%);
+        border-color: darken($theme-color-1, 8%);
+      }
+
+      &.active,
+      &:active {
+        background-color: $theme-color-1;
+        border-color: $theme-color-1;
+        color: $button-text-color;
+      }
   }
 }

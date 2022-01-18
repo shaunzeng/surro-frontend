@@ -1,0 +1,95 @@
+<app-header-footer-layout>
+    <app-topnav header></app-topnav>
+
+    
+    <div body>
+        <app-loader [isBusy]="isBusy$ | async"></app-loader>
+        <div class="row mb-5 mt-3">
+            <div class="col-md-12">
+                <form #searchForm ="ngForm" novalidate (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <label style="width: 100%;" class="form-group has-float-label mr-3 " for="keyword">
+                                <input type="text" style="width: 100%;" class="form-control open-top" id="keyword" name="keyword" placeholder="Keyword" required [(ngModel)]="keyword">
+                            </label>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <label class="form-group has-float-label mr-2">
+                                        <input 
+                                            type="text" 
+                                            class="form-control open-top" 
+                                            id="zipcode" 
+                                            name="zipcode" 
+                                            placeholder="Zipcode" 
+                                            [(ngModel)]="zipcode"
+                                            [typeahead]="suggestedZips$"
+                                            [typeaheadAsync]="true"
+                                            [typeaheadMinLength]="0"
+                                            required>
+                                    </label>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Find <i class="simple-icon-magnifier"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    
+        <div class="row mt-5 mb-5">
+            <div class="col-md-3 d-none d-md-block">
+                <ul class="list-group list-search-btns list-hover">
+                    <li class="list-group-item" 
+                        *ngFor="let f of filters" 
+                        [ngClass]="{'active': filter === f.value || (!f.value && !filter)}"
+                        (click)="onFilterBy(f.value)">
+                        {{f.label}}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-12">
+
+                <app-list-header (itemsPerPageChange)="onPerPageChange($event)"></app-list-header>
+        
+                <div class="row mt-3 mb-3">
+                    
+                    <div class="col-md-12">
+                        <div *ngIf="!(data$ | async) else listView ">
+                            No Results
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-12">
+                      <pagination [totalItems]="'10'" [(ngModel)]="currentPage"></pagination>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3 d-none d-sm-none d-md-block">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="width: 100%; height:400px; background-color: lightgray;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer footer></app-footer>
+</app-header-footer-layout>
+
+
+<ng-template #listView let-item="item" let-index="index">
+    
+    <div class="card mt-3" *ngFor="let row of (data$ | async).data">
+        <div class="card-body">
+            [{{row.type}}] {{row.name}}
+        </div>
+    </div>
+
+</ng-template>
+

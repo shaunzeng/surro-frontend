@@ -22,7 +22,6 @@ import { AuthGuard } from '../shared/auth.guard';
     AngularFireAuthGuardModule,
     ComponentsCarouselModule,
     TabsModule.forRoot(),
-    BrowserAnimationsModule,
     HeadroomModule,
     ScrollToModule.forRoot(),
   ],

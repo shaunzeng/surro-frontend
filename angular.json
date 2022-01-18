@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "vien-angular": {
+    "surro": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "lodash"
            ],
-            "outputPath": "dist/vien-angular",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -180,18 +180,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "vien-angular:build"
+            "browserTarget": "surro:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "vien-angular:build:production"
+              "browserTarget": "surro:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "vien-angular:build"
+            "browserTarget": "surro:build"
           }
         },
         "test": {
@@ -225,16 +225,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "vien-angular:serve"
+            "devServerTarget": "surro:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "vien-angular:serve:production"
+              "devServerTarget": "surro:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "vien-angular"
+  "defaultProject": "surro"
 }

@@ -1,0 +1,29 @@
+.main-search-left,
+.main-search-right {
+    position: relative;
+    width: 60%;
+    border-radius: 20px;
+    background: #f8f8f8;
+    margin-right: 30px;
+
+    input {
+      border: initial;
+      background: transparent;
+      outline: initial !important;
+      font-size: 0.8rem;
+      width: 93%;
+      color: #3a3a3a;
+      padding: 0.4rem 1rem;
+      line-height: 2;
+    }
+
+    .search-icon {
+        right: initial;
+        left: 5px;
+    }
+}
+
+.main-search-right {
+    width: 35%;
+}
+

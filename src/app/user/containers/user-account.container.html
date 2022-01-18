@@ -1,0 +1,19 @@
+<app-header-footer-layout>
+    <app-topnav header></app-topnav>
+
+
+    <div class="row" body>
+        <div class="col-md-12">
+            <div class="d-none d-md-inline-block align-text-bottom mr-1">
+                Dark Mode 
+                <div class="custom-control custom-switch" tooltip="Dark Mode" placement="left">
+                  <input type="checkbox" class="custom-control-input" id="darkModeSwitch" [checked]="isDarkModeActive"
+                    (change)="onDarkModeChange($event)">
+                  <label class="custom-control-label" for="darkModeSwitch"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer footer></app-footer>
+</app-header-footer-layout>

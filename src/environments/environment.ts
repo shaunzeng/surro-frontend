@@ -2,19 +2,18 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { UserRole } from '../app/shared/auth.roles';
+import { UserRole } from '../app/core/services/auth.roles';
 
 export const environment = {
   production: false,
-  buyUrl : 'https://1.envato.market/6NV1b',
   SCARF_ANALYTICS : false,
-  adminRoot: '/app',
-  apiUrl: 'https://api.coloredstrategies.com',
+  adminRoot: '/',
+  apiUrl: '/api',
   defaultMenuType: 'menu-default',
   subHiddenBreakpoint: 1440,
   menuHiddenBreakpoint: 768,
-  themeColorStorageKey: 'vien-themecolor',
-  isMultiColorActive: true,
+  themeColorStorageKey: 'surro-themecolor',
+  isMultiColorActive: false,
   /*
   Color Options:
   'light.blueyale', 'light.blueolympic', 'light.bluenavy', 'light.greenmoss',
@@ -25,10 +24,11 @@ export const environment = {
   'dark.greenlime', 'dark.yellowgranola', 'dark.greysteel', 'dark.orangecarrot',
   'dark.redruby', 'dark.purplemonster'
   */
-  defaultColor: 'light.blueyale',
+  defaultColor: 'light.yellowgranola',
   isDarkSwitchActive: true,
   defaultDirection: 'ltr',
-  themeRadiusStorageKey: 'vien-themeradius',
+  themeRadiusStorageKey: 'surro-key',
   isAuthGuardActive: true,
   defaultRole: UserRole.Admin,
+  localStorageKey:'surro'
 };

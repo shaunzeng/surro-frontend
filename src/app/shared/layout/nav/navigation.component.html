@@ -1,0 +1,175 @@
+<nav class="navbar">
+    <div class="d-flex align-items-center navbar-left">
+        <div class="logo-container d-xs-none d-sm-none d-md-block">
+            <div class="logo"></div>
+        </div>
+
+        <div class="user d-xs-block d-sm-block d-md-none" dropdown >
+          <a class="menu-button-mobile" dropdownToggle>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
+              <rect x="0.5" y="0.5" width="25" height="1" />
+              <rect x="0.5" y="7.5" width="25" height="1" />
+              <rect x="0.5" y="15.5" width="25" height="1" />
+            </svg>
+          </a>
+    
+          <div class="dropdown-menu dropdown-menu-left mt-3" *dropdownMenu role="menu">
+            <a class="dropdown-item c-pointer" [routerLink]="['/']" [ngClass]="{'active': currentUrl==='/'}">Home</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/blogs']" [ngClass]="{'active': currentUrl==='/blogs'}">Blogs</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/community']" [ngClass]="{'active': currentUrl==='/blogs'}">Community</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/about']" [ngClass]="{'active': currentUrl==='/blogs'}">About Us</a>
+          </div>
+        </div>
+        <div>
+          
+        </div>
+        
+        <ul class="nav nav-pills d-xs-none d-sm-none d-md-flex">
+            <li class="nav-item">
+                <a class="nav-link c-pointer" [routerLink]="['/']" [ngClass]="{'active': currentUrl==='/'}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link c-pointer" [routerLink]="['/blogs']" [ngClass]="{'active': currentUrl==='/blogs'}">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link c-pointer" [routerLink]="['/community']" [ngClass]="{'active': currentUrl==='/blogs'}">Community</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link c-pointer" [routerLink]="['/about']" [ngClass]="{'active': currentUrl==='/blogs'}">About us</a>
+            </li>
+        </ul>
+      <!--div class="search" (click)="searchAreaClick($event)">
+        <input placeholder="Search..." [(ngModel)]="searchKey" (keyup)="searchKeyUp($event)">
+        <span class="search-icon" (click)="searchClick($event)">
+          <i class="simple-icon-magnifier"></i>
+        </span>
+      </div -->
+  
+      <!--div class="btn-group ml-2" dropdown *ngIf="!isSingleLang">
+        <button dropdownToggle type="button" class="language-button dropdown-toggle btn btn-light btn-sm">
+          {{currentLanguage | uppercase}} <span class="caret"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem" *ngFor="let item of languages" (click)="onLanguageChange(item)"><a class="dropdown-item"
+              href="javascript:;">{{item.label}}</a></li>
+        </ul>
+      </div-->
+    </div>
+
+    <div class="align-items-center navbar-right">
+
+      <div *ngIf="isLoggedIn$ | async; else loggedOutTemp">
+        <div class="header-icons d-inline-block align-middle">
+        
+          <div class="position-relative d-inline-block">
+      
+            <div dropdown>
+              <button id="button-basic" dropdownToggle type="button" id="notificationButton"
+                class="header-icon btn btn-empty">
+                <i class="simple-icon-bell"></i>
+                <span class="count">3</span>
+              </button>
+              <div id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right mt-3"
+                id="notificationDropdown">
+                <perfect-scrollbar>
+                  <div class="d-flex flex-row mb-3 pb-3 border-bottom">
+                    <a href="javascript:;">
+                      <img src="/assets/img/profiles/l-2.jpg" alt="Notification Image"
+                        class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                    </a>
+                    <div class="pl-3">
+                      <a href="javascript:;">
+                        <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>
+                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row mb-3 pb-3 border-bottom">
+                    <a href="javascript:;">
+                      <img src="/assets/img/notifications/thumb-1.jpg" alt="Notification Image"
+                        class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                    </a>
+                    <div class="pl-3">
+                      <a href="javascript:;">
+                        <p class="font-weight-medium mb-1">1 item is out of stock!</p>
+                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row mb-3 pb-3 border-bottom">
+                    <a href="javascript:;">
+                      <img src="/assets/img/notifications/thumb-2.jpg" alt="Notification Image"
+                        class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                    </a>
+                    <div class="pl-3">
+                      <a href="javascript:;">
+                        <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>
+                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row mb-3 pb-3 ">
+                    <a href="javascript:;">
+                      <img src="/assets/img/notifications/thumb-3.jpg" alt="Notification Image"
+                        class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                    </a>
+                    <div class="pl-3">
+                      <a href="javascript:;">
+                        <p class="font-weight-medium mb-1">3 items just added to wish list by a user!
+                        </p>
+                        <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
+                      </a>
+                    </div>
+                  </div>
+                </perfect-scrollbar>
+              </div>
+            </div>
+          </div>
+      
+          <button class="header-icon btn btn-empty d-none d-sm-inline-block" type="button" id="fullScreenButton"
+            (click)="fullScreenClick()" >
+            <i *ngIf="!isFullScreen" class="simple-icon-size-fullscreen"></i>
+            <i *ngIf="isFullScreen" class="simple-icon-size-actual"></i>
+          </button>
+      
+        </div>
+      
+        <div class="user d-inline-block" dropdown >
+          <button class="btn btn-empty p-0" type="button" dropdownToggle>
+            <span class="name">{{name$ | async}}</span>
+            <span>
+              <img alt="Profile Picture" src="/assets/img/profiles/profile-default.png" />
+            </span>
+          </button>
+      
+          <div class="dropdown-menu dropdown-menu-right mt-3" *dropdownMenu role="menu">
+            <a class="dropdown-item c-pointer" [routerLink]="['/user/profile','321dsaFDS$#']">My Profile</a>
+            <a class="dropdown-item c-pointer" [routerLink]="['/user/account','321dsaFDS$#']">Account Settings</a>
+            <li class="divider dropdown-divider"></li>
+            <a class="dropdown-item c-pointer" (click)="onSignOut()">Sign out</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+</nav>
+
+
+<ng-template #loggedOutTemp>
+  <div class="header-icons d-inline-block align-middle">
+    <ul class="nav nav-pills" >
+      <li class="nav-item">
+          <a class="nav-link c-pointer" [routerLink]="['/login']"><button type="button" class="btn btn-sm btn-outline-primary">Login</button></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link c-pointer" [routerLink]="['/register']"><button type="button" class="btn btn-sm btn-primary">Sign Up</button></a>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+
+<ng-template #msgTemp>
+  <div class="modal-body text-center">
+    {{msg}}
+  </div>
+</ng-template>

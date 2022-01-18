@@ -6,23 +6,11 @@ const routes: Routes = [
     { 
       path: '',
       component: LandingContainer,
-      children:[
-          {
-              path:"login",
-              canLoad:[],
-              //component:LoginComponent
-          },
-          {
-              path:'signup',
-              canLoad:[],
-             // component:SignUpComponent
-          }
-      ]
     },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class LandingRoutingModule { }

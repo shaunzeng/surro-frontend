@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './error.component.html'
 })
 export class ErrorComponent implements OnInit, OnDestroy {
-  adminRoot = environment.adminRoot;
+  root = environment.adminRoot;
 
   constructor() { }
 
