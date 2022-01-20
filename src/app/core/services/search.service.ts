@@ -30,7 +30,7 @@ export class SearchService extends ApiService {
       ...this.httpOptions,
       params: this.getParams(request)
     })
-    .pipe(take(1), tap(result => console.log(result)))
+    .pipe(take(1))
     .toPromise();
   }
 

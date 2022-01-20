@@ -1,23 +1,18 @@
 import {
     Component,
     OnInit,
-    OnDestroy,
-    HostListener,
+    HostListener
   } from '@angular/core';
-import { SearchService } from '@core';
-import { Store } from '@ngrx/store';
-import { blogData } from '../../../data/blog';
+  import { Store } from '@ngrx/store';
   
   @Component({
-    selector: 'app-home-blogs',
+    selector: 'app-blogs',
     templateUrl: './blogs.container.html',
     styleUrls:['./blogs.container.scss']
   })
-  export class BlogsContainer implements OnInit, OnDestroy {
-    data = blogData.slice();
-
+  export class BlogsContainer implements OnInit {
+  
     constructor(
-        public searchService:SearchService,
         private store: Store
     ) {}
   
@@ -25,9 +20,7 @@ import { blogData } from '../../../data/blog';
       
     }
   
-    ngOnDestroy(): void {
-  
-    }
+
   
     @HostListener('window:resize', ['$event'])
     onResize(event): void {

@@ -16,7 +16,7 @@ import { SetupZipcode, SubmitSearch } from './data/actions';
 @Component({
   selector: 'app-home',
   templateUrl: './landing.container.html',
-  styleUrls:['./landing.component.scss']
+  styleUrls:['./landing.container.scss']
 })
 export class LandingContainer implements OnInit, OnDestroy {
 

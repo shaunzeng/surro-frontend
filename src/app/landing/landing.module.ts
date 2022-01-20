@@ -6,11 +6,12 @@ import { landingFeatureKey , lReducer } from './data/reducer';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
 import { BlogsContainer } from './components/blogs/blogs.container';
+import { CommentsContainer } from './components/comments/comments.container';
 import { EffectsModule } from '@ngrx/effects';
 import { LandingEffects } from './data/effects';
 
 @NgModule({
-  declarations: [LandingContainer, BlogsContainer],
+  declarations: [LandingContainer, BlogsContainer, CommentsContainer],
   imports: [
     StoreModule.forFeature(landingFeatureKey,lReducer),
     EffectsModule.forFeature([LandingEffects]),
