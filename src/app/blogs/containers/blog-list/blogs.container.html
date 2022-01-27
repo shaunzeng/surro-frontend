@@ -1,0 +1,22 @@
+<app-header-footer-layout>
+    <app-topnav header></app-topnav>
+
+    <div body>
+        <div class="content pt-3">
+            <p class="text-muted">{{(data$ | async)?.totalCount || 0 }} articles</p>
+            <h1 class="mb-3">Articles</h1>
+            <p classs="text-muted">Keyword:</p>
+            <button 
+            [class]="{'active': filter === f.value}" 
+            class="btn btn-outline-secondary btn-xs mb-1 mr-2" 
+            *ngFor="let f of filters" 
+            (click)="onFilterChanged(f.value)">{{f.label}}</button>
+            <div style="height:30px"></div>
+            <hr>
+            <div style="height:100px"></div>
+            <app-blogs-list [data]="(data$ | async)?.data" [totalCount]="(data$ | async)?.totalCount || 0"></app-blogs-list>
+        </div>
+    </div>
+
+    <app-footer footer></app-footer>
+</app-header-footer-layout>

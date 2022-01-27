@@ -18,4 +18,25 @@ export interface SearchPageParams {
     bizType: string
 }
 
-export type ApiModels = PreviewRequest | ContentRequest ;
+export interface BlogListRequest {
+    filter: string,
+    page: number
+}
+
+export interface BlogPreview{
+    title: string,
+    subTitle: string,
+    author: string,
+    timestamp: Date,
+    commentCount: number,
+    likesCount: number
+}
+
+export interface BlogListResponse {
+    id: string,
+    totalCount: number,
+    page: number,
+    data: BlogPreview[]
+}
+
+export type ApiModels = PreviewRequest | ContentRequest | BlogListRequest | BlogListResponse | BlogPreview;

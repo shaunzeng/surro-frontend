@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { NavigationService } from '@core';
+import { NavigationService, BlogsService } from '@core';
 import { SubmitSearch } from './actions';
 import { tap } from 'rxjs/operators';
 
@@ -9,7 +9,8 @@ export class LandingEffects {
 
     constructor(
         private actions$: Actions,
-        private navService: NavigationService
+        private navService: NavigationService,
+        private blogService: BlogsService
       ) {}
 
     navigateToSearch$ = createEffect(

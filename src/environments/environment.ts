@@ -24,7 +24,7 @@ export const environment = {
   'dark.greenlime', 'dark.yellowgranola', 'dark.greysteel', 'dark.orangecarrot',
   'dark.redruby', 'dark.purplemonster'
   */
-  defaultColor: 'light.yellowgranola',
+  defaultColor: 'light.orangecarrot',
   isDarkSwitchActive: true,
   defaultDirection: 'ltr',
   themeRadiusStorageKey: 'surro-key',

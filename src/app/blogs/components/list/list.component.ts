@@ -1,17 +1,23 @@
 import {
     Component,
     OnInit,
-    HostListener
+    HostListener,
+    Input
   } from '@angular/core';
   import { Store } from '@ngrx/store';
-  
+
   @Component({
-    selector: 'app-blogs',
-    templateUrl: './blogs.container.html',
-    styleUrls:['./blogs.container.scss']
+    selector: 'app-blogs-list',
+    templateUrl: './list.component.html',
+    styleUrls:['./list.component.scss']
   })
-  export class BlogsContainer implements OnInit {
-  
+  export class ListComponent implements OnInit {
+
+    currentPage = 1;
+
+    @Input() data: any;
+    @Input() totalCount: number;
+
     constructor(
         private store: Store
     ) {}
@@ -19,8 +25,10 @@ import {
     ngOnInit(): void {
       
     }
-  
 
+    onPageChanged(e: number){
+
+    }
   
     @HostListener('window:resize', ['$event'])
     onResize(event): void {

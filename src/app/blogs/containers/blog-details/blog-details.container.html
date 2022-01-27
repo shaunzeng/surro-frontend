@@ -1,0 +1,44 @@
+<app-header-footer-layout>
+    <app-topnav header></app-topnav>
+
+    <div body>
+        <app-loader [isBusy]="isBusy$ | async"></app-loader>
+        <div class="row content">
+            <div class="col-12 col-md-12 col-xl-8 col-left">
+                <app-blogs-article [data]="(blog$ | async)" *ngIf="!!(blog$ | async)"></app-blogs-article>
+                
+                <app-blogs-comments [data]="(comments$ | async)"></app-blogs-comments>
+            </div>
+            <div class="col-12 col-md-12 col-xl-4 col-right">
+                <div class="card mb-3">
+                    <div class="position-relative">
+                        <img class="card-img-top" src="/assets/img/cards/thumb-1.jpg" alt="Card image cap">
+                      </div>
+                      <div class="card-body">
+                            <h6>About the Author</h6>
+                          <p class="list-item-heading mb-4">I like this place</p>
+                  
+                        <footer>
+                          <p class="text-muted text-small mb-0 font-weight-light">09.04.2020</p>
+                        </footer>
+                    </div>
+                </div>
+                <div class="card card-blank">
+                      <div class="card-body">
+                        <h5 class="card-title">Recent Posts</h5>
+                        <ul>
+                            <li>
+                                post 1
+                            </li>
+                        </ul>
+                        <footer>
+                          <p class="text-muted text-small mb-0 font-weight-light">09.04.2020</p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer footer></app-footer>
+</app-header-footer-layout>

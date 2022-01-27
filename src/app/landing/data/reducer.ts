@@ -7,7 +7,8 @@ export const landingFeatureKey = 'landing';
 const initialState: LandingState = {
     zipcode: null,
     keyword: null,
-    bizType: null
+    bizType: null,
+    blogPosts: null,
 }
 
 const landingReducer = createReducer(

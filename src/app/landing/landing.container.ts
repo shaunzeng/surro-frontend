@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { catchError, debounceTime, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { SetupZipcode, SubmitSearch } from './data/actions';
+import { FetchBlogsPreview, SetupZipcode, SubmitSearch } from './data/actions';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +44,7 @@ export class LandingContainer implements OnInit, OnDestroy {
         tap(zipcode => {
           this.zipcode = zipcode;
           this.store.dispatch(SetupZipcode({ zipcode }));
+          this.store.dispatch(FetchBlogsPreview());
         })
       ).subscribe(console.log);
 
