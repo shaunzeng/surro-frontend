@@ -38,23 +38,27 @@ import * as Selectors from '../../data/selectors';
     }];
 
     data$: Observable<any>;
+    isBusy$: Observable<boolean>;
   
     constructor(
         private store: Store
     ) {}
   
     ngOnInit(): void {
-      this.store.dispatch(fetchBlogList());
+      this.store.dispatch(fetchBlogList({}));
       this.data$ = this.store.select(Selectors.blogListSelector);
+      this.isBusy$ = this.store.select(Selectors.isBusySelector);
       this.data$.subscribe(console.log);
     }
 
-    onPageChanged(e: any){
-
+    onPageChange(e: number){
+      this.currentPage = e;
+      this.store.dispatch(fetchBlogList({filter: this.filter, page: this.currentPage}));
     }
   
     onFilterChanged(filter: string){
       this.filter = filter;
+      this.store.dispatch(fetchBlogList({filter: this.filter, page: this.currentPage}));
     }
   
     @HostListener('window:resize', ['$event'])

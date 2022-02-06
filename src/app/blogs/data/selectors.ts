@@ -15,7 +15,7 @@ export const blogDetailsSelector = createSelector(
 
 export const isBusySelector = createSelector(
   selectFeature,
-  (state: BlogState) => !!state.blogs.isLoading || !!state.details.isLoading 
+  (state: BlogState) => !!state.blogs.isLoading || !!state.details.isLoading
 )
 
 export const blogCommentsSelector = createSelector(

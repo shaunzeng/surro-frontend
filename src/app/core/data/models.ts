@@ -1,3 +1,5 @@
+import { GetCommentsResponse } from "../services/api.models";
+
 export interface User {
     email:string;
     firstName:string;
@@ -11,29 +13,20 @@ export interface User {
     zipcode:string
 }
 
-export interface Blog {
-    _id: string,
-    title: string,
-    subtitle: string,
-    summary: string,
-    author:{
-        id: string,
-        name: string
-    },
-    parentId: string,
-    category: string,
-    tags: string,
-    content: string,
-    publishedAt: Date,
-    images: string[],
-    commentCount: number
-}
-
 export interface LandingState {
     zipcode: string;
     keyword: string;
     bizType: string;
-    blogPosts: Blog[]
+    trendingBlogs: {
+        entity: BlogListResponse,
+        isLoading: boolean,
+        loadedAt: Date
+    },
+    recentComments: {
+        entity: any,
+        isLoading: boolean,
+        loadedAt: Date
+    }
 }
 
 export interface SearchState {
@@ -44,36 +37,56 @@ export interface SearchState {
     isLoading: boolean;
 }
 
-interface BlogPreview{
+export interface BlogPreview{
+    id: string,
+    category: string,
+    images: string[],
+    parentId: string,
+    summary: string,
     title: string,
     subTitle: string,
-    author: string,
-    timestamp: Date,
-    commentCount: number,
-    likesCount: number
+    author: {
+        id: string,
+        name: string
+    },
+    publishedAt: string,
+    tags: string[]
 }
 
-export interface BlogList {
-    id: string,
+export interface BlogListRequest {
+    filter?: string, 
+    page?: number, 
+    perPage?: number
+}
+
+export interface BlogListResponse {
     totalCount: number,
     page: number,
-    data: BlogPreview[]
+    data: BlogPreview[],
+    source: BlogListRequest,
+    perPage: number,
 }
 
 interface BlogListEntity {
-    entity: BlogList;
+    entity: BlogListResponse;
     isLoading: boolean,
     loadedAt: Date
 }
 
 interface BlogDetailsEntity {
-    entity: Blog;
+    entity: any;
     isLoading: boolean,
     loadedAt: Date
 }
 
+interface GetCommentsRequest {
+    postId: string,
+    page?: number,
+    perPage?: number
+}
+
 interface CommentEntity {
-    entity:any,
+    entity: GetCommentsResponse,
     isLoading: boolean,
     loadedAt: Date
 }

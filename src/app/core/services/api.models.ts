@@ -19,24 +19,71 @@ export interface SearchPageParams {
 }
 
 export interface BlogListRequest {
-    filter: string,
-    page: number
+    filter?: string,
+    page?: number,
+    perPage?: number
 }
 
 export interface BlogPreview{
+    id: string,
+    category: string,
+    summary: string,
+    tags: string[],
+    publishedAt: string,
+    parentId: string,
+    images: string[],
     title: string,
     subTitle: string,
-    author: string,
-    timestamp: Date,
+    author: {
+        id: string,
+        name: string
+    },
     commentCount: number,
-    likesCount: number
 }
 
 export interface BlogListResponse {
-    id: string,
     totalCount: number,
     page: number,
+    perPage: number,
+    source: BlogListRequest,
     data: BlogPreview[]
+}
+
+export interface GetCommentsRequest {
+    postId: string,
+    page?: number,
+    perPage?: number
+}
+
+export interface Comment {
+    id: string,
+    author: {
+        id: string,
+        name: string
+    },
+    content: string,
+    likes: number,
+    likedByYou: boolean,
+    parentId: string,
+    publishedAt: string
+}
+
+export interface GetCommentsResponse {
+    totalCount: number,
+    page: number,
+    perPage: number,
+    source: GetCommentsRequest,
+    data: Comment[]
+}
+
+export interface PostCommentRequest {
+    postId: string,
+    comment: string,
+    parentId?: string
+}
+
+export interface LikeCommentRequest {
+    commentId: string
 }
 
 export type ApiModels = PreviewRequest | ContentRequest | BlogListRequest | BlogListResponse | BlogPreview;

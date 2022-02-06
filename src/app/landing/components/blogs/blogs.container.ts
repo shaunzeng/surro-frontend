@@ -3,10 +3,10 @@ import {
     OnInit,
     OnDestroy,
     HostListener,
+    Input,
   } from '@angular/core';
 import { SearchService } from '@core';
 import { Store } from '@ngrx/store';
-import { blogData } from '../../../data/blog';
   
   @Component({
     selector: 'app-home-blogs',
@@ -14,7 +14,7 @@ import { blogData } from '../../../data/blog';
     styleUrls:['./blogs.container.scss']
   })
   export class BlogsContainer implements OnInit, OnDestroy {
-    data = blogData.slice();
+    @Input() data = [];
 
     constructor(
         public searchService:SearchService,

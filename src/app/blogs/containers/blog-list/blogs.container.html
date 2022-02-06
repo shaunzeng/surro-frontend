@@ -3,6 +3,7 @@
 
     <div body>
         <div class="content pt-3">
+            <app-loader [isBusy]="isBusy$ | async"></app-loader>
             <p class="text-muted">{{(data$ | async)?.totalCount || 0 }} articles</p>
             <h1 class="mb-3">Articles</h1>
             <p classs="text-muted">Keyword:</p>
@@ -14,7 +15,10 @@
             <div style="height:30px"></div>
             <hr>
             <div style="height:100px"></div>
-            <app-blogs-list [data]="(data$ | async)?.data" [totalCount]="(data$ | async)?.totalCount || 0"></app-blogs-list>
+            <app-blogs-list 
+            [data]="(data$ | async)?.data" 
+            [totalCount]="(data$ | async)?.totalCount || 0"
+            (onPageChange)="onPageChange($event)"></app-blogs-list>
         </div>
     </div>
 

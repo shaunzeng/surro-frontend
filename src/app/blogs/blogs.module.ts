@@ -9,11 +9,18 @@ import { ListComponent } from './components/list/list.component';
 import { BlogDetailsContainer } from './containers/blog-details/blog-details.container';
 import { ArticleComponent } from './components/article/article.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { AuthorIntroComponent } from './components/author-intro/author-intro.component';
 import { blogFeatureKey, bReducer } from './data/reducer';
 import { BlogEffects } from './data/effects';
 
 @NgModule({
-  declarations: [BlogsContainer, ListComponent, BlogDetailsContainer, ArticleComponent, CommentsComponent],
+  declarations: [
+    BlogsContainer, 
+    ListComponent, 
+    BlogDetailsContainer, 
+    ArticleComponent, 
+    CommentsComponent,
+    AuthorIntroComponent],
   imports: [
     StoreModule.forFeature(blogFeatureKey, bReducer),
     EffectsModule.forFeature([BlogEffects]),

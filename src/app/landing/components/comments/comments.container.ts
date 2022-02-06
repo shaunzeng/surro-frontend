@@ -6,6 +6,7 @@ import {
     ViewChild,
     AfterViewInit,
     ElementRef,
+    Input,
   } from '@angular/core';
 import { SearchService } from '@core';
 import { Store } from '@ngrx/store';
@@ -18,42 +19,28 @@ templateUrl: './comments.container.html',
 styleUrls:['./comments.container.scss']
 })
 export class CommentsContainer implements OnInit, OnDestroy, AfterViewInit {
-data = blogData.slice();
+    @Input() data = [];
 
-@ViewChild('myWaterfall') myWaterfall: ElementRef;
+    @ViewChild('myWaterfall') myWaterfall: ElementRef;
 
-constructor(
-    public searchService:SearchService,
-    private store: Store
-) {}
+    constructor(
+        public searchService:SearchService,
+        private store: Store
+    ) {}
 
-ngOnInit(): void {
-    
-}
+    ngOnInit(): void {
+        
+    }
 
-ngOnDestroy(): void {
+    ngOnDestroy(): void {
 
-}
+    }
 
-ngAfterViewInit(){
-    setTimeout(() => {
-        waterfall(this.myWaterfall.nativeElement);  
-    }, 100);
-      
-}
+    ngAfterViewInit(){
+        setTimeout(() => {
+           waterfall(this.myWaterfall.nativeElement);  
+        }, 1000);
+        
+    }
 
-@HostListener('window:resize', ['$event'])
-onResize(event): void {
-
-}
-
-@HostListener('window:click', ['$event'])
-onClick(event): void {
-
-}
-
-@HostListener('window:scroll', ['$event'])
-onScroll(event): void {
-
-}
 }

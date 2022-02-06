@@ -1,18 +1,31 @@
-
 export interface BlogPreview{
+    id: string,
+    category: string,
+    images: string[],
+    parentId: string,
+    summary: string,
     title: string,
     subTitle: string,
-    author: string,
-    timestamp: Date,
-    commentCount: number,
-    likesCount: number
+    author: {
+        id: string,
+        name: string
+    },
+    publishedAt: string,
+    tags: string[]
+}
+
+export interface BlogListRequest {
+    filter?: string, 
+    page?: number, 
+    perPage?: number
 }
 
 export interface BlogListResponse {
-    id: string,
     totalCount: number,
     page: number,
-    data: BlogPreview[]
+    data: BlogPreview[],
+    source: BlogListRequest,
+    perPage: number,
 }
 
 export interface BlogDetailsResponse {

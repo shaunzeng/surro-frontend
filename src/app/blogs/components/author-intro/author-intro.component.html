@@ -1,0 +1,16 @@
+<div class="card mb-3">
+    <div class="position-relative">
+        <img class="card-img-top" src="/assets/img/cards/thumb-1.jpg" alt="Card image cap">
+      </div>
+      <div class="card-body">
+            <p class="text-muted text-small mb-2">About the Author</p>
+            <p class="list-item-heading mb-4"><b>{{author?.name}}</b></p>
+            <p class="mb-4">{{author?.intro}}</p>
+            
+        <footer *ngIf="author?.socialMedia">
+          <p class="text-muted text-small mb-2">Social Media</p>
+          <a [attr.href]="author?.socialMedia.twitter" *ngIf="author?.socialMedia.twitter"><i class="glyph-icon iconsminds-twitter"></i></a>
+          <a [attr.href]="author?.socialMedia.instagram" *ngIf="author?.socialMedia.instagram"><i class="glyph-icon iconsminds-instagram"></i></a> 
+        </footer>
+    </div>
+</div>

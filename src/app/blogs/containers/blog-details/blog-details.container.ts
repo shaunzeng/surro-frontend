@@ -1,16 +1,17 @@
 import {
     Component,
     OnInit,
-    HostListener
+    ViewChild,
   } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
   import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { blogData } from '../../../data/blog';
-import { fetchBlogDetails, fetchCommentsByPostId } from '../../data/actions';
+import { selectIsLoggedIn, selectUserId } from '@core';
+import { fetchBlogDetails, fetchCommentsByPostId, postComment, deleteCommentById, likeComment, unlikeComment } from '../../data/actions';
 import { BlogDetailsResponse } from '../../data/models';
 import { blogCommentsSelector, blogDetailsSelector, isBusySelector } from '../../data/selectors';
+import { NgForm } from '@angular/forms';
   
   @Component({
     selector: 'app-blogs-details',
@@ -18,14 +19,17 @@ import { blogCommentsSelector, blogDetailsSelector, isBusySelector } from '../..
     styleUrls:['./blog-details.container.scss']
   })
   export class BlogDetailsContainer implements OnInit {
-    
-    currentPage = 1;
-    data = blogData.slice();
-    filter: string;
+
     blog$: Observable<BlogDetailsResponse>;
     comments$: Observable<any>;
     isBusy$: Observable<boolean>;
+    isLoggedIn$: Observable<boolean>;
+    currentUserId$: Observable<string>;
 
+    postId: string;
+    currentCommentPage = 1;
+
+    @ViewChild('commentForm') commentForm: NgForm;
 
     filters = [{
       label: 'All',
@@ -51,36 +55,56 @@ import { blogCommentsSelector, blogDetailsSelector, isBusySelector } from '../..
   
     ngOnInit(): void {
       this.route.params.pipe(take(1)).subscribe(({ id }) => {
+        this.postId = id;
         this.store.dispatch(fetchBlogDetails({ id }));
-        this.store.dispatch(fetchCommentsByPostId({id}));
+        this.store.dispatch(fetchCommentsByPostId({ id }));
       });
 
       this.blog$ = this.store.select(blogDetailsSelector);
       this.isBusy$ = this.store.select(isBusySelector);
       this.comments$ = this.store.select(blogCommentsSelector);
-      this.blog$.subscribe(console.log)
+      this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
+      this.currentUserId$ = this.store.select(selectUserId);
     }
 
-    onPageChanged(e: any){
+    onCommentPageChange(e: { page: number, itemsPerPage: number}){
+      this.currentCommentPage = e.page;
+      this.store.dispatch(fetchCommentsByPostId({
+        id: this.postId,
+        page: e.page
+      }))
+    }
 
+    onRemoveComment(id: string){
+      if (!id) return ;
+      this.store.dispatch(deleteCommentById({
+        id
+      }))
     }
-  
-    onFilterChanged(filter: string){
-      this.filter = filter;
+
+    onSubmit(){
+      if (this.commentForm.valid) {
+          this.store.dispatch(postComment({ 
+            comment: this.commentForm.value.comment, 
+            postId: this.postId 
+          }));
+          this.commentForm.resetForm();
+      }
     }
-  
-    @HostListener('window:resize', ['$event'])
-    onResize(event): void {
-  
+
+    onLikeComment(id: string) {
+      if (!id) return;
+
+      this.store.dispatch(likeComment({
+        id
+      }));
     }
-  
-    @HostListener('window:click', ['$event'])
-    onClick(event): void {
-  
-    }
-  
-    @HostListener('window:scroll', ['$event'])
-    onScroll(event): void {
-  
+
+    onUnlikeComment(id: string) {
+      if(!id) return;
+
+      this.store.dispatch(unlikeComment({
+        id
+      }))
     }
   }

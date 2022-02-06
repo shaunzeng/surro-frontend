@@ -3,7 +3,15 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { environment as env } from '@env';
 import { take } from 'rxjs/operators';
-import { BlogListRequest, BlogListResponse } from './api.models';
+import { 
+  BlogListRequest, 
+  GetCommentsRequest, 
+  GetCommentsResponse, 
+  PostCommentRequest, 
+  Comment,
+  LikeCommentRequest, 
+  BlogListResponse
+} from './api.models';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -13,11 +21,11 @@ export class BlogsService extends ApiService {
     super(http);
   }
 
-  getBlogsPreview(request?: BlogListRequest) {
+  getBlogsPreview(request?: BlogListRequest): Observable<BlogListResponse> {
     return this.http
-    .get(`${env.apiUrl}/blog/list`, {
+    .get<BlogListResponse>(`${env.apiUrl}/blog/list`, {
       ...this.httpOptions,
-      params: request ? this.getHttpParams(request) : null
+      params: request && Object.keys(request).length > 0 ? this.getHttpParams(request) : null
     })
     .pipe(take(1));
   }
@@ -30,11 +38,52 @@ export class BlogsService extends ApiService {
     .pipe(take(1));
   }
 
-  getComments(postId: string) {
+  getLatestComments(): Observable<any> {
     return this.http
-    .get(`${env.apiUrl}/comment/${postId}`, {
+    .get<any>(`${env.apiUrl}/comment/getLatestComments`, {
+      ...this.httpOptions
+    })
+    .pipe(take(1))
+  }
+
+  getComments(request: GetCommentsRequest): Observable<GetCommentsResponse> {
+    return this.http
+    .get<GetCommentsResponse>(`${env.apiUrl}/comment/getComments`, {
       ...this.httpOptions,
+      params: request && Object.keys(request).length > 0 ? this.getHttpParams(request) : null
     })
     .pipe(take(1));
+  }
+
+  postComment(request: PostCommentRequest): Observable<Comment> {
+    return this.http
+    .post<Comment>(`${env.apiUrl}/comment/addComment`,
+    request,
+    { ...this.httpOptions })
+    .pipe(take(1))
+  }
+
+  deletCommentById(request: { id: string }) {
+    return this.http
+    .post(`${env.apiUrl}/comment/deleteComment`,
+    request,
+    { ...this.httpOptions })
+    .pipe(take(1))
+  }
+
+  likeComment(request: LikeCommentRequest) {
+    return this.http
+    .post(`${env.apiUrl}/comment/likeComment`,
+    request,
+    { ...this.httpOptions })
+    .pipe(take(1))
+  }
+
+  unlikeComment(request: LikeCommentRequest) {
+    return this.http
+    .post(`${env.apiUrl}/comment/unlikeComment`,
+    request,
+    { ...this.httpOptions })
+    .pipe(take(1))
   }
 }

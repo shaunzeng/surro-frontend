@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SearchSwitcherDirective } from './directives/search-switcher.directive';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LoaderComponent } from './components/loader.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     HeaderFooterLayoutComponent,
@@ -51,7 +51,8 @@ import { LoaderComponent } from './components/loader.component';
     SimpleNotificationsModule.forRoot(),
     PopoverModule.forRoot(),
     HeadroomModule,
-    NgSelectModule
+    NgSelectModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule,
@@ -75,7 +76,8 @@ import { LoaderComponent } from './components/loader.component';
     TopnavComponent,
     SearchSwitcherDirective,
     NgSelectModule,
-    LoaderComponent
+    LoaderComponent,
+    ReactiveFormsModule
   ],
 })
 export class SharedModule {}

@@ -1,25 +1,24 @@
-<div>
-    <div class="card card-blank flex-row mb-5" *ngFor="let item of data">
-        <div class="w-20 position-relative">
-            <a [routerLink]="'./' + data.id">
-                <img class="card-img-left" [src]="'/assets/img/details/small-3.jpg'" alt="Card image cap">
-            </a>
-        </div>
-        <div class="w-60 d-flex align-items-center">
-            <div class="card-body">
-                <p><a [routerLink]="'./' + item.author.id">{{item.author.name}}</a> wrote</p>
-                <a [routerLink]="'./' + item.id">
-                    <h5 class="mb-2 listing-heading" ellipsis>{{item.title}}</h5>
-                </a>
-                <p class="listing-desc text-muted" ellipsis>{{item.publishedAt | date}} - {{item.summary}}</p>
-                <a [routerLink]="'./' + data.id">Read more...</a>
+<div class="card flex-row mb-5" *ngFor="let item of data">
+    <div class="w-20 position-relative">
+        <a [routerLink]="'./' + item.id">
+            <img class="card-img-left" [src]="'/assets/img/details/small-3.jpg'" alt="Card image cap">
+        </a>
+    </div>
+    <div class="w-60 d-flex align-items-center">
+        <div class="card-body">
+            <p class="mb-2"><a [routerLink]="'./' + item.author.id">{{item.author.name}}</a> wrote</p>
+            <h3 class="mb-2 " ellipsis><b><a [routerLink]="'./' + item.id">{{item.title}}</a></b></h3>
+            <p class="listing-desc text-muted" ellipsis><i>{{item.publishedAt | date}}</i>- {{item.summary}}</p>
+            <div class="mb-5">
+                <div class="glyph-icon iconsminds-tag d-inline-block mr-2"></div>
+                <span class="badge-pill badge-outline-info mr-2" *ngFor="let t of item.tags">{{t}}</span>
             </div>
+            <a [routerLink]="'./' + item.id">Read more...</a>
         </div>
-        <div class="w-20 d-flex align-items-center">
-            <div class="card-body">
-                <p><i class="glyph-icon simple-icon-heart"></i> 30 likes</p>
-                <p><i class="glyph-icon iconsminds-pen"></i> 10 comments</p>
-            </div>
+    </div>
+    <div class="w-20 d-flex align-items-center">
+        <div class="card-body">
+            <p><i class="glyph-icon iconsminds-pen"></i> {{item.commentCount}} comments</p>
         </div>
     </div>
 </div>

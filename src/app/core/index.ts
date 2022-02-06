@@ -10,7 +10,7 @@ import { BlogsService } from './services/blogs.service';
 import { User, RootState, LandingState, SearchState, BlogState} from './data/models';
 import { NavigationService } from './services/navigation.service';
 import { metaReducers } from './helpers/store.helper';
-
+import { selectIsLoggedIn, selectName, selectUserId} from './data/selectors';
 export {
     CoreModule,
     GlobalErrorHandler,
@@ -28,5 +28,8 @@ export {
     LandingState,
     SearchState,
     BlogState,
-    metaReducers
+    metaReducers,
+    selectIsLoggedIn,
+    selectName,
+    selectUserId
 };

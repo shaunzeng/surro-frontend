@@ -8,7 +8,7 @@ import {
 import { BlogDetailsResponse } from '../../data/models';
 
   @Component({
-    selector: 'app-blogs-article',
+    selector: 'app-blog-article',
     templateUrl: './article.component.html',
     styleUrls:['./article.component.scss']
   })

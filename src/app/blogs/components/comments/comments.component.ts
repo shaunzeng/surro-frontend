@@ -1,45 +1,42 @@
 import {
     Component,
-    OnInit,
-    HostListener,
-    Input
+    Input,
+    ViewChild,
+    EventEmitter,
+    Output
   } from '@angular/core';
-  import { Store } from '@ngrx/store';
+  import { NgForm } from '@angular/forms';
 
+  interface PageClickEvent {
+      page: number,
+      itemsPerPage: number,
+  }
 
   @Component({
-    selector: 'app-blogs-comments',
+    selector: 'app-blog-comments',
     templateUrl: './comments.component.html',
     styleUrls:['./comments.component.scss']
   })
-  export class CommentsComponent implements OnInit {
+  export class CommentsComponent {
 
     @Input() data: any;
+    @Input() currentUserId: string;
 
-    constructor(
-        private store: Store
-    ) {}
-  
-    ngOnInit(): void {
-      
+    @Output() onRemoveComment: EventEmitter<string> = new EventEmitter();
+    @Output() onLikeComment: EventEmitter<string> = new EventEmitter();
+    @Output() onUnlikeComment: EventEmitter<string> = new EventEmitter();
+
+    constructor( ) {}
+
+    onDeleteComment(id: string){
+      this.onRemoveComment.emit(id);
     }
 
-    onPageChanged(e: number){
+    onLike(id: string){
+      this.onLikeComment.emit(id);
+    }
 
-    }
-  
-    @HostListener('window:resize', ['$event'])
-    onResize(event): void {
-  
-    }
-  
-    @HostListener('window:click', ['$event'])
-    onClick(event): void {
-  
-    }
-  
-    @HostListener('window:scroll', ['$event'])
-    onScroll(event): void {
-  
+    onUnlike(id: string){
+      this.onUnlikeComment.emit(id);
     }
   }

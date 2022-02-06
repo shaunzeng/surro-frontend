@@ -2,7 +2,9 @@ import {
     Component,
     OnInit,
     HostListener,
-    Input
+    Input,
+    Output,
+    EventEmitter
   } from '@angular/core';
   import { Store } from '@ngrx/store';
 
@@ -18,6 +20,8 @@ import {
     @Input() data: any;
     @Input() totalCount: number;
 
+    @Output() onPageChange: EventEmitter<number> = new EventEmitter();
+
     constructor(
         private store: Store
     ) {}
@@ -27,7 +31,11 @@ import {
     }
 
     onPageChanged(e: number){
+      this.onPageChange.emit(e);
+    }
 
+    onSubmit(){
+      
     }
   
     @HostListener('window:resize', ['$event'])

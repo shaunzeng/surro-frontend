@@ -11,7 +11,9 @@ import { Store } from '@ngrx/store';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { catchError, debounceTime, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { FetchBlogsPreview, SetupZipcode, SubmitSearch } from './data/actions';
+import { BlogListResponse } from '../blogs/data/models';
+import { FetchRcentComments, SetupZipcode, SubmitSearch, FetchTrendingBlogs } from './data/actions';
+import { selectRecentComments, selectTrendingBlogs } from './data/selectors';
 
 @Component({
   selector: 'app-home',
@@ -22,13 +24,16 @@ export class LandingContainer implements OnInit, OnDestroy {
 
   @ViewChild('searchForm') searchForm: NgForm;
 
-  topic:string = "IVF CLINICS";
+  topic = "IVF CLINICS";
   zipcode = '10281';
   keyword = '';
   suggestedZips$?: Observable<string>;
   suggestedPreview$?: Observable<any>;
   unsubscribe$: Subject<boolean> = new Subject();
   errorMsg?: string;
+
+  trendingBlogs$: Observable<BlogListResponse>;
+  recentComments$: Observable<any>
   
   constructor(
       public searchService:SearchService,
@@ -36,17 +41,6 @@ export class LandingContainer implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    
-    this.store
-      .select((state:RootState) => state.user.zipcode)
-      .pipe(
-        take(1),
-        tap(zipcode => {
-          this.zipcode = zipcode;
-          this.store.dispatch(SetupZipcode({ zipcode }));
-          this.store.dispatch(FetchBlogsPreview());
-        })
-      ).subscribe(console.log);
 
     this.suggestedZips$ = new Observable<string>((subscriber: Subscriber<string | undefined>) => {
         subscriber.next(this.zipcode);
@@ -64,6 +58,21 @@ export class LandingContainer implements OnInit, OnDestroy {
       debounceTime(300),
       switchMap(this.handlerPreviewResults.bind(this))
     )
+
+    this.trendingBlogs$ = this.store.select(selectTrendingBlogs);
+    this.recentComments$ = this.store.select(selectRecentComments);
+    this.recentComments$.subscribe(console.log);
+
+    this.store
+      .select((state:RootState) => state.user.zipcode)
+      .pipe(
+        take(1)
+      ).subscribe(zipcode => {
+        this.zipcode = zipcode;
+          this.store.dispatch(SetupZipcode({ zipcode }));
+          this.store.dispatch(FetchTrendingBlogs());
+          this.store.dispatch(FetchRcentComments())
+      });
   }
 
 

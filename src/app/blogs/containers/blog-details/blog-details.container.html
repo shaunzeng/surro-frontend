@@ -5,40 +5,76 @@
         <app-loader [isBusy]="isBusy$ | async"></app-loader>
         <div class="row content">
             <div class="col-12 col-md-12 col-xl-8 col-left">
-                <app-blogs-article [data]="(blog$ | async)" *ngIf="!!(blog$ | async)"></app-blogs-article>
+                <app-blog-article [data]="(blog$ | async)" *ngIf="!!(blog$ | async)"></app-blog-article>
                 
-                <app-blogs-comments [data]="(comments$ | async)"></app-blogs-comments>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">- Comments</h4>
+                        <form #commentForm="ngForm" (ngSubmit)="onSubmit()" class="mb-5" *ngIf="(isLoggedIn$ | async)">
+                            <div class="comment-contaiener" novalidate>
+                                <div class="input-group">
+                                    <input 
+                                    type="text" 
+                                    class="form-control"  
+                                    placeholder="Say Something"
+                                    required
+                                    ngModel
+                                    #comment="ngModel"
+                                    name="comment">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary radius-border" type="submit">
+                                            <span class="d-inline-block">Submit</span> 
+                                            <i class="simple-icon-arrow-right ml-2"></i>
+                                        </button>
+                                    </div>
+                                    <div *ngIf="!comment.valid && commentForm.submitted" class="invalid-tooltip">Missing words</div>
+                                </div>
+                            </div>
+                       </form>
+
+                       <app-blog-comments 
+                       [data]="(comments$ | async)?.data"
+                       [currentUserId]="currentUserId$ | async"
+                       (onRemoveComment)="onRemoveComment($event)"
+                       (onLikeComment)="onLikeComment($event)"
+                       (onUnlikeComment)="onUnlikeComment($event)"
+                       ></app-blog-comments>
+                       
+                       <div class="col-12">
+                            <pagination 
+                            [totalItems]="(comments$ | async)?.totalCount || 0" 
+                            [itemsPerPage]="6" 
+                            [rotate]="true" 
+                            [maxSize]="5"
+                            [(ngModel)]="currentCommentPage" 
+                            (pageChanged)="onCommentPageChange($event)" 
+                            class="justify-content-center"
+                            [customNextTemplate]="nextTemplate" 
+                            [customPreviousTemplate]="prevTemplate">
+                            </pagination>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-md-12 col-xl-4 col-right">
+                <app-blog-author [author]="(blog$ | async)?.author"></app-blog-author>
                 <div class="card mb-3">
-                    <div class="position-relative">
-                        <img class="card-img-top" src="/assets/img/cards/thumb-1.jpg" alt="Card image cap">
-                      </div>
-                      <div class="card-body">
-                            <h6>About the Author</h6>
-                          <p class="list-item-heading mb-4">I like this place</p>
-                  
-                        <footer>
-                          <p class="text-muted text-small mb-0 font-weight-light">09.04.2020</p>
-                        </footer>
+                    <div class="card-body">
+                      <h5 class="card-title">Tags</h5>
+                        <span class="badge badge-pill badge-primary mr-1" *ngFor="let t of ((blog$ | async)?.tags || [])">{{t}}</span>
                     </div>
                 </div>
-                <div class="card card-blank">
-                      <div class="card-body">
-                        <h5 class="card-title">Recent Posts</h5>
-                        <ul>
-                            <li>
-                                post 1
-                            </li>
-                        </ul>
-                        <footer>
-                          <p class="text-muted text-small mb-0 font-weight-light">09.04.2020</p>
-                        </footer>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 
     <app-footer footer></app-footer>
 </app-header-footer-layout>
+
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+<i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+<i class='simple-icon-arrow-left'></i>
+</ng-template>

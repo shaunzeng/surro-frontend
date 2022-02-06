@@ -1,16 +1,45 @@
-<div class="card mb-3">
-    <div class="card-body">
-       <h4 class="card-title mb-3">- Comments</h4>
-       <form action="" class="mb-5">
-           <div class="form-row">
-                <div class="form-group col-8 ">
-                    <textarea type="text" placeholder="Say something ?" class="form-control" id="commentInput" name="commentInput"></textarea>
+<div *ngIf="data; else noCommentTemplate">  
+    <div class="d-flex flex-row mb-5 justify-content-between" *ngFor="let comment of data"> 
+        <a href="javascript:;">
+            <img [src]="'https://vien-angular.coloredstrategies.com/assets/img/profiles/l-4.jpg'" [alt]="comment.author.name"
+            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+        </a>
+        <div class="pl-3 flex-grow-1">
+            <a href="javascript:;">
+                <p class="font-weight-medium mb-0">{{comment.author.name}}</p>
+                <p class="text-muted mb-0 text-small mb-2">{{comment.publishedAt | date}}</p>
+            </a>
+            <p class="mt-4 mb-4">
+                {{comment.content}}
+            </p>
+            <div class="mb-3">
+                <div *ngIf="!comment.likedByYou">
+                    <a href="javascript:;" (click)="onLike(comment.id)" class="d-inline-block mr-3">
+                        <span class="badge badge-pill badge-light">
+                            <i class="glyph-icon simple-icon-like"></i> {{comment.likes}} likes
+                        </span>
+                    </a>
                 </div>
-                <div class="form-group col-4">
-                   <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                <div *ngIf="comment.likedByYou">
+                    <a href="javascript:;" (click)="onUnlike(comment.id)" class="d-inline-block mr-3">
+                        <span class="badge badge-pill badge-info">
+                            <i class="glyph-icon simple-icon-heart"></i> {{comment.likes}} likes
+                        </span>
+                    </a>
                 </div>
-           </div>
-       </form>
-       <div>Comments</div>
+                
+            </div>
+        </div>
+        <div class="pl-3">
+            <span dropdown container="#anchorDropdownContainer" *ngIf="comment.author.id === currentUserId">
+                <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"><i class="glyph-icon simple-icon-options"></i></a>
+                <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+                    <li><a class="dropdown-item" href="javascript:;" (click)="onDeleteComment(comment.id)"><i class="glyph-icon simple-icon-trash"></i> Remove Comment</a></li>
+                </ul>
+            </span>
+        </div>
     </div>
-  </div>
+</div>
+<ng-template #noCommentTemplate >
+<p class="text-center">No comments yet</p>
+</ng-template>
