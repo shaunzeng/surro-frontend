@@ -42,8 +42,9 @@ const userReducer = (state: User | undefined, action : Action) => cReduer(state,
 
 export const reducers : ActionReducerMap<RootState> = {
     user: userReducer,
-    landing:null,
-    search:null
+    landing: null,
+    search: null,
+    blogs: null
 }
 
 export const metaReducers: MetaReducer<RootState>[] = []

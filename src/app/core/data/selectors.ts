@@ -12,3 +12,8 @@ export const selectName = createSelector(
     selectFeature,
     (state: User) => state.firstName +' ' + state.lastName
 )
+
+export const selectUserId = createSelector(
+  selectFeature,
+  (state: User) => state.id
+)

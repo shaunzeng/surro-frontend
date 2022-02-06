@@ -1,0 +1,46 @@
+<div class="card flex-row mb-5" *ngFor="let item of data">
+    <div class="w-20 position-relative">
+        <a [routerLink]="'./' + item.id">
+            <img class="card-img-left" [src]="'/assets/img/details/small-3.jpg'" alt="Card image cap">
+        </a>
+    </div>
+    <div class="w-60 d-flex align-items-center">
+        <div class="card-body">
+            <p class="mb-2"><a [routerLink]="'./' + item.author.id">{{item.author.name}}</a> wrote</p>
+            <h3 class="mb-2 " ellipsis><b><a [routerLink]="'./' + item.id">{{item.title}}</a></b></h3>
+            <p class="listing-desc text-muted" ellipsis><i>{{item.publishedAt | date}}</i>- {{item.summary}}</p>
+            <div class="mb-5">
+                <div class="glyph-icon iconsminds-tag d-inline-block mr-2"></div>
+                <span class="badge-pill badge-outline-info mr-2" *ngFor="let t of item.tags">{{t}}</span>
+            </div>
+            <a [routerLink]="'./' + item.id">Read more...</a>
+        </div>
+    </div>
+    <div class="w-20 d-flex align-items-center">
+        <div class="card-body">
+            <p><i class="glyph-icon iconsminds-pen"></i> {{item.commentCount}} comments</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <pagination 
+        [totalItems]="totalCount" 
+        [itemsPerPage]="15" 
+        [rotate]="true" 
+        [maxSize]="5"
+        [(ngModel)]="currentPage" 
+        (pageChanged)="onPageChanged($event)" 
+        class="justify-content-center"
+        [customNextTemplate]="nextTemplate" 
+        [customPreviousTemplate]="prevTemplate">
+        </pagination>
+    </div>
+</div>
+
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+<i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+<i class='simple-icon-arrow-left'></i>
+</ng-template>

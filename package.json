@@ -56,6 +56,7 @@
     "sortablejs": "^1.10.2",
     "tslib": "^2.0.0",
     "video.js": "^7.8.3",
+    "waterfall.js": "^1.0.2",
     "yamapng": "^2.0.4",
     "zone.js": "~0.10.3"
   },

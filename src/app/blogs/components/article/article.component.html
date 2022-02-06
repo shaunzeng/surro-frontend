@@ -1,0 +1,10 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h2 class="mb-2"><b>{{data.title}}</b></h2>
+    <h6 class="text-muted mb-2" *ngIf="data.subtitle" >{{data.subtitle}}</h6>
+    <p class="text-muted mb-5">By <a [routerLink]="''" >{{data.author.name}}</a>, on {{data.publishedAt | date }}</p>
+    <p class="mb-5" *ngIf="data.summary" ><b><i>Summary</i></b> - {{data.summary}}</p>
+    <hr class="mb-5">
+    <div [innerHtml]="data.content"></div>
+  </div>
+</div>

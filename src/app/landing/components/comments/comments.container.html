@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-12">
+        <h1 class="text-center d-block mb-3">Latest Activities</h1>
+    </div>
+</div>
+<div style="height:100px"></div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="my-waterfall" #myWaterfall>
+            <div class="item" *ngFor="let item of data">
+                <div class="card card-blank">
+                  <img src="/assets/img/cards/thumb-1.jpg" alt="Card image cap" class="card-img-top">
+                      <div class="card-body">
+                        
+                        <a routerLink="./">
+                          <p class="list-item-heading mb-4">{{item.content}}</p>
+                        </a>
+                        <footer>
+                          <p class="text-muted text-small mb-0 font-weight-light">09.04.2020</p>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

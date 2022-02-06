@@ -31,12 +31,16 @@ export class ListHeaderComponent {
 
 
   onSelectDisplayMode(mode: string): void {
+    this.displayMode = mode;
     this.changeDisplayMode.emit(mode);
   }
+  
   selectAll(event): void  {
     this.selectAllChange.emit(event);
   }
+
   onChangeItemsPerPage(item): void  {
+    this.itemsPerPage = item;
     this.itemsPerPageChange.emit(item);
   }
 

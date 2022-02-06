@@ -15,6 +15,11 @@ import { PRESET_KEYWORDS } from './data/constants';
 import { FecthSearchResults } from './data/actions';
 import { selectSearchResults, isBusySelector } from './data/selectors';
 import { FetchRequest } from './data/models';
+
+interface PageChangeEvent {
+  itemsPerPage: number,
+  page: number
+}
   
   @Component({
     selector: 'app-search-results',
@@ -26,8 +31,9 @@ import { FetchRequest } from './data/models';
     keyword: string;
     zipcode: string;
     filter: string;
-    currentPage = 0;
+    currentPage = 1;
     perPage = 10;
+    displayMode = 'list';
 
     suggestedZips$?: Observable<string>;
     unsubscribe$: Subject<boolean> = new Subject();
@@ -56,11 +62,12 @@ import { FetchRequest } from './data/models';
         this.isBusy$ = this.store.select(isBusySelector);
 
         this.initZipcodeSearch();
+
         this.loadSearchResults({
           keyword: this.keyword,
           bizType: this.filter,
           zipcode: this.zipcode,
-          start: this.currentPage.toString(),
+          page: this.currentPage.toString(),
           perPage: this.perPage.toString()
         });
     }
@@ -75,7 +82,7 @@ import { FetchRequest } from './data/models';
           keyword: this.keyword,
           bizType: this.filter,
           zipcode: this.zipcode,
-          start: this.perPage.toString(),
+          page: this.currentPage.toString(),
           perPage: this.perPage.toString()
         });
       }
@@ -90,15 +97,18 @@ import { FetchRequest } from './data/models';
       
     }
 
-    onPerPageChange(num: number) {
-      this.perPage = num;
-      this.loadSearchResults({
-        keyword: this.keyword,
-        zipcode: this.zipcode,
-        perPage: this.perPage.toString(),
-        bizType: this.filter,
-        start: this.currentPage.toString()
-      })
+    onPerPageChanged(e: number) {
+      this.perPage = e;
+      this.onSubmit();
+    }
+
+    onPageChanged(e: PageChangeEvent){
+      this.currentPage = e.page;
+      this.onSubmit();
+    }
+
+    onChangeDisplayMode(mode: string){
+      this.displayMode = mode;
     }
 
     private initZipcodeSearch(){
