@@ -2,19 +2,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { environment as env } from '@env';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { PreviewRequest, ContentRequest, ApiModels } from './api.models';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService extends ApiService {
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    withCredentials: true, 
-  }; 
-
-  constructor(private http: HttpClient) {
-    super();
+  constructor(public http: HttpClient) {
+    super(http);
   }
 
   searchZip(input: string) {
@@ -28,9 +23,9 @@ export class SearchService extends ApiService {
     return this.http
     .get(`${env.apiUrl}/search/content`, {
       ...this.httpOptions,
-      params: this.getParams(request)
+      params: this.getHttpParams(request)
     })
-    .pipe(take(1), tap(result => console.log(result)))
+    .pipe(take(1))
     .toPromise();
   }
 
@@ -38,23 +33,12 @@ export class SearchService extends ApiService {
     return this.http
     .get(`${env.apiUrl}/search/preview`, {
       ...this.httpOptions,
-      params: this.getParams(request)
+      params: this.getHttpParams(request)
     })
     .pipe(take(1))
     .toPromise();
   }
 
-  private getParams(request: ApiModels ): HttpParams {
-
-    let httpParams = new HttpParams();
-
-    Object.keys(request).forEach( k => {
-      if (!!request[k]) {
-        httpParams = httpParams.set(k, request[k]);
-      }
-    });
-
-    return httpParams;
-  }
+  
 
 }

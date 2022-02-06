@@ -6,15 +6,15 @@ interface Row {
 export interface FetchRequest {
     keyword?: string,
     zipcode: string,
-    start?: string,
+    page?: string,
     bizType?: string,
-    perPage: string
+    perPage?: string
 }
 
 export interface FetchResponse {
     perPage: string,
     totalCount: number,
-    start: string,
+    page: string,
     data: any[],
     _id: string | number
 }

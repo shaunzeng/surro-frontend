@@ -26,13 +26,8 @@ export interface IPasswordReset {
 @Injectable({ providedIn: 'root' })
 export class AuthService extends ApiService {
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    withCredentials: true, 
-  }; 
-
-  constructor(private http: HttpClient) {
-    super()
+  constructor(public http: HttpClient) {
+    super(http)
   }
 
   signIn(credentials: ISignInCredentials) {

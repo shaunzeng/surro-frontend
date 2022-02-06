@@ -23,7 +23,7 @@ export class SearchEffects {
             from(this.searchService.searchContent({
                 query: action.keyword, 
                 zipcode: action.zipcode, 
-                page: action.start,
+                page: action.page,
                 type: action.bizType,
                 perPage: action.perPage
             }))

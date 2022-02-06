@@ -144,7 +144,9 @@
                 "inject": false
               }
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/waterfall.js/waterfall.min.js"
+            ]
           },
           "configurations": {
             "production": {

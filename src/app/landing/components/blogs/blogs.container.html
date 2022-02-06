@@ -1,92 +1,135 @@
-<div class="row mx-lg-n5">
-    <div class="col-md-12 text-center py-5 px-lg-5" >
-        <div class="highlight"></div>
-        <div><h5><b>Eveerything about Surrogacy</b></h5></div>
+<div class="row">
+    <div class="col-12">
+        <h1 class="text-center d-block">Blogs</h1>
     </div>
 </div>
-
-<div class="row mx-lg-n5">
-    <div class="col-md-8">
-        <div class="row mx-lg-n5">
-            <div class="col-md-6 py-3 px-lg-5">
-                <div class="card">
-                    <div class="card-body">
-                        card
-                    </div>
-                </div>
+<div style="height:100px"></div>
+<div class="row">
+    <div class="col-lg-12 col-md-6 col-xl-4 col-sm-12">
+        <div class="row">
+            <div class="col-lg-4 col-xl-12 mb-4">
+                <app-gradient-card>
+                    <a [routerLink]="'/blogs/' + data[0]?.id">
+                        <span class="badge badge-pill badge-theme-3 align-self-start mb-3">Trending</span>
+                        <h3 class="text-white">{{data[0]?.title}}</h3>
+                        <p class="text-white text-sm">{{data[0]?.subtitle}}</p>
+                    </a>
+                </app-gradient-card>
             </div>
-            <div class="col-md-6 py-3 px-lg-5">
-                <div class="card">
-                    <div class="card-body">
-                        card
-                    </div>
-                </div>
+            <div class="col-lg-4 col-xl-12 mb-4">
+                <app-gradient-card>
+                    <a [routerLink]="'/blogs/' + data[1]?.id">
+                        <span class="badge badge-pill badge-theme-3 align-self-start mb-3">New</span>
+                        <h3 class="text-white">{{data[1]?.title}}</h3>
+                        <p class="text-white text-sm">{{data[1]?.subtitle}}</p>
+                    </a>
+                </app-gradient-card>
             </div>
-        </div>
-        <div class="row mx-lg-n5">
-            <div class="col-md-12 py-3 px-lg-5">
-                <div class="card">
-                    <div class="card-body">
-                        card
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mx-lg-n5">
-            <div class="col-md-6 py-3 px-lg-5">
-                <div class="row">
-                    <div class="col-md-12 py-3 px-lg-5">
-                        <div class="card">
-                            <div class="card-body">
-                                card
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 py-3 px-lg-5">
-                <div class="row">
-                    <div class="col-md-12 py-3 px-lg-5">
-                        <div class="card">
-                            <div class="card-body">
-                                card
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                card
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-4 col-xl-12 mb-4">
+                <app-gradient-card>
+                    <a [routerLink]="'/blogs/' + data[2]?.id">
+                        <span class="badge badge-pill badge-theme-3 align-self-start mb-3">New</span>
+                        <h3 class="text-white">{{data[2]?.title}}</h3>
+                        <p class="text-white text-sm">{{data[2]?.subtitle}}</p>
+                    </a>
+                </app-gradient-card>
             </div>
         </div>
-
     </div>
-    <div class="col-md-4">
-        <div class="row mx-lg-n5">
-            <div class="col-md-12 py-3 px-lg-5">
-                <div class="card">
+    <div class="col-lg-6 col-md-6 col-xl-4 col-sm-12 mb-4">
+        <div class="card" style="height:537px">
+            <div class="position-relative">
+              <img class="card-img-top" src="/assets/img/cards/thumb-1.jpg" alt="Card image cap">
+              <span class="badge badge-pill badge-theme-1 position-absolute badge-top-left">New</span>
+              <span class="badge badge-pill badge-secondary position-absolute badge-top-left-2">Trending</span>
+            </div>
+            <div class="card-body">
+              <a [routerLink]="'/blogs/' + data[3]?.id">
+                <h2 class="mb-2">{{data[3]?.title}}</h2>
+                <p class="text-muted mb-4">{{data[3]?.subtitle}}</p>
+              </a>
+              <footer>
+                <p class="text-muted text-small mb-0 font-weight-light">{{data[3]?.publishedAt | date}}</p>
+              </footer>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xl-4 col-sm-12 mb-4">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div [class]="'card'">
+                    <div class="card-body" >
+                        <a [routerLink]="'/blogs/' + data[4]?.id">
+                            <h3 >{{data[4]?.title}}</h3>
+                            <p class="text-muted text-xs">{{data[4]?.subtitle}}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <div [class]="'card '">
                     <div class="card-body">
-                        card
+                        <a [routerLink]="'/blogs/' + data[5]?.id">
+                            <h3>{{data[5]?.title}}</h3>
+                            <p class="text-muted text-xs">{{data[5]?.subtitle}}</p>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mx-lg-n5">
-            <div class="col-md-12 py-3 px-lg-5">
-                calendar
+
+        <div class="card card-blank">
+            <div class="card-body">
+                <h3 class="mb-3">Events</h3>
+                <div class="d-flex flex-row mb-3">
+                    <a routerLink="#" class="d-block position-relative">
+                        <img src="/assets/img/cards/thumb-1.jpg" [alt]="'alt'" class="list-thumbnail border-0" />
+                        <span [class]="'position-absolute badge-top-right badge badge-pill badge-secondary'">Wokshop</span>
+                    </a>
+                    <div class="pl-3 pt-2 pr-2 pb-2">
+                        <a routerLink="#">
+                            <p class="list-item-heading">Get to know each other</p>
+                            <div class="pr-4">
+                                <p class="text-muted mb-1 text-small">
+                                    surrogacy 101
+                                </p>
+                            </div>
+                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                18:00:00 09/09/2022
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-row mb-5">
+                    <a routerLink="#" class="d-block position-relative">
+                        <img src="/assets/img/cards/thumb-1.jpg" [alt]="'alt'" class="list-thumbnail border-0" />
+                        <span [class]="'position-absolute badge-top-right badge badge-pill badge-secondary'">Wokshop</span>
+                    </a>
+                    <div class="pl-3 pt-2 pr-2 pb-2">
+                        <a routerLink="#">
+                            <p class="list-item-heading">Find your match</p>
+                            <div class="pr-4">
+                                <p class="text-muted mb-1 text-small">
+                                    surrogacy 101
+                                </p>
+                            </div>
+                            <div class="text-primary text-small font-weight-medium d-none d-sm-block">
+                                18:00:00 09/09/2022
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-row" >
+                    <div class="col text-center ">
+                        <button type="button" class="btn btn-outline-primary">View More</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="row mx-lg-n5" >
     <div class="col text-center ">
-        <button type="button" class="btn btn-outline-primary">Read More</button>
+        <a [routerLink]="'/blogs'"><button type="button" class="btn btn-outline-primary">Read More</button></a>
     </div>
 </div>
