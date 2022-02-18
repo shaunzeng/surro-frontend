@@ -1,37 +1,56 @@
 <app-header-footer-layout>
     <app-topnav header></app-topnav>
-
-    
     <div body>
         <app-loader [isBusy]="isBusy$ | async"></app-loader>
-        <div class="row mb-5 mt-3">
-            <div class="col-md-12">
+        <div class="row mb-3 mt-3">
+            <div class="col-12">
                 <form #searchForm ="ngForm" novalidate (ngSubmit)="onSubmit()">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <label style="width: 100%;" class="form-group has-float-label mr-3 " for="keyword">
-                                <input type="text" style="width: 100%;" class="form-control open-top" id="keyword" name="keyword" placeholder="Keyword" required [(ngModel)]="keyword">
-                            </label>
+                        <div class="col-xl-3 col-lg-4 col-md-4 ">
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label style="width: 100%;" class="form-group has-float-label mr-3 " for="keyword">
+                                        <input 
+                                            type="text" 
+                                            style="width: 100%;" 
+                                            class="form-control open-top" 
+                                            id="keyword" name="keyword" 
+                                            placeholder="Keyword" 
+                                            required 
+                                            [(ngModel)]="filter.keyword">
+                                    </label>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
                                     <label class="form-group has-float-label mr-2">
                                         <input 
                                             type="text" 
-                                            class="form-control open-top" 
+                                            class="form-control open-top w-100" 
                                             id="zipcode" 
+                                            ngModel
+                                            zipcode
+                                            #zipcode="ngModel"
                                             name="zipcode" 
                                             placeholder="Zipcode" 
-                                            [(ngModel)]="zipcode"
+                                            maxlength="5"
+                                            [(ngModel)]="filter.zipcode"
                                             [typeahead]="suggestedZips$"
                                             [typeaheadAsync]="true"
                                             [typeaheadMinLength]="0"
                                             required>
                                     </label>
+                                    <div *ngIf="!zipcode.valid" class="invalid-tooltip">Zipcode is required</div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-2 col-sm-6">
                                     <button type="submit" class="btn btn-sm btn-outline-primary">Find <i class="simple-icon-magnifier"></i></button>
+                                </div>
+                            </div>
+                            <div class="row d-none d-sm-block d-md-none">
+                                <div class="col-12">
+                                    <button class="btn btn-sm btn-outline-info" (click)="openConfigFilter(filterModal)">
+                                        Set filter <i class="simple-icon-equalizer"></i> 
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -41,25 +60,22 @@
         </div> 
     
         <div class="row mt-5 mb-5">
-            <div class="col-md-3 d-none d-md-block">
-                <ul class="list-group list-search-btns list-hover">
-                    <li class="list-group-item" 
-                        *ngFor="let f of filters" 
-                        [ngClass]="{'active': filter === f.value || (!f.value && !filter)}"
-                        (click)="onFilterBy(f.value)">
-                        {{f.label}}
-                    </li>
-                </ul>
+            <div class="col-xl-3 col-md-4 d-none d-md-block">
+                <app-list-side-menu 
+                    [filter]="filter" 
+                    (filterchanged)="onFilterchange()"
+                    (resetFilter)="onResetFilter()">
+                </app-list-side-menu>
             </div>
-            <div class="col-md-6 col-sm-12">
-
+            <div class="col-xl-6 col-md-8 col-sm-12">
+                
                 <app-list-header 
-                (changeDisplayMode)="onChangeDisplayMode($event)"
-                (itemsPerPageChange)="onPerPageChanged($event)"
-                ></app-list-header>
+                    (changeDisplayMode)="onChangeDisplayMode($event)"
+                    (itemsPerPageChange)="onPerPageChanged($event)">
+                </app-list-header>
         
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div *ngIf="!(data$ | async) else listView ">
                             No Results
                         </div>
@@ -69,10 +85,10 @@
                     <div class="col-12">
                         <pagination 
                         [totalItems]="!(data$ | async) ? 0 : (data$ | async).totalCount" 
-                        [itemsPerPage]="perPage" 
-                        [rotate]="true" 
+                        [itemsPerPage]="filter.perPage" 
+                        [rotate]="false" 
                         [maxSize]="5"
-                        [(ngModel)]="currentPage" 
+                        [(ngModel)]="filter.page" 
                         (pageChanged)="onPageChanged($event)" 
                         class="justify-content-center"
                         [customNextTemplate]="nextTemplate" 
@@ -81,60 +97,73 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 d-none d-sm-none d-md-block">
+            <div class="col-xl-3 d-none d-xl-block">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div style="width: 100%; height:400px; background-color: lightgray;"></div>
+                    <div class="col-12">
+                        <div style="width: 100%; height:750px; background-color: lightgray;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <app-footer footer></app-footer>
 </app-header-footer-layout>
-
 
 <ng-template #listView >
     <h3 class="ml-3 mb-5">{{(data$ | async).totalCount}} results</h3>
     <div class="col-12 list" *ngIf="displayMode ==='list'">
-        <div [ngClass]="{'card d-flex flex-row mb-3': true, 'active': false}" *ngFor="let p of (data$ | async).data; let i=index"
-          [contextMenu]="basicMenu" [contextMenuSubject]="p">
-          <div class="d-flex flex-grow-1 min-width-zero">
-            <div
-              class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-              <a class="list-item-heading mb-0 truncate w-40 w-xs-100" href="javascript:;">
-                {{p.name}}
-              </a>
-              <p class="mb-0 text-muted text-small w-15 w-xs-100">{{p.address}}</p>
-              <p class="mb-0 text-muted text-small w-15 w-xs-100">placeholder</p>
-              <div class="w-15 w-xs-100">
-                <span [class]="'badge badge-pill badge-'+ p.statusColor">placeholder</span>
-              </div>
+        <div class="card flex-row mb-5" *ngFor="let p of (data$ | async)?.data; let i=index">
+            <div class="w-80 d-flex align-items-center">
+                <div class="card-body">
+                    <h4 class="mb-2 font-weight-bold">
+                        <a href="javascript:;" [routerLink]="['../profile/' + p.type +'/1']">
+                            <span class="text-muted text-small d-inline-block mr-2">[{{p.type}}]</span> 
+                            <span class="d-inline-block">{{p.name}}</span>
+                        </a>
+                    </h4>
+                    <p class="mb-5 text-muted text-small">{{p.address}}, {{p.city}} {{p.state}} {{p.zipcode}}</p>
+                    <br>
+                    <rating [(ngModel)]="rate" 
+                            [ngModelOptions]="{standalone:true}"
+                            [max]="5" 
+                            [readonly]="true" 
+                            [titles]="['1','2','3','4','5']"
+                            [customTemplate]="t"></rating> 42 reviews   
+                </div>
             </div>
-          </div>
+            <div class="w-20 d-flex align-items-center">
+                <div class="card-body">
+                    <p class="text-small">{{p.distance | number: "0.1-2"}} mi</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="col-12 list" *ngIf="displayMode ==='thumb'">
-        <div [ngClass]="{'card d-flex flex-row mb-3': true, 'active': false }" *ngFor="let p of (data$ | async).data; let i=index"
-          [contextMenu]="basicMenu" [contextMenuSubject]="p">
-          <a class="d-flex" href="javascript:;">
-            <img [src]="'https://vien-angular.coloredstrategies.com/assets/img/products/bebinca-thumb.jpg'" [alt]="'some photo'" class="list-thumbnail responsive border-0 card-img-left" />
-          </a>
-          <div class="pl-2 d-flex flex-grow-1 min-width-zero">
-            <div
-              class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-              <a href="javascript:;" class="w-40 w-sm-100">
-                <p class="list-item-heading mb-0 truncate">{{p.name}}</p>
-              </a>
-              <p class="mb-0 text-muted text-small w-15 w-sm-100">{{p.address}}</p>
-              <p class="mb-0 text-muted text-small w-15 w-sm-100">{{p.type}}</p>
-              <div class="w-15 w-sm-100">
-                <span [class]="'badge badge-pill badge-green'">placeholder</span>
-              </div>
+        <div class="card flex-row mb-5" *ngFor="let p of (data$ | async)?.data; let i=index">
+            <div class="w-20 position-relative">
+                <a href="javascript:;" [routerLink]="['../profile/' + p.type +'/1']">
+                    <img class="card-img-left" [src]="'/assets/img/details/small-3.jpg'" alt="Card image cap">
+                </a>
             </div>
-          </div>
+            <div class="w-60 d-flex align-items-center">
+                <div class="card-body">
+                    <h4 class="mb-2 font-weight-bold">
+                        <a href="javascript:;" [routerLink]="['../profile/' + p.type +'/1']">
+                            <span class="text-muted text-small d-inline-block mr-2">[{{p.type}}]</span> 
+                            <span class="d-inline-block">{{p.name}}</span>
+                        </a>
+                    </h4>
+                    <p class="mb-5 text-muted text-small">{{p.address}}, {{p.city}} {{p.state}} {{p.zipcode}}</p>
+                    <br>
+                    <rating [(ngModel)]="rate" [ngModelOptions]="{standalone:true}" [max]="5" [readonly]="true" [titles]="['1','2','3','4','5']" [customTemplate]="t"></rating> 42 reviews
+                </div>
+            </div>
+            <div class="w-20 d-flex align-items-center">
+                <div class="card-body">
+                    <p class="text-small">{{p.distance | number: "0.1-2"}} mi</p>
+                </div>
+            </div>
         </div>
       </div>
 </ng-template>
@@ -144,5 +173,26 @@
 </ng-template>
 <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
 <i class='simple-icon-arrow-left'></i>
+</ng-template>
+<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}
+</ng-template>
+
+<ng-template #filterModal>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Set Filter</h4>
+        <button type="button" class="btn-cloe close pull-right" arial-label="Close" (click)="modalRef?.hide()">
+            <span arial-hiddent="true" class="visually-hiddent">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-list-side-menu 
+                    [filter]="filter" 
+                    (filterchanged)="onFilterchange()"
+                    (resetFilter)="onResetFilter()">
+                </app-list-side-menu>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modalRef?.hide()">See results</button>
+    </div>
 </ng-template>
 

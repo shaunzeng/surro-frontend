@@ -13,12 +13,12 @@ import { BlogDetailsResponse } from '../../data/models';
 import { blogCommentsSelector, blogDetailsSelector, isBusySelector } from '../../data/selectors';
 import { NgForm } from '@angular/forms';
   
-  @Component({
-    selector: 'app-blogs-details',
-    templateUrl: './blog-details.container.html',
-    styleUrls:['./blog-details.container.scss']
-  })
-  export class BlogDetailsContainer implements OnInit {
+@Component({
+  selector: 'app-blogs-details',
+  templateUrl: './blog-details.container.html',
+  styleUrls:['./blog-details.container.scss']
+})
+export class BlogDetailsContainer implements OnInit {
 
     blog$: Observable<BlogDetailsResponse>;
     comments$: Observable<any>;

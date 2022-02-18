@@ -13,7 +13,7 @@ import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { catchError, debounceTime, filter, map, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { BlogListResponse } from '../blogs/data/models';
 import { FetchRcentComments, SetupZipcode, SubmitSearch, FetchTrendingBlogs } from './data/actions';
-import { selectRecentComments, selectTrendingBlogs } from './data/selectors';
+import { isBusy, selectRecentComments, selectTrendingBlogs } from './data/selectors';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +33,8 @@ export class LandingContainer implements OnInit, OnDestroy {
   errorMsg?: string;
 
   trendingBlogs$: Observable<BlogListResponse>;
-  recentComments$: Observable<any>
+  recentComments$: Observable<any>;
+  isBusy$: Observable<boolean>;
   
   constructor(
       public searchService:SearchService,
@@ -61,7 +62,7 @@ export class LandingContainer implements OnInit, OnDestroy {
 
     this.trendingBlogs$ = this.store.select(selectTrendingBlogs);
     this.recentComments$ = this.store.select(selectRecentComments);
-    this.recentComments$.subscribe(console.log);
+    this.isBusy$ = this.store.select(isBusy);
 
     this.store
       .select((state:RootState) => state.user.zipcode)

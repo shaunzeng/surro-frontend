@@ -7,10 +7,11 @@ import { AuthService } from './services/auth.service';
 import { LangService , Language} from './services/lang.service';
 import { SearchService } from './services/search.service';
 import { BlogsService } from './services/blogs.service';
-import { User, RootState, LandingState, SearchState, BlogState} from './data/models';
+import { User, RootState, LandingState, SearchState, BlogState, Option, ProfileState} from './data/models';
 import { NavigationService } from './services/navigation.service';
 import { metaReducers } from './helpers/store.helper';
 import { selectIsLoggedIn, selectName, selectUserId} from './data/selectors';
+
 export {
     CoreModule,
     GlobalErrorHandler,
@@ -28,6 +29,8 @@ export {
     LandingState,
     SearchState,
     BlogState,
+    ProfileState,
+    Option,
     metaReducers,
     selectIsLoggedIn,
     selectName,

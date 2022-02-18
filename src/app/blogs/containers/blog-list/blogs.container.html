@@ -2,7 +2,7 @@
     <app-topnav header></app-topnav>
 
     <div body>
-        <div class="content pt-3">
+        <div class="center-content-70 pt-3">
             <app-loader [isBusy]="isBusy$ | async"></app-loader>
             <p class="text-muted">{{(data$ | async)?.totalCount || 0 }} articles</p>
             <h1 class="mb-3">Articles</h1>

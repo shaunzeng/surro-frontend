@@ -6,7 +6,7 @@ export const FETCH_SEARCH_RESULTS_SUCCESS = '[Search] Fetch Search Results Succe
 
 export const FecthSearchResults = createAction(
   FETCH_SEARCH_RESULTS,
-  props<FetchRequest>()
+  props<{request: FetchRequest}>()
 );
 
 export const FecthSearchResultsSuccess = createAction(

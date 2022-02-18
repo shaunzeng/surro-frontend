@@ -21,12 +21,10 @@ export class SearchService extends ApiService {
 
   searchContent(request: ContentRequest) {
     return this.http
-    .get(`${env.apiUrl}/search/content`, {
-      ...this.httpOptions,
-      params: this.getHttpParams(request)
-    })
+    .post(`${env.apiUrl}/search/content`, 
+    this.sanitizeRequest(request),
+    { ...this.httpOptions })
     .pipe(take(1))
-    .toPromise();
   }
 
   searchPreview(request: PreviewRequest) {

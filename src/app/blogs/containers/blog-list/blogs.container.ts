@@ -48,7 +48,6 @@ import * as Selectors from '../../data/selectors';
       this.store.dispatch(fetchBlogList({}));
       this.data$ = this.store.select(Selectors.blogListSelector);
       this.isBusy$ = this.store.select(Selectors.isBusySelector);
-      this.data$.subscribe(console.log);
     }
 
     onPageChange(e: number){
@@ -61,18 +60,4 @@ import * as Selectors from '../../data/selectors';
       this.store.dispatch(fetchBlogList({filter: this.filter, page: this.currentPage}));
     }
   
-    @HostListener('window:resize', ['$event'])
-    onResize(event): void {
-  
-    }
-  
-    @HostListener('window:click', ['$event'])
-    onClick(event): void {
-  
-    }
-  
-    @HostListener('window:scroll', ['$event'])
-    onScroll(event): void {
-  
-    }
   }

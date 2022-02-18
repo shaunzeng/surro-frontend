@@ -1,0 +1,290 @@
+<div class="row center-content-80">
+    <div class="col-12 col-md-12 col-xl-8 col-left">
+        <div class="card mb-3">
+            <div class="card-body">
+              <div class="box-padding">
+                <p class="text-muted mb-2">[CLINIC]</p>
+                <h1 class="font-weight-bold mb-2">Reproductive Medicine Associates of Connecticut </h1>
+                <div class="mb-4">
+                  <rating [(ngModel)]="rate" 
+                            [ngModelOptions]="{standalone:true}"
+                            [max]="5" 
+                            [readonly]="true" 
+                            [titles]="['1','2','3','4','5']"
+                            [customTemplate]="t"></rating> 42 reviews  
+                </div>
+                
+                <p class="text-muted text-small mb-2">761 Main Ave #200, Norwalk, CT 06851</p>
+                <p class="text-small mb-5">(373) 858 5525</p>
+                <div class="d-flex">
+                  <div class="p-2 flex-fill">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_few"
+                        checked disabled>
+                        <label class="custom-control-label" for="review_few">IVF</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_medium"
+                        checked disabled>
+                        <label class="custom-control-label" for="review_medium">Embryo/Egg Cryopreservation</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_massive"
+                        checked disabled>
+                        <label class="custom-control-label" for="review_massive">Egg donation</label>
+                    </div>
+                  </div>
+                  <div class="p-2 flex-fill">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_few"
+                        checked disabled>
+                        <label class="custom-control-label" for="review_few">English</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_medium"
+                        checked disabled>
+                        <label class="custom-control-label" for="review_medium">Spanish</label>
+                    </div>
+                  </div>
+                  <div class="p-2 flex-fill">
+                    Price range: $10,000 - $20,000
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="card mb-3">
+          <tabset class="card-tabs">
+            <tab heading="Overview" class="card-body">
+              <ng-container *ngTemplateOutlet="overviewTmp"></ng-container>
+            </tab>
+        
+            <tab heading="Statistics" class="card-body">
+              <ng-container *ngTemplateOutlet="statsTmp"></ng-container>
+            </tab>
+        
+            <tab heading="Reviews" class="card-body">
+              <app-profile-review (onReviewSubmission)="onSubmitReview($event)"></app-profile-review>
+            </tab>
+
+            <tab heading="Photos" class="card-body">
+              <app-profile-photo [album]="album"></app-profile-photo>
+            </tab>
+          </tabset>
+      </div>
+        
+    </div>
+  
+    <div class="col-12 col-md-12 col-xl-4 col-right">
+      <div class="card bg-dark height-300 mb-3">
+        <img class="card-img" src="/assets/img/carousels/1.jpg" alt="Card image" >
+        <div class="card-img-overlay">
+          <div class="box-padding">
+            <div class="white-bar"></div>
+            <div class="box-padding-inner">
+              <br>
+              <p class="mb-2 text-white">Founded in 2000 by Dr Leondire, RMACT has been servicing the east cost area for 20 years and helped thousands of family and couples to complete their families</p>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="mb-3">Send them a message</h5>
+          <form>
+            <label class="form-group has-float-label">
+              <input class="form-control" />
+              <span>Your name</span>
+            </label>
+            <label class="form-group has-float-label">
+              <input class="form-control" type="password" placeholder="" />
+              <span>Your email</span>
+            </label>
+            <label class="form-group has-float-label">
+              <ng-select [items]="['General Question', 'Consultation', 'Appointment']"  [hideSelected]="true"
+                multiple="false" bindLabel="name">
+              </ng-select>
+              <span>What is your concern?</span>
+            </label>
+            <label class="form-group has-float-label">
+              <textarea class="form-control" ></textarea>
+              <span>Your message</span>
+            </label>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+  
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="mb-3">Help improve Surroch</h5>
+  
+          <form>
+            <label class="form-group has-float-label">
+              <input class="form-control" />
+              <span>Some question</span>
+            </label>
+            <label class="form-group has-float-label">
+              <input class="form-control" type="password" placeholder="" />
+              <span>dsa</span>
+            </label>
+            <label class="form-group has-float-label">
+              <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']"  [hideSelected]="true"
+                multiple="true" bindLabel="name">
+              </ng-select>
+              <span>final challenge</span>
+            </label>
+            <label class="form-group has-float-label">
+              <input class="form-control" bsDatepicker>
+              <span>some questions </span>
+            </label>
+            <label class="form-group has-float-label">
+              <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
+                bindValue="id">
+              </ng-select>
+              <span>aaddd</span>
+            </label>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+  
+        </div>
+      </div>
+    </div>
+</div>
+
+<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+<ng-template #overviewTmp >
+  <div class="row mb-5">
+    <div class="col-4 text-center">
+      <p>Overall rating</p>
+      <h1 class="font-weight-bold heading-icon">4.7</h1>
+      <br>
+      <rating [(ngModel)]="rate" 
+                [ngModelOptions]="{standalone:true}"
+                [max]="5" 
+                [readonly]="true" 
+                [titles]="['1','2','3','4','5']"
+                [customTemplate]="t"></rating>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12">
+          <p class="font-weight-bold">Recent reviews</p>
+          <blockquote class="blockquote">
+            <p class="mb-2 text-muted">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p>
+          </blockquote>
+          <blockquote class="blockquote">
+            <p class="mb-2 text-muted">"saxxhakj hj kashkjdsh jk hgh j hjgk, h jk  hkj hj k"</p>
+          </blockquote>
+          <button class="btn btn-outline-primary btn-sm" type="button">Read more</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="separator mb-5"></div>
+  <div class="row mb-5">
+    <div class="col-6">
+      location ...
+    </div>
+    <div class="col-6">
+      hours ...
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #statsTmp>
+  <div class="row">
+    <div class="col-6">
+      <div [class]="'card card-blank mb-3 dashboard-filled-line-chart '+class">
+        <div class="card-body">
+            <div class="float-left float-none-xs">
+                <div class="d-inline-block">
+                    <h5 class="d-inline">Success Rate</h5>
+                    <span class="text-muted text-small d-block">2019</span>
+                </div>
+            </div>
+            <div *ngIf="control" class="btn-group float-right float-none-xs mt-2" dropdown>
+                <button id="button-basic" dropdownToggle type="button"
+                    class="btn btn-outline-primary btn-xs dropdown-toggle" aria-controls="dropdown-basic">
+                    per capita <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item" href="javascript:;">dsa</a>
+                    </li>
+                    <li role="menuitem"><a class="dropdown-item" href="javascript:;">dsadsa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <app-area-chart [shadow]="true" class="chart" [options]="chartDataConfig.areaChartOptions"
+                [data]="conversionChartData"></app-area-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div [class]="'card card-blank mb-3 dashboard-filled-line-chart '+class">
+        <div class="card-body">
+            <div class="float-left float-none-xs">
+                <div class="d-inline-block">
+                    <h5 class="d-inline">Success Rate</h5>
+                    <span class="text-muted text-small d-block">2019</span>
+                </div>
+            </div>
+            <div *ngIf="control" class="btn-group float-right float-none-xs mt-2" dropdown>
+                <button id="button-basic" dropdownToggle type="button"
+                    class="btn btn-outline-primary btn-xs dropdown-toggle" aria-controls="dropdown-basic">
+                    per capita <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item" href="javascript:;">dsa</a>
+                    </li>
+                    <li role="menuitem"><a class="dropdown-item" href="javascript:;">dsadsa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <app-area-chart [shadow]="true" class="chart" [options]="chartDataConfig.areaChartOptions"
+                [data]="conversionChartData"></app-area-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <div [class]="'card card-blank mb-3 dashboard-filled-line-chart '+class">
+        <div class="card-body">
+            <div class="float-left float-none-xs">
+                <div class="d-inline-block">
+                    <h5 class="d-inline">Success Rate</h5>
+                    <span class="text-muted text-small d-block">2019</span>
+                </div>
+            </div>
+            <div *ngIf="control" class="btn-group float-right float-none-xs mt-2" dropdown>
+                <button id="button-basic" dropdownToggle type="button"
+                    class="btn btn-outline-primary btn-xs dropdown-toggle" aria-controls="dropdown-basic">
+                    per capita <span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item" href="javascript:;">dsa</a>
+                    </li>
+                    <li role="menuitem"><a class="dropdown-item" href="javascript:;">dsadsa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <app-area-chart [shadow]="true" class="chart" [options]="chartDataConfig.areaChartOptions"
+                [data]="conversionChartData"></app-area-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

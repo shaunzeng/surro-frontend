@@ -1,0 +1,86 @@
+<div class="d-flex flex-row-reverse mb-5">
+    <div class="p-2"><button class="btn btn-primary btn-sm" (click)="onOpenWriteReview()"><i class="glyph-icon simple-icon-pencil"></i> Write a review</button></div>
+</div>
+
+<div class="remove-last-border">
+    <div class="d-flex flex-row mb-3 border-bottom justify-content-between">
+      <a href="javascript:;">
+        <img [src]="'https://vien-angular.coloredstrategies.com/assets/img/profiles/l-4.jpg'" [alt]="'Shaun'"
+          class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+      </a>
+      <div class="pl-3 flex-grow-1">
+        <a href="javascript:;">
+          <p class="font-weight-medium mb-0">Shaun Zeng</p>
+          <p class="text-muted mb-3 text-small">11/21/2019</p>
+        </a>
+        <div>
+            <rating [(ngModel)]="rate" 
+                            [ngModelOptions]="{standalone:true}"
+                            [max]="5" 
+                            [readonly]="true" 
+                            [titles]="['1','2','3','4','5']"
+                            [customTemplate]="t"></rating>
+        </div>
+        <p class="mt-3">
+          a test review 
+        </p>
+        <p>
+            <a href="javascript:;" class="d-inline-block mr-3">
+                <span class="badge badge-pill badge-light">
+                    <i class="glyph-icon simple-icon-like"></i> 3 likes
+                </span>
+            </a>
+        </p>
+      </div>
+      <div class="comment-likes">
+        <span dropdown container="#anchorDropdownContainer">
+            <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"><i class="glyph-icon simple-icon-options"></i></a>
+            <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+                <li><a class="dropdown-item" href="javascript:;" ><i class="glyph-icon simple-icon-trash"></i> Remove Comment</a></li>
+                <li><a class="dropdown-item" href="javascript:;" ><i class="glyph-icon simple-icon-flag"></i> Report Comment</a></li>
+            </ul>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex flex-row mb-3 border-bottom justify-content-between">
+        <a href="javascript:;">
+          <img [src]="'https://vien-angular.coloredstrategies.com/assets/img/profiles/l-4.jpg'" [alt]="'Shaun'"
+            class="img-thumbnail border-0 rounded-circle list-thumbnail align-self-center xsmall" />
+        </a>
+        <div class="pl-3 flex-grow-1">
+          <a href="javascript:;">
+            <p class="font-weight-medium mb-0">Shaun Zeng</p>
+            <p class="text-muted mb-3 text-small">11/21/2019</p>
+          </a>
+          <div>
+              <rating [(ngModel)]="rate" 
+                              [ngModelOptions]="{standalone:true}"
+                              [max]="5" 
+                              [readonly]="true" 
+                              [titles]="['1','2','3','4','5']"
+                              [customTemplate]="t"></rating>
+          </div>
+          <p class="mt-3">
+            I did my IVF with these guys, it was great, but I had 3 failed transfers, I was pretty upset, but overall staff is nice, they did great on scheduling and finance
+          </p>
+          <p>
+              <a href="javascript:;" class="d-inline-block mr-3">
+                  <span class="badge badge-pill badge-light">
+                      <i class="glyph-icon simple-icon-like"></i> 3 likes
+                  </span>
+              </a>
+          </p>
+        </div>
+        <div class="comment-likes">
+          <span dropdown container="#anchorDropdownContainer">
+              <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"><i class="glyph-icon simple-icon-options"></i></a>
+              <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
+                  <li><a class="dropdown-item" href="javascript:;" ><i class="glyph-icon simple-icon-trash"></i> Remove Comment</a></li>
+                  <li><a class="dropdown-item" href="javascript:;" ><i class="glyph-icon simple-icon-flag"></i> Report Comment</a></li>
+              </ul>
+          </span>
+        </div>
+      </div>
+</div>
+
+<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>

@@ -24,6 +24,11 @@ import { SearchSwitcherDirective } from './directives/search-switcher.directive'
 import { NgSelectModule } from '@ng-select/ng-select';
 import { LoaderComponent } from './components/loader.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RatingModule } from 'ngx-bootstrap/rating';
+import { ComponentsChartModule } from './components/charts/components.charts.module';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { LightboxModule } from 'ngx-lightbox';
+
 @NgModule({
   declarations: [
     HeaderFooterLayoutComponent,
@@ -36,7 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     TopnavComponent,
     SearchSwitcherDirective,
-    LoaderComponent
+    LoaderComponent,
   ],
   imports: [
     RouterModule,
@@ -50,9 +55,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabsModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     PopoverModule.forRoot(),
+    RatingModule.forRoot(),
     HeadroomModule,
     NgSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentsChartModule,
+    DropzoneModule,
+    LightboxModule
   ],
   exports: [
     RouterModule,
@@ -77,7 +86,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     SearchSwitcherDirective,
     NgSelectModule,
     LoaderComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RatingModule,
+    ComponentsChartModule,
+    DropzoneModule,
+    LightboxModule
   ],
 })
 export class SharedModule {}

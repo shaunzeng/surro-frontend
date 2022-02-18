@@ -60,9 +60,9 @@
             </div>
         </div>
         <div style="height:200px"></div>
-        <app-home-blogs [data]="(trendingBlogs$ | async)?.data || []"></app-home-blogs>
+        <app-home-blogs [data]="(trendingBlogs$ | async)?.data || []" *ngIf="!(isBusy$ | async)"></app-home-blogs>
         <div style="height:200px"></div>
-        <app-home-comments [data]="recentComments$ | async"></app-home-comments>
+        <app-home-comments [data]="(recentComments$ | async) || []" *ngIf="!(isBusy$ | async)"></app-home-comments>
         <div style="height:100px"></div>
     </div>
 

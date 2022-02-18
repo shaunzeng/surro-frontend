@@ -8,11 +8,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { SearchEffects } from './data/effects';
 import { StoreModule } from '@ngrx/store';
 import { searchFeatureKey, sReducer } from './data/reducer';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
     SearcherResultsContainer,
-    ListHeaderComponent
+    ListHeaderComponent,
+    SideMenuComponent,
+    FilterComponent,
   ],
   imports: [
     TranslateModule.forChild(),

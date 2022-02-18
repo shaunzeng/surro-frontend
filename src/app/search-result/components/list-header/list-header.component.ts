@@ -11,8 +11,7 @@ export class ListHeaderComponent {
   @Input() showSearch = false;
   @Input() showItemsPerPage = true;
   @Input() showDisplayMode = true;
-  @Input() displayMode = 'list';
-  @Input() selectAllState = '';
+  @Input() displayMode = 'thumb';
   @Input() itemsPerPage = 10;
   @Input() itemOptionsPerPage = [5, 10, 20];
   @Input() itemOrder = { label: 'Distance', value: 'distance' };
@@ -28,15 +27,9 @@ export class ListHeaderComponent {
   @ViewChild('search') search: any;
   constructor() { }
 
-
-
   onSelectDisplayMode(mode: string): void {
     this.displayMode = mode;
     this.changeDisplayMode.emit(mode);
-  }
-  
-  selectAll(event): void  {
-    this.selectAllChange.emit(event);
   }
 
   onChangeItemsPerPage(item): void  {

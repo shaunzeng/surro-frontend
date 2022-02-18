@@ -43,4 +43,19 @@ export class ApiUrlService {
         return httpParams;
     }
 
+    sanitizeRequest(request: any) {
+        return Object.keys(request).reduce((acct, key) => {
+            if (Array.isArray(request[key]) && request[key].length > 0) {
+                acct[key] = request[key];
+            } else if (typeof request[key] === 'number') {
+                acct[key] = request[key];
+            } else if (typeof request[key] === 'string' && !!request[key]) {
+                acct[key] = request[key];
+            } else if (typeof request[key] === 'boolean' && request[key]) {
+                acct[key] = request[key];
+            }
+            return acct;
+        }, {});
+    }
+
 }

@@ -31,10 +31,11 @@
             </div>
         </div>
         <div class="pl-3">
-            <span dropdown container="#anchorDropdownContainer" *ngIf="comment.author.id === currentUserId">
+            <span dropdown container="#anchorDropdownContainer" >
                 <a href id="basic-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"><i class="glyph-icon simple-icon-options"></i></a>
                 <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="basic-link">
-                    <li><a class="dropdown-item" href="javascript:;" (click)="onDeleteComment(comment.id)"><i class="glyph-icon simple-icon-trash"></i> Remove Comment</a></li>
+                    <li *ngIf="comment.author.id === currentUserId"><a class="dropdown-item" href="javascript:;" (click)="onDeleteComment(comment.id)"><i class="glyph-icon simple-icon-trash"></i> Remove Comment</a></li>
+                    <li><a class="dropdown-item" href="javascript:;" (click)="onDeleteComment(comment.id)"><i class="glyph-icon simple-icon-flag"></i> Report Comment</a></li>
                 </ul>
             </span>
         </div>
