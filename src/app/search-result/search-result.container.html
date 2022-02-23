@@ -76,7 +76,7 @@
         
                 <div class="row mb-3">
                     <div class="col-12">
-                        <div *ngIf="!(data$ | async) else listView ">
+                        <div *ngIf="(profiles$ | async).length === 0; else listView ">
                             No Results
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-12">
                         <pagination 
-                        [totalItems]="!(data$ | async) ? 0 : (data$ | async).totalCount" 
+                        [totalItems]="(totalCount$ | async)" 
                         [itemsPerPage]="filter.perPage" 
                         [rotate]="false" 
                         [maxSize]="5"
@@ -110,62 +110,12 @@
 </app-header-footer-layout>
 
 <ng-template #listView >
-    <h3 class="ml-3 mb-5">{{(data$ | async).totalCount}} results</h3>
-    <div class="col-12 list" *ngIf="displayMode ==='list'">
-        <div class="card flex-row mb-5" *ngFor="let p of (data$ | async)?.data; let i=index">
-            <div class="w-80 d-flex align-items-center">
-                <div class="card-body">
-                    <h4 class="mb-2 font-weight-bold">
-                        <a href="javascript:;" [routerLink]="['../profile/' + p.type +'/1']">
-                            <span class="text-muted text-small d-inline-block mr-2">[{{p.type}}]</span> 
-                            <span class="d-inline-block">{{p.name}}</span>
-                        </a>
-                    </h4>
-                    <p class="mb-5 text-muted text-small">{{p.address}}, {{p.city}} {{p.state}} {{p.zipcode}}</p>
-                    <br>
-                    <rating [(ngModel)]="rate" 
-                            [ngModelOptions]="{standalone:true}"
-                            [max]="5" 
-                            [readonly]="true" 
-                            [titles]="['1','2','3','4','5']"
-                            [customTemplate]="t"></rating> 42 reviews   
-                </div>
-            </div>
-            <div class="w-20 d-flex align-items-center">
-                <div class="card-body">
-                    <p class="text-small">{{p.distance | number: "0.1-2"}} mi</p>
-                </div>
-            </div>
+    <h3 class="ml-3 mb-5">{{ (totalCount$ | async) }} results</h3>
+    <div class="col-12 list">
+        <div *ngFor="let p of (profiles$ | async); let i=index">
+            <app-list-profile-card [profile]="p" [index]="i" [displayMode]="displayMode" ></app-list-profile-card>
         </div>
     </div>
-
-    <div class="col-12 list" *ngIf="displayMode ==='thumb'">
-        <div class="card flex-row mb-5" *ngFor="let p of (data$ | async)?.data; let i=index">
-            <div class="w-20 position-relative">
-                <a href="javascript:;" [routerLink]="['../profile/' + p.type +'/1']">
-                    <img class="card-img-left" [src]="'/assets/img/details/small-3.jpg'" alt="Card image cap">
-                </a>
-            </div>
-            <div class="w-60 d-flex align-items-center">
-                <div class="card-body">
-                    <h4 class="mb-2 font-weight-bold">
-                        <a href="javascript:;" [routerLink]="['../profile/' + p.type +'/1']">
-                            <span class="text-muted text-small d-inline-block mr-2">[{{p.type}}]</span> 
-                            <span class="d-inline-block">{{p.name}}</span>
-                        </a>
-                    </h4>
-                    <p class="mb-5 text-muted text-small">{{p.address}}, {{p.city}} {{p.state}} {{p.zipcode}}</p>
-                    <br>
-                    <rating [(ngModel)]="rate" [ngModelOptions]="{standalone:true}" [max]="5" [readonly]="true" [titles]="['1','2','3','4','5']" [customTemplate]="t"></rating> 42 reviews
-                </div>
-            </div>
-            <div class="w-20 d-flex align-items-center">
-                <div class="card-body">
-                    <p class="text-small">{{p.distance | number: "0.1-2"}} mi</p>
-                </div>
-            </div>
-        </div>
-      </div>
 </ng-template>
 
 <ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
@@ -174,8 +124,7 @@
 <ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
 <i class='simple-icon-arrow-left'></i>
 </ng-template>
-<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}
-</ng-template>
+
 
 <ng-template #filterModal>
     <div class="modal-header">

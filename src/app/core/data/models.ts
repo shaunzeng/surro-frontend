@@ -103,6 +103,7 @@ export interface RootState {
     landing: LandingState;
     search: SearchState;
     blogs: BlogState;
+    profile: ProfileState;
 }
 
 export interface Option {

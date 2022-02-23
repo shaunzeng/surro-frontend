@@ -13,9 +13,9 @@ import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { FecthSearchResults } from './data/actions';
-import { selectSearchResults, isBusySelector } from './data/selectors';
+import { selectSearchResults, isBusySelector, selectTotalCount } from './data/selectors';
 import { FetchRequest } from './data/models';
-import { BIZ_TYPES, defaultFilter, STATES } from './data/constants';
+import { defaultFilter} from './data/constants';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 interface PageChangeEvent {
@@ -37,7 +37,9 @@ export class SearcherResultsContainer implements OnInit, OnDestroy {
   suggestedZips$?: Observable<string>;
   unsubscribe$: Subject<boolean> = new Subject();
 
-  data$: Observable<string[]>;
+  profiles$: Observable<any[]>;
+  totalCount$: Observable<number>;
+
   isBusy$: Observable<boolean>;
 
   rate = 3;
@@ -57,7 +59,8 @@ export class SearcherResultsContainer implements OnInit, OnDestroy {
       this.filter.zipcode = this.zipcode = snapshot.queryParams.zipcode || '10281';
       this.filter.category = snapshot.queryParams.bizType;
       
-      this.data$ = this.store.select(selectSearchResults);
+      this.profiles$ = this.store.select(selectSearchResults);
+      this.totalCount$ = this.store.select(selectTotalCount);
       this.isBusy$ = this.store.select(isBusySelector);
 
       this.initZipcodeSearch();

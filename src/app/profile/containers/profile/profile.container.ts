@@ -1,19 +1,11 @@
 import {
     Component,
-    OnInit
-  } from '@angular/core';
-import { Store } from '@ngrx/store';
+} from '@angular/core';
   
-  @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.container.html',
-    styleUrls:['./profile.container.scss']
-  })
-  export class ProfileContainer implements OnInit {
-  
-    constructor( private store: Store ) {}
-  
-    ngOnInit(): void {
-
-    }
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.container.html',
+})
+export class ProfileContainer {
+  constructor() {}
 }

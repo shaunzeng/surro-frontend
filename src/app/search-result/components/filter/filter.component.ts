@@ -18,7 +18,6 @@ export class FilterComponent {
     }
 
     set filter(val) {
-        console.log('set filter ?');
         this._filter = val;
     }
     component: SearcherResultsContainer;

@@ -11,6 +11,7 @@ import { User, RootState, LandingState, SearchState, BlogState, Option, ProfileS
 import { NavigationService } from './services/navigation.service';
 import { metaReducers } from './helpers/store.helper';
 import { selectIsLoggedIn, selectName, selectUserId} from './data/selectors';
+import { ProfileService } from './services/profile.service';
 
 export {
     CoreModule,
@@ -23,6 +24,7 @@ export {
     Language,
     SearchService,
     BlogsService,
+    ProfileService,
     User,
     RootState,
     NavigationService,

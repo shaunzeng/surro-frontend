@@ -1,9 +1,9 @@
-<div class="row center-content-80">
+<div class="row center-content-80" *ngIf="!(isBusy$ | async)">
     <div class="col-12 col-md-12 col-xl-8 col-left">
         <div class="card mb-3">
             <div class="card-body">
               <div class="box-padding">
-                <p class="text-muted mb-2">[CLINIC]</p>
+                <p class="text-muted mb-2 font-weight-bold">[CLINIC]</p>
                 <h1 class="font-weight-bold mb-2">Reproductive Medicine Associates of Connecticut </h1>
                 <div class="mb-4">
                   <rating [(ngModel)]="rate" 
@@ -68,11 +68,10 @@
             </tab>
 
             <tab heading="Photos" class="card-body">
-              <app-profile-photo [album]="album"></app-profile-photo>
+              <app-profile-photo ></app-profile-photo>
             </tab>
           </tabset>
-      </div>
-        
+      </div> 
     </div>
   
     <div class="col-12 col-md-12 col-xl-4 col-right">
@@ -93,68 +92,18 @@
       
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="mb-3">Send them a message</h5>
-          <form>
-            <label class="form-group has-float-label">
-              <input class="form-control" />
-              <span>Your name</span>
-            </label>
-            <label class="form-group has-float-label">
-              <input class="form-control" type="password" placeholder="" />
-              <span>Your email</span>
-            </label>
-            <label class="form-group has-float-label">
-              <ng-select [items]="['General Question', 'Consultation', 'Appointment']"  [hideSelected]="true"
-                multiple="false" bindLabel="name">
-              </ng-select>
-              <span>What is your concern?</span>
-            </label>
-            <label class="form-group has-float-label">
-              <textarea class="form-control" ></textarea>
-              <span>Your message</span>
-            </label>
-            <button class="btn btn-primary" type="submit">Submit</button>
-          </form>
-  
+          <app-profile-email (onSendEmail)="onSubmitMessage($event)"></app-profile-email>
         </div>
       </div>
 
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="mb-3">Help improve Surroch</h5>
-  
-          <form>
-            <label class="form-group has-float-label">
-              <input class="form-control" />
-              <span>Some question</span>
-            </label>
-            <label class="form-group has-float-label">
-              <input class="form-control" type="password" placeholder="" />
-              <span>dsa</span>
-            </label>
-            <label class="form-group has-float-label">
-              <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']"  [hideSelected]="true"
-                multiple="true" bindLabel="name">
-              </ng-select>
-              <span>final challenge</span>
-            </label>
-            <label class="form-group has-float-label">
-              <input class="form-control" bsDatepicker>
-              <span>some questions </span>
-            </label>
-            <label class="form-group has-float-label">
-              <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
-                bindValue="id">
-              </ng-select>
-              <span>aaddd</span>
-            </label>
-            <button class="btn btn-primary" type="submit">Submit</button>
-          </form>
-  
+          <app-profile-help (onSendHelp)="onSendHelp($event)"></app-profile-help>
         </div>
       </div>
     </div>
 </div>
+<app-loader [isBusy]="isBusy$ | async"></app-loader>
 
 <ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
 <ng-template #overviewTmp >
@@ -198,6 +147,7 @@
 </ng-template>
 
 <ng-template #statsTmp>
+  <p class="text-muted">Source: CDC</p>
   <div class="row">
     <div class="col-6">
       <div [class]="'card card-blank mb-3 dashboard-filled-line-chart '+class">

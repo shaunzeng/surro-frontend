@@ -20,5 +20,4 @@ export interface FetchResponse {
     totalCount: number,
     page: string,
     data: any[],
-    _id: string | number
 }

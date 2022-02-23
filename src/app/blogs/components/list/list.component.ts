@@ -9,47 +9,15 @@ import {
   import { Store } from '@ngrx/store';
 
   @Component({
-    selector: 'app-blogs-list',
+    selector: 'app-blogs-list-card',
     templateUrl: './list.component.html',
     styleUrls:['./list.component.scss']
   })
-  export class ListComponent implements OnInit {
+  export class ListComponent {
 
-    currentPage = 1;
 
     @Input() data: any;
-    @Input() totalCount: number;
 
-    @Output() onPageChange: EventEmitter<number> = new EventEmitter();
-
-    constructor(
-        private store: Store
-    ) {}
+    constructor() {}
   
-    ngOnInit(): void {
-      
-    }
-
-    onPageChanged(e: number){
-      this.onPageChange.emit(e);
-    }
-
-    onSubmit(){
-      
-    }
-  
-    @HostListener('window:resize', ['$event'])
-    onResize(event): void {
-  
-    }
-  
-    @HostListener('window:click', ['$event'])
-    onClick(event): void {
-  
-    }
-  
-    @HostListener('window:scroll', ['$event'])
-    onScroll(event): void {
-  
-    }
   }

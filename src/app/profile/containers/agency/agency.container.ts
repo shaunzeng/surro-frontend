@@ -3,6 +3,7 @@ import {
     OnInit,
   } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { submitReview } from '../../data/actions';
   
 @Component({
     selector: 'app-agency',
@@ -45,5 +46,17 @@ export class ProfileAgencyContainer implements OnInit {
   
     ngOnInit(): void {
 
+    }
+
+    onSubmitReview(e: {rating: number, review: string}) {
+      this.store.dispatch(submitReview(e));
+    }
+
+    onSubmitMessage(e: {name: string, email: string, concerns: string[], message: string}) {
+      console.log('requested conversation : ', e);
+    }
+
+    onSendHelp(e: any){
+      console.log('sent help');
     }
 }

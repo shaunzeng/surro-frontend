@@ -1,0 +1,45 @@
+<h5 class="mb-3">Send them a message</h5>
+<form #emailForm ="ngForm" novalidate (ngSubmit)="onSubmit()" *ngIf="!isSubmitted">
+    <label class="form-group has-float-label">
+        <input class="form-control" type="text" placeholder="" 
+        required
+        ngModel
+        #name="ngModel"
+        name="name" />
+        <span>*Your name</span>
+        <div *ngIf="!name.valid && emailForm.submitted" class="invalid-tooltip">Missing Name</div>
+    </label>
+    <label class="form-group has-float-label">
+        <input class="form-control" type="email" placeholder="" 
+        required
+        ngModel
+        email
+        #email="ngModel"
+        name="email" />
+        <span>*Your email</span>
+        <div *ngIf="!email.valid && emailForm.submitted" class="invalid-tooltip">Missing Email</div>
+    </label>
+    <label class="form-group has-float-label">
+        <ng-select [items]="concerns"  [hideSelected]="true" multiple="false" bindLabel="name"
+        required
+        ngModel
+        #concern="ngModel"
+        name="concern" >
+        </ng-select>
+        <span>*What is your concern?</span>
+        <div *ngIf="!concern.valid && emailForm.submitted" class="invalid-tooltip">Required Field</div>
+    </label>
+    <label class="form-group has-float-label">
+        <textarea class="form-control" cols="30" rows="5" 
+        required
+        ngModel
+        #message="ngModel"
+        name="message"></textarea>
+        <span>*Your message</span>
+        <div *ngIf="!message.valid && emailForm.submitted" class="invalid-tooltip">Required</div>
+    </label>
+    <button class="btn btn-primary btn-sm" type="submit" >Submit</button>
+</form>
+<div *ngIf="isSubmitted">
+    <p class="text-small">Thank you for your inquery, we will get back to you as soon as possible.</p>
+</div>

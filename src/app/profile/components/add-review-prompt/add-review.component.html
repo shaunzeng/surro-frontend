@@ -27,14 +27,14 @@
                 <div class="input-group">
                     <textarea 
                     aria-label="With textarea" 
-                    name="text" 
-                    id="text" 
+                    name="review" 
+                    id="review" 
                     cols="30" 
                     rows="10" 
                     placeholder="Tell us what you think"
                     required
                     ngModel
-                    #text="ngModel"
+                    #review="ngModel"
                     class="form-control"></textarea>
                 </div>
             </div>
@@ -42,7 +42,7 @@
     
         <div class="row mb-4">
             <div class="col-12">
-                <h5 class="mb-4">Attach Images</h5>
+                <h5 class="mb-4">Attach Images <span class="text-muted text-small">Max 4 images</span></h5>
                 <dropzone [config]="config" ></dropzone>
             </div>
         </div>

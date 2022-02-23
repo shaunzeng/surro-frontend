@@ -39,6 +39,7 @@ import * as Selectors from '../../data/selectors';
 
     data$: Observable<any>;
     isBusy$: Observable<boolean>;
+    totalCount$: Observable<number>;
   
     constructor(
         private store: Store
@@ -47,11 +48,12 @@ import * as Selectors from '../../data/selectors';
     ngOnInit(): void {
       this.store.dispatch(fetchBlogList({}));
       this.data$ = this.store.select(Selectors.blogListSelector);
+      this.totalCount$ = this.store.select(Selectors.blogListTotalCountSelector);
       this.isBusy$ = this.store.select(Selectors.isBusySelector);
     }
 
-    onPageChange(e: number){
-      this.currentPage = e;
+    onPageChange(e: any){
+      this.currentPage = e.page;
       this.store.dispatch(fetchBlogList({filter: this.filter, page: this.currentPage}));
     }
   

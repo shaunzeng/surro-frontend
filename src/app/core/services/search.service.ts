@@ -36,7 +36,4 @@ export class SearchService extends ApiService {
     .pipe(take(1))
     .toPromise();
   }
-
-  
-
 }

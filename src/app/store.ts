@@ -44,7 +44,8 @@ export const reducers : ActionReducerMap<RootState> = {
     user: userReducer,
     landing: null,
     search: null,
-    blogs: null
+    blogs: null,
+    profile: null
 }
 
 export const metaReducers: MetaReducer<RootState>[] = []

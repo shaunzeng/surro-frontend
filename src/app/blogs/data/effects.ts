@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { fetchBlogList, fetchBlogListSuccess, fetchBlogDetails, fetchBlogDetailsSuccess, fetchCommentsByPostId, fetchCommentsByPostIdSuccess, postComment, postCommentSuccess, deleteCommentById, deleteCommentByIdSuccess, likeComment, likeCommentSuccess, unlikeComment, unlikeCommentSuccess } from './actions';
-import { BlogsService } from '../../core/services/blogs.service';
+import { BlogsService } from '@core';
 import { catchError, switchMap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
 import { BlogListResponse, BlogDetailsResponse } from './models';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class BlogEffects {

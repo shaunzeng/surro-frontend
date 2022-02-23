@@ -4,23 +4,45 @@
     <div body>
         <div class="center-content-70 pt-3">
             <app-loader [isBusy]="isBusy$ | async"></app-loader>
-            <p class="text-muted">{{(data$ | async)?.totalCount || 0 }} articles</p>
+            <p class="text-muted">{{(totalCount$ | async)}} articles</p>
             <h1 class="mb-3">Articles</h1>
             <p classs="text-muted">Keyword:</p>
-            <button 
-            [class]="{'active': filter === f.value}" 
-            class="btn btn-outline-secondary btn-xs mb-1 mr-2" 
-            *ngFor="let f of filters" 
-            (click)="onFilterChanged(f.value)">{{f.label}}</button>
-            <div style="height:30px"></div>
-            <hr>
-            <div style="height:100px"></div>
-            <app-blogs-list 
-            [data]="(data$ | async)?.data" 
-            [totalCount]="(data$ | async)?.totalCount || 0"
-            (onPageChange)="onPageChange($event)"></app-blogs-list>
+            <div class="mb-5">
+                <button 
+                [class]="{'active': filter === f.value}" 
+                class="btn btn-outline-secondary btn-xs mb-1 mr-2" 
+                *ngFor="let f of filters" 
+                (click)="onFilterChanged(f.value)">{{f.label}}</button>
+            </div>
+            
+            <hr class="mb-5">
+
+            <app-blogs-list-card *ngFor="let d of (data$ | async)" [data]="d"></app-blogs-list-card>
+
+            <div class="row">
+                <div class="col-12">
+                    <pagination 
+                    [totalItems]="(totalCount$ | async)" 
+                    [itemsPerPage]="10" 
+                    [rotate]="true" 
+                    [maxSize]="5"
+                    [(ngModel)]="currentPage" 
+                    (pageChanged)="onPageChange($event)" 
+                    class="justify-content-center"
+                    [customNextTemplate]="nextTemplate" 
+                    [customPreviousTemplate]="prevTemplate">
+                    </pagination>
+                </div>
+            </div>
         </div>
     </div>
 
     <app-footer footer></app-footer>
 </app-header-footer-layout>
+
+<ng-template #nextTemplate let-disabled="disabled" let-currentPage="currentPage">
+<i class='simple-icon-arrow-right'></i>
+</ng-template>
+<ng-template #prevTemplate let-disabled="disabled" let-currentPage="currentPage">
+<i class='simple-icon-arrow-left'></i>
+</ng-template>

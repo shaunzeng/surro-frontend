@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared';
 import { ProfileRoutingModule } from './profile.routing';
 import { TranslateModule } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
@@ -10,6 +10,8 @@ import { ProfileAgencyContainer } from './containers/agency/agency.container';
 import { AddReviewComponent } from './components/add-review-prompt/add-review.component';
 import { ReviewComponent } from './components/review/review.component';
 import { PhotoComponent } from './components/photo/photo.component';
+import { EmailCardComponent } from './components/email-card/email-card.component';
+import { HelpCardComponent } from './components/help-card/help-card.component';
 import { profileFeatureKey, pReducer } from './data/reducer';
 import { Profileffects } from './data/effects';
 
@@ -20,7 +22,9 @@ import { Profileffects } from './data/effects';
     ProfileAgencyContainer,
     AddReviewComponent,
     ReviewComponent,
-    PhotoComponent
+    PhotoComponent,
+    EmailCardComponent,
+    HelpCardComponent
   ],
   imports: [
     StoreModule.forFeature(profileFeatureKey, pReducer),

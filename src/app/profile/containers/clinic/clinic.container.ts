@@ -3,11 +3,15 @@ import {
     Input,
     OnInit,
   } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ChartService } from '@shared';
+import { Observable } from 'rxjs';
 import {
   conversionChartData
 } from '../../../data/charts';
+import { fetchProfile, submitReview } from '../../data/actions';
+import { selectIsBusy, selectProfile } from '../../data/selectors';
 
 @Component({
   selector: 'app-clinic',
@@ -22,47 +26,38 @@ export class ProfileClinicContainer implements OnInit {
     conversionChartData = conversionChartData;
     
     rate = 4;
+    album = [];
+    profileId: string;
 
-    album = [
-      {
-        src: '/assets/img/products/marble-cake.jpg',
-        thumb: '/assets/img/products/marble-cake-thumb.jpg'
-      },
-      {
-        src: '/assets/img/products/parkin.jpg',
-        thumb: '/assets/img/products/parkin-thumb.jpg'
-      },
-      {
-        src: '/assets/img/products/fruitcake.jpg',
-        thumb: '/assets/img/products/fruitcake-thumb.jpg'
-      },
-      {
-        src: '/assets/img/products/tea-loaf.jpg',
-        thumb: '/assets/img/products/tea-loaf-thumb.jpg'
-      },
-      {
-        src: '/assets/img/products/napoleonshat.jpg',
-        thumb: '/assets/img/products/napoleonshat-thumb.jpg'
-      },
-      {
-        src: '/assets/img/products/magdalena.jpg',
-        thumb: '/assets/img/products/magdalena-thumb.jpg'
-      }
-    ]
+    isBusy$: Observable<boolean>;
+    profile$: Observable<any>;
+
     constructor(
         private store: Store,
         private chartService: ChartService,
-        
-        
+        private route: ActivatedRoute,
     ) {
       this.chartDataConfig = this.chartService;
     }
   
     ngOnInit(): void {
+      const { id } = this.route.snapshot.params;
+      this.profileId = id;
 
+      this.isBusy$ = this.store.select(selectIsBusy);
+      this.profile$ = this.store.select(selectProfile);
+      this.store.dispatch(fetchProfile({ id }));
     }
 
-    onSubmitReview(data) {
-      console.log('got data ? ', data);
+    onSubmitReview(e: {rating: number, review: string}) {
+      this.store.dispatch(submitReview(e));
+    }
+
+    onSubmitMessage(e: {name: string, email: string, concerns: string[], message: string}) {
+      console.log('requested conversation : ', e);
+    }
+
+    onSendHelp(e: any){
+      console.log('sent help');
     }
 }

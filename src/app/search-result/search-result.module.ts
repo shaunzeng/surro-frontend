@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearcherResultsContainer } from './search-result.container';
 import { SearchResultsRoutingModule } from './search-result.routing';
@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { searchFeatureKey, sReducer } from './data/reducer';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { FilterComponent } from './components/filter/filter.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FilterComponent } from './components/filter/filter.component';
     ListHeaderComponent,
     SideMenuComponent,
     FilterComponent,
+    ProfileCardComponent
   ],
   imports: [
     TranslateModule.forChild(),
