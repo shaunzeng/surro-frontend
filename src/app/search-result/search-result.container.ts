@@ -2,8 +2,8 @@ import {
     Component,
     OnInit,
     OnDestroy,
-    HostListener,
     ViewChild,
+    TemplateRef,
   } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,142 +11,136 @@ import { SearchService } from '@core';
 import { Store } from '@ngrx/store';
 import { from, Observable, of, Subject, Subscriber } from 'rxjs';
 import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
-import { PRESET_KEYWORDS } from './data/constants';
+
 import { FecthSearchResults } from './data/actions';
-import { selectSearchResults, isBusySelector } from './data/selectors';
+import { selectSearchResults, isBusySelector, selectTotalCount } from './data/selectors';
 import { FetchRequest } from './data/models';
+import { defaultFilter} from './data/constants';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 interface PageChangeEvent {
   itemsPerPage: number,
   page: number
 }
   
-  @Component({
-    selector: 'app-search-results',
-    templateUrl: './search-result.container.html',
-    styleUrls:['./search-result.container.scss']
-  })
-  export class SearcherResultsContainer implements OnInit, OnDestroy {
-    
-    keyword: string;
-    zipcode: string;
-    filter: string;
-    currentPage = 1;
-    perPage = 10;
-    displayMode = 'list';
-
-    suggestedZips$?: Observable<string>;
-    unsubscribe$: Subject<boolean> = new Subject();
-    
-    filters = PRESET_KEYWORDS;
-    data$: Observable<string[]>;
-    isBusy$: Observable<boolean>;
-    
-
-    @ViewChild('searchForm') searchForm: NgForm;
-
-    constructor(
-        private activatedRoute: ActivatedRoute,
-        public searchService:SearchService,
-        private store: Store
-    ) {}
+@Component({
+  selector: 'app-search-results',
+  templateUrl: './search-result.container.html',
+  styleUrls:['./search-result.container.scss']
+})
+export class SearcherResultsContainer implements OnInit, OnDestroy {
   
-    ngOnInit(): void {
-        const snapshot = this.activatedRoute.snapshot;
-        this.keyword = snapshot.queryParams.keyword;
-        this.zipcode = snapshot.queryParams.zipcode;
-        this.filter = snapshot.queryParams.bizType;
+  filter = JSON.parse(JSON.stringify(defaultFilter));
+  displayMode = 'thumb';
+  zipcode: string;
 
-        this.data$ = this.store.select(selectSearchResults);
-        this.data$.subscribe(console.log);
-        this.isBusy$ = this.store.select(isBusySelector);
+  suggestedZips$?: Observable<string>;
+  unsubscribe$: Subject<boolean> = new Subject();
 
-        this.initZipcodeSearch();
+  profiles$: Observable<any[]>;
+  totalCount$: Observable<number>;
 
-        this.loadSearchResults({
-          keyword: this.keyword,
-          bizType: this.filter,
-          zipcode: this.zipcode,
-          page: this.currentPage.toString(),
-          perPage: this.perPage.toString()
-        });
-    }
-  
-    ngOnDestroy(): void {
-  
-    }
+  isBusy$: Observable<boolean>;
 
-    onSubmit(){
-      if ( this.zipcode ){ 
-        this.loadSearchResults({
-          keyword: this.keyword,
-          bizType: this.filter,
-          zipcode: this.zipcode,
-          page: this.currentPage.toString(),
-          perPage: this.perPage.toString()
-        });
-      }
-    }
+  rate = 3;
+  modalRef?:BsModalRef;
+  @ViewChild('searchForm') searchForm: NgForm;
 
-    onFilterBy(ctg: string) {
-      this.filter = ctg;
-      this.onSubmit();
-    }
+  constructor(
+      private activatedRoute: ActivatedRoute,
+      private searchService:SearchService,
+      private store: Store,
+      private modalService: BsModalService
+  ) {}
 
-    onSortChange(order: string){
+  ngOnInit(): void {
+      const snapshot = this.activatedRoute.snapshot;
+      this.filter.keyword = snapshot.queryParams.keyword;
+      this.filter.zipcode = this.zipcode = snapshot.queryParams.zipcode || '10281';
+      this.filter.category = snapshot.queryParams.bizType;
       
-    }
+      this.profiles$ = this.store.select(selectSearchResults);
+      this.totalCount$ = this.store.select(selectTotalCount);
+      this.isBusy$ = this.store.select(isBusySelector);
 
-    onPerPageChanged(e: number) {
-      this.perPage = e;
+      this.initZipcodeSearch();
       this.onSubmit();
-    }
+  }
 
-    onPageChanged(e: PageChangeEvent){
-      this.currentPage = e.page;
-      this.onSubmit();
-    }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
-    onChangeDisplayMode(mode: string){
-      this.displayMode = mode;
-    }
-
-    private initZipcodeSearch(){
-      this.suggestedZips$ = new Observable<string>((subscriber: Subscriber<string | undefined>) => {
-        subscriber.next(this.zipcode);
-      }).pipe(
-        takeUntil(this.unsubscribe$),
-        debounceTime(100),
-        switchMap(this.handlerZipResult.bind(this))
-      )
-    }
-
-    private handlerZipResult(query:string) {
-      return (!!query && query.length > 1 && query.length < 6) ? 
-              from(this.searchService.searchZip(query))
-              .pipe(
-                map(data => data['zips'] || null)) 
-              : of([]);
-    }
-
-    private loadSearchResults(request: FetchRequest){
-      if (!!request.zipcode) {
-        this.store.dispatch(FecthSearchResults(request));
-      }
-    }
-  
-    @HostListener('window:resize', ['$event'])
-    onResize(event): void {
-  
-    }
-  
-    @HostListener('window:click', ['$event'])
-    onClick(event): void {
-  
-    }
-  
-    @HostListener('window:scroll', ['$event'])
-    onScroll(event): void {
-  
+  onSubmit(){
+    if (this.filter.zipcode){ 
+      const request = this.getRequest(this.filter);
+      this.store.dispatch(FecthSearchResults({ request }));
     }
   }
+
+  onSortChange(order: string){
+    this.filter.sort = order;
+    this.onSubmit();
+  }
+
+  onPerPageChanged(e: number) {
+    this.filter.perPage = e;
+    this.onSubmit();
+  }
+
+  onPageChanged(e: PageChangeEvent){
+    this.filter.page = e.page;
+    this.onSubmit();
+  }
+
+  onChangeDisplayMode(mode: string){
+    this.displayMode = mode;
+  }
+
+  onResetFilter(){
+    this.filter = JSON.parse(JSON.stringify(defaultFilter));
+    this.filter.zipcode = this.zipcode;
+    this.onSubmit();
+  }
+
+  onFilterchange(){
+    this.onSubmit();
+  }
+
+  openConfigFilter(temp: TemplateRef<any>){
+    this.modalRef = this.modalService.show(temp);
+  }
+
+  private initZipcodeSearch(){
+    this.suggestedZips$ = new Observable<string>((subscriber: Subscriber<string | undefined>) => {
+      subscriber.next(this.filter.zipcode);
+    }).pipe(
+      takeUntil(this.unsubscribe$),
+      debounceTime(100),
+      switchMap(this.handlerZipResult.bind(this))
+    )
+  }
+
+  private handlerZipResult(query:string) {
+    return (!!query && query.length > 1 && query.length < 6) ? 
+            from(this.searchService.searchZip(query))
+            .pipe(map(data => data['zips'] || null)) 
+            : of([]);
+  }
+
+  private getRequest(filter: any): FetchRequest{
+    return {
+      zipcode: filter.zipcode,
+      keyword: filter.keyword,
+      page: filter.page,
+      perPage: filter.perPage,
+      category: filter.category,
+      languages: Object.keys(filter.languages).filter(lan => filter.languages[lan]),
+      reviews: Object.keys(filter.reviews).filter(re => filter.reviews[re]),
+      cost: Object.keys(filter.cost).filter(c => filter.cost[c]),
+      locations: Object.keys(filter.locations).filter(l => filter.locations[l])
+    } as FetchRequest;
+  }
+
+}

@@ -8,6 +8,7 @@ import { NotFoundComponent } from './pages/notFound/notFound.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { UnauthorizedComponent } from './pages/unathorized/unauthorized.component';
 import { SharedModule } from './shared.module';
+import { ChartService } from './components/charts/chart.service';
 import * as actions from './pages/data/actions';
 import * as selectors from './pages/data/selectors';
 
@@ -23,5 +24,6 @@ export {
     FooterComponent,
     TopnavComponent,
     actions,
-    selectors
+    selectors,
+    ChartService
 }

@@ -58,7 +58,7 @@ export class LoginComponent {
 
       this.loginMsg = `Welcome Back, ${data.firstName} ${data.lastName}`;
       this.modalRef = this.modalService.show(this.loginTemp, {
-        backdrop:false,
+        backdrop:true,
         class: 'info modal-lg'
       });
 

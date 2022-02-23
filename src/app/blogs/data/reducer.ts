@@ -1,5 +1,16 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { deleteCommentByIdSuccess, fetchBlogDetails, fetchBlogDetailsSuccess, fetchBlogList, fetchBlogListSuccess, fetchCommentsByPostId, fetchCommentsByPostIdSuccess, likeCommentSuccess, postCommentSuccess, unlikeCommentSuccess} from "./actions";
+import { 
+    deleteCommentByIdSuccess, 
+    fetchBlogDetails, 
+    fetchBlogDetailsSuccess, 
+    fetchBlogList, 
+    fetchBlogListSuccess, 
+    fetchCommentsByPostId, 
+    fetchCommentsByPostIdSuccess, 
+    likeComment, 
+    postCommentSuccess, 
+    unlikeComment 
+} from "./actions";
 import { BlogState } from '@core';
 
 export const blogFeatureKey = 'blogs';
@@ -32,8 +43,8 @@ const blogReducer = createReducer(
     on(fetchCommentsByPostIdSuccess, (state, payload) => ({...state, comments: { entity: payload, isLoading: false, loadedAt: new Date()}})),
     on(postCommentSuccess, handlePostCommentSuccess),
     on(deleteCommentByIdSuccess, handleDeleteCommentSuccess),
-    on(likeCommentSuccess, handleLikeCommentSuccess),
-    on(unlikeCommentSuccess, handleUnlikeCommentSuccess)
+    on(likeComment, handleLikeComment),
+    on(unlikeComment, handleUnlikeComment)
 )
 
 export const bReducer = (state: BlogState | undefined, action : Action) => blogReducer(state, action);
@@ -66,7 +77,7 @@ function handleDeleteCommentSuccess(state: BlogState, payload) {
     }
 }
 
-function handleLikeCommentSuccess(state: BlogState, payload) {
+function handleLikeComment(state: BlogState, payload) {
     return {
         ...state,
         comments: {
@@ -88,7 +99,7 @@ function handleLikeCommentSuccess(state: BlogState, payload) {
     };
 }
 
-function handleUnlikeCommentSuccess(state, payload) {
+function handleUnlikeComment(state, payload) {
     return {
         ...state,
         comments: {

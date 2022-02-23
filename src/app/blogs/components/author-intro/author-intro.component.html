@@ -1,16 +1,28 @@
-<div class="card mb-3">
-    <div class="position-relative">
-        <img class="card-img-top" src="/assets/img/cards/thumb-1.jpg" alt="Card image cap">
-      </div>
-      <div class="card-body">
-            <p class="text-muted text-small mb-2">About the Author</p>
-            <p class="list-item-heading mb-4"><b>{{author?.name}}</b></p>
-            <p class="mb-4">{{author?.intro}}</p>
-            
-        <footer *ngIf="author?.socialMedia">
-          <p class="text-muted text-small mb-2">Social Media</p>
-          <a [attr.href]="author?.socialMedia.twitter" *ngIf="author?.socialMedia.twitter"><i class="glyph-icon iconsminds-twitter"></i></a>
-          <a [attr.href]="author?.socialMedia.instagram" *ngIf="author?.socialMedia.instagram"><i class="glyph-icon iconsminds-instagram"></i></a> 
-        </footer>
+<div class="card mb-4">
+  <div class="card-body">
+    <div class="text-center pt-4">
+      <a routerLink="./">
+        <img alt="Profile" src="/assets/img/profiles/l-1.jpg"
+          class="img-thumbnail border-0 rounded-circle m-4 list-thumbnail align-self-center">
+      </a>
+      <p class="text-muted text-small mb-2">About the Author</p>
+      <p class="list-item-heading mb-4"><b>{{author?.name}}</b></p>
     </div>
+    <p class="mb-5 text-center">
+      {{author?.intro}}
+    </p>
+
+
+    <p class="text-muted text-small mb-2 text-center" *ngIf="author?.socialMedia">Social Media</p>
+    <div class="social-icons text-center" *ngIf="author?.socialMedia">
+      <ul class="list-unstyled list-inline">
+        <li class="list-inline-item">
+          <a [attr.href]="author?.socialMedia.twitter" *ngIf="author?.socialMedia.twitter"><i class="glyph-icon iconsminds-twitter"></i></a>
+        </li>
+        <li class="list-inline-item">
+          <a [attr.href]="author?.socialMedia.instagram" *ngIf="author?.socialMedia.instagram"><i class="glyph-icon iconsminds-instagram"></i></a> 
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

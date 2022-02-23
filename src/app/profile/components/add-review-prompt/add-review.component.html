@@ -1,0 +1,56 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Write a Review</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form  #reviewForm ="ngForm" novalidate>
+        <div class="row mb-4">
+            <div class="col-12">
+                <rating 
+                required
+                ngModel
+                #rating="ngModel"
+                name="rating"
+                id="rating"
+                [max]="5" 
+                [readonly]="false" 
+                [titles]="['1','2','3','4','5']"
+                [customTemplate]="t"></rating> 
+                <span *ngIf="reviewForm.value.rating"> {{reviewForm.value.rating | number: '1.1-2'}}</span>
+                <span class="text-muted" *ngIf="!reviewForm.value.rating"> Select your rating</span>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="input-group">
+                    <textarea 
+                    aria-label="With textarea" 
+                    name="review" 
+                    id="review" 
+                    cols="30" 
+                    rows="10" 
+                    placeholder="Tell us what you think"
+                    required
+                    ngModel
+                    #review="ngModel"
+                    class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row mb-4">
+            <div class="col-12">
+                <h5 class="mb-4">Attach Images <span class="text-muted text-small">Max 4 images</span></h5>
+                <dropzone [config]="config" ></dropzone>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-sm" (click)="onSubmit()" [disabled]="!reviewForm.valid">Submit</button>
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="bsModalRef.hide()">Cancel</button>
+</div>
+
+<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>

@@ -30,11 +30,12 @@ export interface LandingState {
 }
 
 export interface SearchState {
-    data: any;
-    zipcode: string;
-    keyword: string;
-    bizType: string;
-    isLoading: boolean;
+    results:{
+        entity: any,
+        isLoading: boolean,
+        loadedAt: Date
+    },
+    filter: any
 }
 
 export interface BlogPreview{
@@ -102,4 +103,28 @@ export interface RootState {
     landing: LandingState;
     search: SearchState;
     blogs: BlogState;
+    profile: ProfileState;
+}
+
+export interface Option {
+    label: string,
+    value: string | number
+}
+
+export interface ProfileState {
+    reviews: {
+        entity: any,
+        isLoading: boolean,
+        loadedAt: Date
+    },
+    profile:{
+        entity: any,
+        isLoading: boolean,
+        loadedAt: Date,
+    },
+    stats:{
+        entity: any,
+        isLoading: boolean,
+        loadedAt: Date
+    }
 }
