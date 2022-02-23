@@ -1,0 +1,153 @@
+<div class="row center-content-80">
+    <div class="col-12 col-md-12 col-xl-8 col-left">
+        <div class="card mb-3">
+            <div class="card-body">
+              <div class="box-padding">
+                <p class="text-muted mb-2">[AGENCY]</p>
+                <h1 class="font-weight-bold mb-2">Circle Surrogacy and Egg Donation</h1>
+                <div class="mb-4">
+                  <rating [(ngModel)]="rate" 
+                            [ngModelOptions]="{standalone:true}"
+                            [max]="5" 
+                            [readonly]="true" 
+                            [titles]="['1','2','3','4','5']"
+                            [customTemplate]="t"></rating> 42 reviews  
+                </div>
+                <p class="text-muted text-small mb-2">761 Main Ave #200, Norwalk, CT 06851</p>
+                <p class="text-small mb-5">(373) 858 5525</p>
+                <div class="d-flex">
+                  <div class="p-2 flex-fill">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_few"
+                        checked>
+                        <label class="custom-control-label" for="review_few">IVF</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_medium"
+                        checked>
+                        <label class="custom-control-label" for="review_medium">Embryo Cryopreservation</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="review_massive"
+                        checked>
+                        <label class="custom-control-label" for="review_massive">>= 101</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="444"
+                        checked>
+                        <label class="custom-control-label" for="444">>= 101</label>
+                    </div>
+                  </div>
+                  <div class="p-2 flex-fill">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="222"
+                        checked>
+                        <label class="custom-control-label" for="222">English</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="333"
+                        checked>
+                        <label class="custom-control-label" for="333">Spanish</label>
+                    </div>
+                  
+                  </div>
+                  <div class="p-2 flex-fill">
+                    Price range: $10,000 - $20,000
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="card">
+          <tabset class="card-tabs">
+            <tab heading="Overview" class="card-body">
+              <ng-container *ngTemplateOutlet="overviewTmp"></ng-container>
+            </tab>
+        
+            <tab heading="The team" class="card-body">
+              <p class="font-weight-bold">The team</p>
+            </tab>
+        
+            <tab heading="Reviews" class="card-body">
+              <app-profile-review (onReviewSubmission)="onSubmitReview($event)"></app-profile-review>
+            </tab>
+
+            <tab heading="Photos" class="card-body">
+              <app-profile-photo ></app-profile-photo>
+            </tab>
+          </tabset>
+      </div>
+        
+    </div>
+  
+    <div class="col-12 col-md-12 col-xl-4 col-right">
+      <div class="card bg-dark height-300 mb-3">
+        <img class="card-img" src="/assets/img/carousels/1.jpg" alt="Card image" >
+        <div class="card-img-overlay">
+          <div class="box-padding">
+            <div class="white-bar"></div>
+            <div class="box-padding-inner">
+              <br>
+              <p class="mb-2 text-white">Founded in 2000 by Dr Leondire, RMACT has been servicing the east cost area for 20 years and helped thousands of family and couples to complete their families</p>
+              <br>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-3">
+        <div class="card-body">
+          <app-profile-email (onSendEmail)="onSubmitMessage($event)"></app-profile-email>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <app-profile-help (onSendHelp)="onSendHelp($event)"></app-profile-help>
+        </div>
+      </div>
+    </div>
+</div>
+
+<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}</ng-template>
+
+<ng-template #overviewTmp >
+  <div class="row mb-5">
+    <div class="col-4 text-center">
+      <p>Overall rating</p>
+      <h1 class="font-weight-bold heading-icon">4.7</h1>
+      <br>
+      <rating [(ngModel)]="rate" 
+                [ngModelOptions]="{standalone:true}"
+                [max]="5" 
+                [readonly]="true" 
+                [titles]="['1','2','3','4','5']"
+                [customTemplate]="t"></rating>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12">
+          <p class="font-weight-bold">Recent reviews</p>
+          <blockquote class="blockquote">
+            <p class="mb-2 text-muted">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p>
+          </blockquote>
+          <blockquote class="blockquote">
+            <p class="mb-2 text-muted">"saxxhakj hj kashkjdsh jk hgh j hjgk, h jk  hkj hj k"</p>
+          </blockquote>
+          <button class="btn btn-outline-primary btn-sm" type="button">Read more</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="separator mb-5"></div>
+  <div class="row mb-5">
+    <div class="col-6">
+      location ...
+    </div>
+    <div class="col-6">
+      hours ...
+    </div>
+  </div>
+</ng-template>

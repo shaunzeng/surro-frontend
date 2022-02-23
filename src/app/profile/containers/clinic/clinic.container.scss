@@ -1,0 +1,21 @@
+.white-bar{
+    width: 55px;
+    height: 8px;
+    background-color: white;
+}
+
+.box-padding {
+    padding: 40px;
+    .box-padding-inner {
+        padding:30px;
+        height:400px
+    }
+}
+
+.height-300{
+    min-height: 400px;
+    .card-img{
+        max-height: inherit;
+        min-height:400px;
+    }
+}

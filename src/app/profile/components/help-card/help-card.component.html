@@ -1,0 +1,29 @@
+<h5 class="mb-3">Help improve Surroch</h5>
+  
+          <form>
+            <label class="form-group has-float-label">
+              <input class="form-control" />
+              <span>Some question</span>
+            </label>
+            <label class="form-group has-float-label">
+              <input class="form-control" type="password" placeholder="" />
+              <span>dsa</span>
+            </label>
+            <label class="form-group has-float-label">
+              <ng-select [items]="['Uber', 'Microsoft', 'Flexigen']"  [hideSelected]="true"
+                multiple="true" bindLabel="name">
+              </ng-select>
+              <span>final challenge</span>
+            </label>
+            <label class="form-group has-float-label">
+              <input class="form-control" bsDatepicker>
+              <span>some questions </span>
+            </label>
+            <label class="form-group has-float-label">
+              <ng-select [items]="[{id:0, name:'Cake'}, {id:1, name:'Dessert'}, {id:2, name:'Cupcake'}]" bindLabel="name"
+                bindValue="id">
+              </ng-select>
+              <span>aaddd</span>
+            </label>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>

@@ -13,6 +13,7 @@ export class ListPageHeaderComponent {
   @Input() showDisplayMode = true;
   @Input() displayMode = 'list';
   @Input() selectAllState = '';
+  
   @Input() itemsPerPage = 10;
   @Input() itemOptionsPerPage = [5, 10, 20];
   @Input() itemOrder = { label: 'Product Name', value: 'title' };

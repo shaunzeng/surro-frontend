@@ -1,0 +1,28 @@
+<div class="card flex-row mb-5">
+    <div class="w-20 position-relative" *ngIf="displayMode ==='thumb'">
+        <a href="javascript:;" [routerLink]="['../profile/' + profile.type + profile.id]">
+            <img class="card-img-left" [src]="'/assets/img/details/small-3.jpg'" alt="Card image cap">
+        </a>
+    </div>
+    <div class="w-60 d-flex align-items-center" [ngClass]="{'w-60': displayMode === 'thumb', 'w-80': displayMode !== 'thumb'}">
+        <div class="card-body">
+            <h4 class="mb-2 font-weight-bold">
+                <a href="javascript:;" [routerLink]="['../profile/' + profile.type + '/' + profile.id]">
+                    <span class="text-muted text-small d-inline-block mr-2">[{{profile.type}}]</span> 
+                    <span class="d-inline-block">{{profile.name}}</span>
+                </a>
+            </h4>
+            <p class="mb-5 text-muted text-small">{{profile.address}}, {{profile.city}} {{profile.state}} {{profile.zipcode}}</p>
+            <br>
+            <rating [(ngModel)]="rate" [ngModelOptions]="{standalone:true}" [max]="5" [readonly]="true" [titles]="['1','2','3','4','5']" [customTemplate]="t"></rating> 42 reviews
+        </div>
+    </div>
+    <div class="w-20 d-flex align-items-center">
+        <div class="card-body">
+            <p class="text-small">{{profile.distance | number: "0.1-2"}} mi</p>
+        </div>
+    </div>
+</div>
+
+<ng-template #t let-index="index" let-value="value">{{index < value ? '' : ''}}
+</ng-template>

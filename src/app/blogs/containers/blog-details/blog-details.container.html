@@ -3,7 +3,7 @@
 
     <div body>
         <app-loader [isBusy]="isBusy$ | async"></app-loader>
-        <div class="row content">
+        <div class="row center-content-80">
             <div class="col-12 col-md-12 col-xl-8 col-left">
                 <app-blog-article [data]="(blog$ | async)" *ngIf="!!(blog$ | async)"></app-blog-article>
                 

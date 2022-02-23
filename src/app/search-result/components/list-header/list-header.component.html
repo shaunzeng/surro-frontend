@@ -31,11 +31,16 @@
                 <path class="view-icon-svg" d="M17.5,17H6.5a.5.5,0,0,1,0-1h11a.5.5,0,0,1,0,1Z" /></svg>
             </a>
           </span>
-          <div class="d-block d-md-inline-block position-relative" *ngIf="showOrderBy">
+          <div *ngIf="showOrderBy" class="d-block d-md-inline-block d-sm-inline-block position-relative" >
             <div class="float-md-left mr-1 mb-1" dropdown>
-              <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-dark btn-xs dropdown-toggle"
-                aria-controls="dropdown-basic">
-                Order By : {{itemOrder.label}} <span class="caret"></span>
+              <button 
+              id="button-basic" 
+              dropdownToggle 
+              type="button" 
+              class="btn btn-outline-dark btn-xs dropdown-toggle"
+              aria-controls="dropdown-basic">
+                Order By : {{itemOrder.label}} 
+                <span class="caret"></span>
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                 <li role="menuitem" *ngFor="let item of itemOptionsOrders"><a
@@ -45,12 +50,12 @@
             </div>
           </div>
   
-          <div class="d-inline-block" *ngIf="showSearch">
+          <div *ngIf="showSearch" class="d-inline-block" >
             <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
               <input class="form-control" placeholder="Search" (keyup)="onSearchKeyUp($event)">
             </div>
           </div>
-          <div class="float-right" *ngIf="showItemsPerPage">
+          <div *ngIf="showItemsPerPage" class="float-right" >
             <span class="text-muted text-small">Per Page </span>
             <span dropdown class="d-inline-block position-relative">
               <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
@@ -68,4 +73,4 @@
         <div class="separator mb-4"></div>
       </div>
     </div>
-  </div>
+</div>

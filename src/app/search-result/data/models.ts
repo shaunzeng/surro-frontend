@@ -7,8 +7,12 @@ export interface FetchRequest {
     keyword?: string,
     zipcode: string,
     page?: string,
-    bizType?: string,
-    perPage?: string
+    perPage?: string,
+    category?: string,
+    languages?: string[],
+    reviews?: string[],
+    locations?: string[],
+    cost?: string[],
 }
 
 export interface FetchResponse {
@@ -16,5 +20,4 @@ export interface FetchResponse {
     totalCount: number,
     page: string,
     data: any[],
-    _id: string | number
 }

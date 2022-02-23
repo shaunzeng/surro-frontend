@@ -5,11 +5,15 @@ export interface PreviewRequest {
 }
 
 export interface ContentRequest {
-    query?: string,
+    keyword?: string,
     zipcode: string,
     page?: string,
-    type?: string,
-    perPage?: string
+    perPage?: string,
+    bizType?: string,
+    languages?: string[],
+    reviews?: string[],
+    locations?: string[],
+    cost?: string[],
 }
 
 export interface SearchPageParams {
